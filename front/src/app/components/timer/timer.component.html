@@ -1,0 +1,19 @@
+
+<div class="container"  style="border:1px solid">
+    <div class="row">
+        <div class="col-xs-12">
+            <h3>Timer:</h3>
+            <p> Seconds elapsed: <strong>{{ seconds }}</strong></p>
+
+            <button class="btn btn-success" [disabled]="countingTime" (click)="timeElapsed()">Resume Timer</button>
+            &nbsp;
+            <button class="btn btn-warning" (click)="pauseTimer()">Pause Timer</button>
+            &nbsp;
+            <button class="btn btn-danger" (click)="stopTimer(seconds)">Stop Timer</button>
+            <hr>
+        </div>
+    </div>
+</div>
+
+
+

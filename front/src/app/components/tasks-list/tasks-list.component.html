@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row">
+        <p> Showing tasks for day: <strong>{{dateToShow}}</strong></p>
+        <button class="btn btn-primary" (click)="showDay(-1)">Prev day</button>
+        &nbsp;
+        <button class="btn btn-primary" (click)="showDay(1)">Next day</button>
+    </div>
+    <hr>
+    <div class="row" *ngIf="isTasksListForDayEmpty">
+        <h2>You have no tasks to do so you are free on this day, or press button to add new task!</h2>
+    </div>
+    <div class="row">
+        <app-task *ngFor="let task of tasks" [taskToShow]="task"></app-task>
+        <button class="btn btn-primary" *ngIf="isTasksListForDayEmpty==false">Share list of tasks</button>
+        <button style="margin-top: 30px;" (click)="createNewTaskModal = true"><h4>Press to add new task </h4></button>
+    </div>
+    <app-create-new-task *ngIf="createNewTaskModal" (closeModal)="createNewTaskModal = false" [defaultDatePickerDate]="dateToShow"></app-create-new-task>
+</div>
