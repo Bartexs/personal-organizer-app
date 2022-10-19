@@ -1,9 +1,9 @@
 package barttek.projects.com.personalorganizerapp;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,8 +14,10 @@ import java.util.Map;
 @RequestMapping
 public class SingleTaskController {
     Map<Integer, SingleTask> singleTasksMap = new HashMap<>();
-    List<SingleTask> taskList;
+    List<SingleTask> taskList = new ArrayList<>();
     private int highestGeneratedId = 0;
+
+
 
     //http://localhost:8080/date?amount=10       <- where the amount here is amount down there lol, 0 to get today
     @GetMapping("date")
@@ -64,7 +66,11 @@ public class SingleTaskController {
         takingPills.addToSubTask("Bioprazol");
         takingPills.addToSubTask("Magnez");
 
-        this.taskList = List.of(makingDinner, makingMoney, losingShit, snoringCoke, takingPills);
+        List<SingleTask> randomArray = new ArrayList<>();
+
+        randomArray = List.of(makingDinner, makingMoney, losingShit, snoringCoke, takingPills);
+
+        this.taskList.addAll(randomArray);
 
         for(SingleTask task : taskList) {
             this.singleTasksMap.put(task.getId(), task);
@@ -75,5 +81,17 @@ public class SingleTaskController {
     @GetMapping("singleTasks/newId")
     public int generateIdForNewSingleTask() {
         return this.generateSingleTaskId();
+    }
+
+    @PostMapping("task/new")
+    @ResponseBody
+    public ResponseEntity addNewTask(@RequestBody SingleTask sTask) {
+        this.taskList.add(sTask);
+        this.singleTasksMap.put(sTask.getId(), sTask);
+
+        if(this.singleTasksMap.containsValue(sTask)) {
+            return ResponseEntity.ok(HttpStatus.CREATED);
+        }
+        return ResponseEntity.ok(HttpStatus.NOT_IMPLEMENTED);
     }
 }

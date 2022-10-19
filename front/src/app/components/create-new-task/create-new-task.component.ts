@@ -16,6 +16,7 @@ export class CreateNewTaskComponent implements OnInit {
   isFormValid!: boolean;
   id!: number;
   showSubTaskList!: boolean;
+  createTask!: Task;
 
   constructor(private tskService : TasksListService) { }
 
@@ -52,6 +53,7 @@ export class CreateNewTaskComponent implements OnInit {
     let countTimePerDay: boolean;
     let hasSubTasks: boolean;
 
+    // toogle valused based on input form from user
     this.creatingNewHabitForm.value.isTaskUsingTimerCheckBox == true ? countTimePerDay = true : countTimePerDay = false;
     this.creatingNewHabitForm.value.isTaskHasSubTaskListCheckBox == true ? hasSubTasks = true : hasSubTasks = false;
 
@@ -59,10 +61,20 @@ export class CreateNewTaskComponent implements OnInit {
 
     console.log(this.creatingNewHabitForm);
 
+    // we generate new task based on having subtasks list or not
     if(this.showSubTaskList) {
-
+      const createTask: Task = {
+        id: this.id,
+        name: this.creatingNewHabitForm.value.name,
+        markedAsCompleted: false,
+        dateDue: this.creatingNewHabitForm.value.dateDuePicker,
+        countTimePerDay: countTimePerDay,
+        hasSubTasks: hasSubTasks
+        // subTaskMap?: Map<String, Boolean>;
+      }
+      this.createTask = createTask;
     } else {
-      const task: Task = {
+      const createTask: Task = {
         id: this.id,
         name: this.creatingNewHabitForm.value.name,
         markedAsCompleted: false,
@@ -70,11 +82,15 @@ export class CreateNewTaskComponent implements OnInit {
         countTimePerDay: countTimePerDay,
         hasSubTasks: hasSubTasks
       }
+      this.createTask = createTask;
     }
 
+    //
     this.isFormValid = this.creatingNewHabitForm.valid;
 
+    //if form is valid we post new task to backend and close modal window, else we print message based on wrong value 
     if(this.isFormValid) {
+      this.tskService.onPostNewTask(this.createTask);
       this.closeModalWindow();
     } else {
       // print msg that form is invalid

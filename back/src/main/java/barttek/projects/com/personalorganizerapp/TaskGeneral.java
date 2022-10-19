@@ -82,9 +82,4 @@ public class TaskGeneral {
     public void setSubTaskMap(Map<String, Boolean> subTaskMap) {
         this.subTaskMap = subTaskMap;
     }
-
-    public int generateNewId() {
-
-        return -1;
-    }
 }

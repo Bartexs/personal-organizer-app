@@ -12,6 +12,14 @@ export class TasksListService {
 
   }
 
+  onPostNewTask(createdTask: Task) {
+    let pathToPost = 'http://localhost:8080/task/new'
+    console.log(createdTask);
+    return this.http.post(pathToPost, createdTask).subscribe((responseData) => {
+      console.log(responseData);
+    }) 
+  }
+
   onFetchDate(daysFromToday: number) {
     let pathToGet = 'http://localhost:8080/date?amount=' + daysFromToday;
     return this.http.get(pathToGet);

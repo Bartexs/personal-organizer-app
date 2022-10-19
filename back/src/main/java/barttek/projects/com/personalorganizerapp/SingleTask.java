@@ -1,10 +1,13 @@
 package barttek.projects.com.personalorganizerapp;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SingleTask extends TaskGeneral {
     private LocalDate dateDue;
     private boolean markedAsCompleted = false;
+    private final List<Tag> tagsList = new ArrayList<>();
 
     public SingleTask(int id, String name, boolean countTimePerDay, boolean hasSubTasks, LocalDate dateDue) {
         super(id, name, countTimePerDay, hasSubTasks);
