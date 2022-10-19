@@ -1,16 +1,31 @@
 <div class="cs-nav-bar">
     <div class="navbar-list">
         <ul>
+            <!-- logo and brand name for my website -->
             <li>Site name</li>
+            <!-- show all possible options -->
+            <!-- tasks list, habitslist, news based on custom preferences in settings, also if not set, make message and allow user to go through tutorial to setting it -->
+            <!--  -->
             <li>Home --landing page--</li>
+            <!-- info about why it was created what it does, maybe some tutorial? and info that im learning programming etc, DO THIS AS FIRST ROUTING SUBPAGE -->
             <li>About site</li>
+            <!-- as below + register with email possibility -->
             <li>Register user</li>
+            <!-- implement OAuth -->
             <li>Login</li>
         </ul>
         <ul *ngIf="isUserLoggedIn">
             <li>TasksList</li>
             <li>HabitsList</li>
+            <!-- graphs, instructions on phone in photos folder, stats based on tags for single tasks/habbits 
+                like you spend 100minutes on working out habit during last week, or did this tag 5times last week -->
             <li>Statistics</li>
+            <!-- make it possible to not show selected components on home subpage, maybe some customization of colors? intereseted topics in news, localistation to set weather widget -->
+            <li>Options</li>
+            <!-- create send feedback button to contact with my email account etc. -->
+            <!-- https://www.baeldung.com/java-email -->
+            <li>Send feedback</li>
+            <li>Donate </li>
         </ul>
     </div>
 </div>
