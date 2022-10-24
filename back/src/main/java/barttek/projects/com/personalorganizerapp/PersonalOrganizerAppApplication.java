@@ -7,6 +7,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import javax.mail.MessagingException;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -16,7 +17,6 @@ public class PersonalOrganizerAppApplication {
 		SpringApplication.run(PersonalOrganizerAppApplication.class, args);
 		HabitLogger habitLogger = new HabitLogger();
 		Controller cntrl = new Controller(habitLogger);
-
 		cntrl.runApp();
 	}
 
