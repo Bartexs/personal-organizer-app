@@ -10,7 +10,7 @@
                 <!-- active class set this link as currently selected, add dynamic class selecting -->
                 <!-- tasks list, habitslist, news based on custom preferences in settings, also if not set, make message and allow user to go through tutorial to setting it -->
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="home">Home</a>
                 </li>
                 <!-- info about why it was created what it does, maybe some tutorial? and info that im learning programming etc, DO THIS AS FIRST ROUTING SUBPAGE -->
                 <li class="nav-item">
@@ -29,21 +29,23 @@
                         <!-- create service with all the config for the user -->
                         <!-- make it possible to not show selected components on home subpage, maybe some customization of colors? intereseted topics in news, localistation to set weather widget -->
                 </li>
+                <!-- create send feedback button to contact with my email account etc. -->
+                <!-- https://www.baeldung.com/java-email -->
+                <li class="nav-item">
+                    <a class="nav-link"href="feedback">Contact</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link"href="#">Register</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"href="#">Login</a>
                 </li>
-                <!-- create send feedback button to contact with my email account etc. -->
-                <!-- https://www.baeldung.com/java-email -->
-                <li class="nav-item">
-                    <a class="nav-link"href="#">Contact</a>
-                </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<router-outlet></router-outlet>
 
 <!-- create footer -->
 <div class="div">

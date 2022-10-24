@@ -1,0 +1,30 @@
+.custom-container {
+    padding-top: 60px;
+    display: flex;
+    /* border-style: solid; */
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+    min-height: 65vh;
+    min-width: 75vw;
+    max-width: 75vw;
+    margin: auto;
+
+}
+
+.contact-form {
+    min-width: 45vw;
+    max-height: inherit;
+    /* border-style: solid; */
+}
+
+.encourage-to-contact-info {
+    padding-top: 150px;
+    /* border-style: solid; */
+}
+
+.send-button {
+    position: relative;
+}
+
