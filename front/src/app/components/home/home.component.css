@@ -1,0 +1,37 @@
+.bordered {
+    border: 2px solid gray;
+    padding: 15px;
+}
+
+.main-window {
+    padding-top: 75px;
+}
+
+.main-windows-top-background {
+    background-color:rgb(75, 158, 180, 0.6);
+}
+
+.center-text {
+    text-align: center;
+    border: 3px solid green;
+}
+
+.createNewTaskButton {
+    text-align: left;
+    margin-top: 1000px;
+}
+
+.cs-nav-bar {
+    border-bottom: 5px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-style: solid;
+    border-color: gray;
+    background-color: darkcyan;
+}
+
+.navbar-list {
+    text-align: center;
+    display: inline-block;
+}

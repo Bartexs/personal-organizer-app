@@ -12,7 +12,9 @@ import { HabitsListComponent } from './components/habits-list/habits-list.compon
 import { HabitComponent } from './components/habit/habit.component';
 import { CreateNewHabitComponent } from './components/create-new-habit/create-new-habit.component';
 import { CreateNewTaskComponent } from './components/create-new-task/create-new-task.component';
-import { CreateNewSubtaskListComponent } from './components/create-new-task/create-new-subtask-list/create-new-subtask-list/create-new-subtask-list.component'
+import { CreateNewSubtaskListComponent } from './components/create-new-task/create-new-subtask-list/create-new-subtask-list/create-new-subtask-list.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { HomeComponent } from './components/home/home.component'
 
 @NgModule({
   declarations: [
@@ -24,19 +26,20 @@ import { CreateNewSubtaskListComponent } from './components/create-new-task/crea
     HabitComponent,
     CreateNewHabitComponent,
     CreateNewTaskComponent,
-    CreateNewSubtaskListComponent
+    CreateNewSubtaskListComponent,
+    ContactComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
-  
-  
 }
