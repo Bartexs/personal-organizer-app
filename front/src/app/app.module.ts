@@ -14,7 +14,7 @@ import { CreateNewHabitComponent } from './components/create-new-habit/create-ne
 import { CreateNewTaskComponent } from './components/create-new-task/create-new-task.component';
 import { CreateNewSubtaskListComponent } from './components/create-new-task/create-new-subtask-list/create-new-subtask-list/create-new-subtask-list.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { HomeComponent } from './components/home/home.component'
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { HomeComponent } from './components/home/home.component'
     CreateNewTaskComponent,
     CreateNewSubtaskListComponent,
     ContactComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
