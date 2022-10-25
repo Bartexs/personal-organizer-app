@@ -14,6 +14,8 @@ export class TasksListComponent implements OnInit {
   daysCounter = 0;
   isTasksListForDayEmpty = false;
   createNewTaskModal = false;
+  // set view mode, if showing on dashboard show compactView, if showing on tasks-list page show fullView
+  viewMode = "compactView, fullView";
 
   constructor(private taskService: TasksListService) { }
 

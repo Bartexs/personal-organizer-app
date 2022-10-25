@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
   startTimer = false;
   secondsElapsed = 0;
 
-
   onTimerStarted() {
     this.startTimer = true;
   }

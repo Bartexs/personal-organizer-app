@@ -1,11 +1,12 @@
 <div class="container">
     <div class="row">
-        <p> Showing tasks for day: <strong>{{dateToShow}}</strong></p>
-        <button class="btn btn-primary" (click)="showDay(-1)">Prev day</button>
-        &nbsp;
-        <button class="btn btn-primary" (click)="showDay(1)">Next day</button>
+        <h5 class="showing-date"> Showing tasks for day: <strong>{{dateToShow}}</strong></h5>
+        <div class="day-control-buttons">
+            <button class="btn btn-outline-secondary" (click)="showDay(-1)">Prev day</button>
+            <button class="btn btn-outline-secondary" (click)="showDay(1)">Next day</button>
+        </div>
     </div>
-    <hr>
+
     <div class="row" *ngIf="isTasksListForDayEmpty">
         <h2>You have no tasks to do so you are free on this day, or press button to add new task!</h2>
     </div>
