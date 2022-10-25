@@ -1,0 +1,42 @@
+.custom-container {
+    border-color: black;
+    display: flex;
+    padding-top: 100px;
+}
+
+h3 {
+    padding-top: 50px;
+    padding-left: 85px;
+    padding: 30px
+}
+
+.content {
+    display: flex;
+    padding: 50px;
+    border-color: lightgray;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    width: 50vw;
+    height: 65vh;
+    margin: auto;
+    box-shadow: 2px 4px 18px 1px gray;
+    flex-direction: row;
+}
+
+.custom-form-group {
+    width: 600px;
+}
+
+.cs-col {
+    padding-bottom: 15px;
+    max-width: 150px;
+}
+
+.cs-background-right {
+    width: 1000px;
+    border-left: solid;
+    border-color: lightgray;
+    border-width: 1px;
+    margin-left: 50px;
+}
