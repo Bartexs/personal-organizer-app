@@ -35,7 +35,7 @@ public class EmailCreator {
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress("from@gmail.com"));
         message.setRecipients(
-                Message.RecipientType.TO, InternetAddress.parse("to@gmail.com"));
+               Message.RecipientType.TO, InternetAddress.parse("to@gmail.com"));
         message.setSubject("Mail Subject");
 
         String msg = "This is my first email using JavaMailer";

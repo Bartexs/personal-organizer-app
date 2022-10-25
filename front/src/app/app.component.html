@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
         <!-- logo and brand name for my website -->
-        <a href="#" class="navbar-brand">PersonalOrganiserApp</a>
+        <a href="welcome" class="navbar-brand">PersonalOrganiserApp</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -14,11 +14,11 @@
                 </li>
                 <!-- info about why it was created what it does, maybe some tutorial? and info that im learning programming etc, DO THIS AS FIRST ROUTING SUBPAGE -->
                 <li class="nav-item">
-                    <a class="nav-link"href="#">About</a>
+                    <a class="nav-link"href="about">About</a>
                 </li>
 
                 <!-- if user logged in show dropdown menu with content -->
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="isUserLoggedIn">
                     <a class="nav-link"href="#">Dropdown menu</a>
                     <!-- taskslist -->
                     <!-- habitslist -->
@@ -35,16 +35,16 @@
                     <a class="nav-link"href="feedback">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link"href="#">Register</a>
+                    <a class="nav-link"href="register">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link"href="#">Login</a>
+                    <a class="nav-link"href="login">Login</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-
+<hr>
 <router-outlet></router-outlet>
 
 <!-- create footer -->

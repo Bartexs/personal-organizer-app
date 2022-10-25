@@ -15,6 +15,10 @@ import { CreateNewTaskComponent } from './components/create-new-task/create-new-
 import { CreateNewSubtaskListComponent } from './components/create-new-task/create-new-subtask-list/create-new-subtask-list/create-new-subtask-list.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { HomeComponent } from './components/home/home.component';
+import { AboutComponent } from './components/about/about.component';
+import { RegisterUserComponent } from './components/register-user/register-user.component';
+import { LoginUserComponent } from './components/login-user/login-user.component';
+import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,10 @@ import { HomeComponent } from './components/home/home.component';
     CreateNewSubtaskListComponent,
     ContactComponent,
     HomeComponent,
+    AboutComponent,
+    RegisterUserComponent,
+    LoginUserComponent,
+    WelcomePageComponent,
   ],
   imports: [
     BrowserModule,
