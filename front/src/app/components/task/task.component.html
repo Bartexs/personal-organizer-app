@@ -1,4 +1,4 @@
-<hr>
+<!-- <hr>
 <div class="container" style="border: 1px solid">
     <div class="row">
         <p><strong>{{taskToShow.name}}</strong></p>
@@ -27,5 +27,29 @@
     </div>
         <button class="btn btn-secondary" *ngIf="taskToShow.hasSubTasks">Press to add to subTaskList</button>
         <button class="btn btn-danger">SHARE TASK</button>
+</div> -->
+<div class="custom-main-container">
+    <div class="name-and-description-container">
+        <div class="tasks-name">
+            <p><strong>{{taskToShow.name}}</strong></p>
+        </div>
+        <hr class="section-breaker">
+        <div class="tasks-description">
+            <p>Task's description</p>
+        </div>
+    </div>
+    <div class="buttons-and-color-container">
+        <!-- <hr class="section-breaker-horizontal"> -->
+        <div class="buttons-container">buttons</div>
+        <div class="tasks-color">color</div>
+        <!-- <p> BUTTONS </p>
+        <p> mark as completed</p>
+        <p> move to another day </p>
+        <p> edit </p>
+        <p> share </p>
+
+        <p> show details </p>
+        <p> show sublist </p> -->
+    </div>
 </div>
 

@@ -21,10 +21,18 @@
 
 .encourage-to-contact-info {
     padding-top: 150px;
-    /* border-style: solid; */
+    border-left: 5px;
+    border-left-style: solid;
+    padding-left: 20px;
+    border-left-width: 1.5px;
+    border-color: lightgray;
 }
 
 .send-button {
     position: relative;
 }
+
+.rating-checked {
+    color: orange;
+  }
 

@@ -12,6 +12,7 @@
     </div>
     <div class="row">
         <app-task *ngFor="let task of tasks" [taskToShow]="task"></app-task>
+        <hr>
         <button class="btn btn-primary" *ngIf="isTasksListForDayEmpty==false">Share list of tasks</button>
         <button style="margin-top: 30px;" (click)="createNewTaskModal = true"><h4>Press to add new task </h4></button>
     </div>
