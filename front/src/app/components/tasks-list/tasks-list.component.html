@@ -1,4 +1,8 @@
-<div class="container">
+<div class="tasks-list-header">
+    <div class="headline">
+        <h1>Your tasks:</h1>
+        <hr class="section-breaker">
+    </div>
     <div class="row">
         <h5 class="showing-date"> Showing tasks for day: <strong>{{dateToShow}}</strong></h5>
         <div class="day-control-buttons">
@@ -19,4 +23,5 @@
     <app-create-new-task *ngIf="createNewTaskModal" (closeModal)="createNewTaskModal = false" [defaultDatePickerDate]="dateToShow"></app-create-new-task>
 </div>
 
+<!-- add hooks for each section -->
 <!-- create show details button, this should open task in modal on new url, and we should be able to share this link, there should be button to collapse details/show it -->
