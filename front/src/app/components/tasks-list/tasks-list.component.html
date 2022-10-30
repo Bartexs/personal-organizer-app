@@ -1,25 +1,35 @@
 <div class="tasks-list-header">
-    <div class="headline">
-        <h1>Your tasks:</h1>
-        <hr class="section-breaker">
+    <div class="header-top"> 
+        <div class="headline">
+            <h1>Your tasks:</h1>
+            <hr class="section-breaker">
+        </div>
+        <div class="header-image-for-component"> 
+
+        </div>
+        <div class="roll-up-section-button"> 
+            
+        </div>
     </div>
-    <div class="row">
+    <div class="header-date-picking"> 
         <h5 class="showing-date"> Showing tasks for day: <strong>{{dateToShow}}</strong></h5>
         <div class="day-control-buttons">
             <button class="btn btn-outline-secondary" (click)="showDay(-1)">Prev day</button>
             <button class="btn btn-outline-secondary" (click)="showDay(1)">Next day</button>
         </div>
     </div>
-
+</div>
+<div class="tasks-list-content-main">
     <div class="row" *ngIf="isTasksListForDayEmpty">
         <h2>You have no tasks to do so you are free on this day, or press button to add new task!</h2>
     </div>
     <div class="row">
         <app-task *ngFor="let task of tasks" [taskToShow]="task"></app-task>
-        <hr>
-        <button class="btn btn-primary" *ngIf="isTasksListForDayEmpty==false">Share list of tasks</button>
-        <button style="margin-top: 30px;" (click)="createNewTaskModal = true"><h4>Press to add new task </h4></button>
     </div>
+</div>
+<div class="tasks-list-content-bottom">
+    <button class="btn btn-primary" *ngIf="isTasksListForDayEmpty==false">Share list of tasks</button>
+    <button style="margin-top: 30px;" (click)="createNewTaskModal = true"><h4>Press to add new task </h4></button>
     <app-create-new-task *ngIf="createNewTaskModal" (closeModal)="createNewTaskModal = false" [defaultDatePickerDate]="dateToShow"></app-create-new-task>
 </div>
 
