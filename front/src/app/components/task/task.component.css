@@ -25,6 +25,15 @@
     padding-top: 9px;
 }
 
+.show-description {
+  /* border-style: solid; */
+  font-size: xx-small;
+  position: relative;
+  left: 40%;
+  bottom: 15px;
+  text-decoration: underline;
+}
+
 .section-breaker {
     width: 90%;
     margin: auto;
@@ -44,7 +53,10 @@
 .buttons-container {
     padding-left: 15px;
     width: 65%;
-    border-style: solid;
+    /* border-style: solid; */
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .tasks-color {
@@ -61,10 +73,10 @@
 
 /* Dropup Button */
 .dropbtn {
-    background-color: #3498DB;
-    color: white;
+    /* background-color: #3498DB;
+    color: white; */
     padding: 16px;
-    font-size: 16px;
+    /* font-size: 16px; */
     border: none;
   }
   
@@ -105,3 +117,17 @@
   .dropup:hover .dropbtn {
     background-color: #2980B9;
   }
+
+/* icons styling */
+  svg {
+    width: 30px;
+    height: 30px;
+    color: gray;
+  }
+
+  svg:hover {
+    fill: red;
+  }
+
+ 
+  
