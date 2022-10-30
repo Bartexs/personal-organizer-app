@@ -1,10 +1,63 @@
-.showing-date {
-    padding-bottom: 15px;
-}
-
 .section-breaker {
     width: 30%;
     padding-bottom: 15px;
     border-width: 1.9px;
     /* box-shadow: 2px 4px 18px 1px gray; */
 }
+
+/* styling for the header of the content window */
+    /* styling for the headline */
+        .header-top {
+            display: flex;
+        }
+
+        .headline {
+            width: 50%;
+        }
+
+        .header-image-for-component {
+            width: 39%;
+            /* border-style: solid; */
+        }
+
+        .roll-up-section-button {
+            font-size: xx-small;
+            position: relative;
+            left: 5%;
+            bottom: 30px;
+            text-decoration: underline;
+            display: inline-flex;
+        }
+
+        .hide-arrow-down {
+            margin-left: 3px;
+            height: 14px;
+        }
+
+    /* styling for the date picker */
+        .header-date-picking {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .day-picker {
+            width: 50%;
+        }
+
+        .day-control-buttons {
+            width: 100%;
+            justify-content: center;
+            align-items: baseline;
+            display: inline-flex;
+        }
+
+        .week-picker {
+            width: 50%;
+        }
+
+        .week-control-buttons {
+            width: 100%;
+            justify-content: center;
+            align-items: baseline;
+            display: inline-flex;
+        }
