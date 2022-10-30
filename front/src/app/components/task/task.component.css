@@ -127,6 +127,7 @@
 
   svg:hover {
     fill: red;
+    background-color: lightgray
   }
 
  
