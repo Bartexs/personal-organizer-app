@@ -48,20 +48,16 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    
 }
 
 .buttons-container {
     padding-left: 15px;
-    width: 65%;
+    width: 70%;
     /* border-style: solid; */
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-}
-
-.tasks-color {
-    width: 40%;
-    border-style: solid;
 }
 
 .section-breaker-horizontal {
@@ -70,6 +66,27 @@
     height: 100px;
 }
 
+/* color for right side of the task */
+.tasks-color {
+  border-left: solid;
+  border-color: black;
+  border-width: 3px;
+  /* made it available to choose by the user */
+  background-color: purple;
+  width: 35%;
+  /* gives transparency for the color */
+  opacity: .45;
+}
+
+.set-color-button {
+  color: white;
+  font-size: xx-small;
+  position: relative; 
+  left: 70%;
+  top: 100px;
+  /* max-width: 40%; */
+  /* border-style: solid; */
+}
 
 /* Dropup Button */
 .dropbtn {
