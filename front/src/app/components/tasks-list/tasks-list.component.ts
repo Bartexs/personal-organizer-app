@@ -15,7 +15,9 @@ export class TasksListComponent implements OnInit {
   isTasksListForDayEmpty = false;
   createNewTaskModal = false;
   // set view mode, if showing on dashboard show compactView, if showing on tasks-list page show fullView
-  viewMode = "compactView, fullView";
+
+  // decides if tasks list widget is hidden or not
+  isShowView = false;
 
   constructor(private taskService: TasksListService) { }
 

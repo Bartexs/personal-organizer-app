@@ -1,3 +1,9 @@
+/* style wrapper for whole component view */
+.window-wrapper {
+    padding: 50px;
+    position: relative;
+}
+
 .section-breaker {
     width: 30%;
     padding-bottom: 15px;
@@ -20,13 +26,19 @@
             /* border-style: solid; */
         }
 
-        .roll-up-section-button {
+        /* .roll-up-section-button {
             font-size: xx-small;
             position: relative;
             left: 5%;
             bottom: 30px;
             text-decoration: underline;
             display: inline-flex;
+        } */
+
+        .hide-widget {
+            padding: 0;
+            border: none;
+            background: none;
         }
 
         .hide-arrow-down {
@@ -60,4 +72,38 @@
             justify-content: center;
             align-items: baseline;
             display: inline-flex;
+        }
+
+        /* hidden widget styling */
+        .hiddenWdigetViewName {
+            /* border-style: solid; */
+            text-align: center;
+        }
+
+        .hiddenWidgetContainer {
+            position: relative;
+        }
+
+        .roll-up-section-button {
+            position: absolute;
+            left: 85%;
+            bottom: 85%;
+            /* font-size: xx-small;
+            position: relative;
+            
+            
+            text-decoration: underline;
+            display: inline-flex; */
+        }
+
+        .roll-up-section-button-hidden {
+            position: absolute;
+            left: 84%;
+            bottom: 13%;
+            /* font-size: xx-small;
+            position: relative;
+            
+            
+            text-decoration: underline;
+            display: inline-flex; */
         }

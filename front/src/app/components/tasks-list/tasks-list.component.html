@@ -1,54 +1,74 @@
-<div class="tasks-list-header">
-    <div class="header-top"> 
-        <div class="headline">
-            <h1>Your tasks:</h1>
+<!-- if hide widget button is pressed we dont show anything else, we are showing component -->
+<div class="window-wrapper" *ngIf="isShowView else hideTasksListView">
+    <div class="roll-up-section-button"> 
+        <button class="hide-widget"(click)="isShowView = !isShowView">hide widget</button>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down hide-arrow-down" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+            <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+        </svg>
+    </div>
+    <div class="tasks-list-header">
+        <div class="header-top"> 
+            <div class="headline">
+                <h1>Your tasks:</h1>
+            </div>
+            <div class="header-image-for-component"> 
+                <p>Image</p>
+            </div>
         </div>
-        <div class="header-image-for-component"> 
-            <p>Image</p>
+        <hr class="section-breaker">
+        <div class="header-date-picking"> 
+            <div class="day-picker">
+                <h5>Choose a day:</h5>
+                <div class="day-control-buttons">
+                    <button class="btn btn-outline-secondary" (click)="showDay(-1)">Prev day</button>
+                    <p><strong>{{dateToShow}}</strong></p>
+                    <button class="btn btn-outline-secondary" (click)="showDay(1)">Next day</button>
+                </div>
+            </div>
+            <!-- add today button -->
+            <div class="week-picker">
+                <h5>Choose a week:</h5>
+                <div class="day-control-buttons">
+                    <button class="btn btn-outline-secondary">Prev week</button>
+                    <p><strong>WEEK</strong></p>
+                    <button class="btn btn-outline-secondary">Next week</button>
+                </div>
+            </div>
         </div>
-        <div class="roll-up-section-button"> 
-            <p>hide widget</p>
+    </div>
+    <div class="tasks-list-content-main">
+        <div class="row" *ngIf="isTasksListForDayEmpty">
+            <h2>You have no tasks to do so you are free on this day, or press button to add new task!</h2>
+        </div>
+        <div class="row">
+            <app-task *ngFor="let task of tasks" [taskToShow]="task"></app-task>
+        </div>
+    </div>
+    <div class="tasks-list-content-bottom">
+        <button class="btn btn-outline-secondary" *ngIf="isTasksListForDayEmpty==false">Share your day</button>
+        <button class="btn btn-outline-secondary" (click)="createNewTaskModal = true">Add new task</button>
+    
+        <app-create-new-task *ngIf="createNewTaskModal" (closeModal)="createNewTaskModal = false" [defaultDatePickerDate]="dateToShow"></app-create-new-task>
+    </div>
+</div>
+
+<ng-template #hideTasksListView>
+    <div class="hiddenWidgetContainer">
+        <div class="hiddenWdigetViewName">
+            <h1> Your tasks list</h1>
+        </div>
+        <div class="roll-up-section-button-hidden"> 
+            <button class="hide-widget"(click)="isShowView = !isShowView">show widget</button>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down hide-arrow-down" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
                 <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
             </svg>
         </div>
     </div>
-    <hr class="section-breaker">
-    <div class="header-date-picking"> 
-        <div class="day-picker">
-            <h5>Choose a day:</h5>
-            <div class="day-control-buttons">
-                <button class="btn btn-outline-secondary" (click)="showDay(-1)">Prev day</button>
-                <p><strong>{{dateToShow}}</strong></p>
-                <button class="btn btn-outline-secondary" (click)="showDay(1)">Next day</button>
-            </div>
-        </div>
-        <!-- add today button -->
-        <div class="week-picker">
-            <h5>Choose a week:</h5>
-            <div class="day-control-buttons">
-                <button class="btn btn-outline-secondary">Prev week</button>
-                <p><strong>WEEK</strong></p>
-                <button class="btn btn-outline-secondary">Next week</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="tasks-list-content-main">
-    <div class="row" *ngIf="isTasksListForDayEmpty">
-        <h2>You have no tasks to do so you are free on this day, or press button to add new task!</h2>
-    </div>
-    <div class="row">
-        <app-task *ngFor="let task of tasks" [taskToShow]="task"></app-task>
-    </div>
-</div>
-<div class="tasks-list-content-bottom">
-    <button class="btn btn-outline-secondary" *ngIf="isTasksListForDayEmpty==false">Share your day</button>
-    <button class="btn btn-outline-secondary" (click)="createNewTaskModal = true">Add new task</button>
+</ng-template>
 
-    <app-create-new-task *ngIf="createNewTaskModal" (closeModal)="createNewTaskModal = false" [defaultDatePickerDate]="dateToShow"></app-create-new-task>
-</div>
+
 
 <!-- add hooks for each section -->
 <!-- create show details button, this should open task in modal on new url, and we should be able to share this link, there should be button to collapse details/show it -->
