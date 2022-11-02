@@ -9,20 +9,17 @@ import { Task } from 'src/app/models/task.model'
 })
 export class TasksListComponent implements OnInit {
   tasks: Task[] = [];
-  currentDate: any; 
   dateToShow: any;
   daysCounter = 0;
   isTasksListForDayEmpty = false;
   createNewTaskModal = false;
-  // set view mode, if showing on dashboard show compactView, if showing on tasks-list page show fullView
 
   // decides if tasks list widget is hidden or not
-  isShowView = false;
+  isShowView = true;
 
   constructor(private taskService: TasksListService) { }
 
   ngOnInit(): void {
-    this.setDate();
     this.taskService.onFetchDate(this.daysCounter).subscribe((date) => {
       this.dateToShow = date;
     });
@@ -48,6 +45,11 @@ export class TasksListComponent implements OnInit {
     })
   }
 
+  setDateToShowToToday() {
+    this.daysCounter = 0;
+    this.showDay(0);
+  }
+
   showDay(dayCounter: number) {
     this.daysCounter += dayCounter;
     this.taskService.onFetchDate(this.daysCounter).subscribe((date) => {
@@ -58,13 +60,5 @@ export class TasksListComponent implements OnInit {
       this.tasks = tasksRecieved;
       this.checkTasksListForDayEmpty();
     });
-  }
-
-  setDate() {
-    let today = new Date();
-    
-    let daysOfWeek: string[] = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
-
-    this.currentDate = {name: daysOfWeek[today.getDay() - 1], dayOfMonth: today.getDate(), month: today.getMonth() + 1};
   }
 }

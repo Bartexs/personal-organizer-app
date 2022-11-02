@@ -18,17 +18,22 @@
         </div>
         <hr class="section-breaker">
         <div class="header-date-picking"> 
-            <div class="day-picker">
-                <h5>Choose a day:</h5>
+            <div>
+                <!-- <h5>Choose a day:</h5> -->
                 <div class="day-control-buttons">
                     <button class="btn btn-outline-secondary" (click)="showDay(-1)">Prev day</button>
                     <p><strong>{{dateToShow}}</strong></p>
                     <button class="btn btn-outline-secondary" (click)="showDay(1)">Next day</button>
                 </div>
             </div>
-            <!-- add today button -->
-            <div class="week-picker">
-                <h5>Choose a week:</h5>
+            <div>
+                <!-- <h5>Choose today:</h5> -->
+                <div class="day-control-buttons">
+                    <button class="btn btn-outline-secondary" (click)="setDateToShowToToday()">Today</button>
+                </div>
+            </div>
+            <div>
+                <!-- <h5>Choose a week:</h5> -->
                 <div class="day-control-buttons">
                     <button class="btn btn-outline-secondary">Prev week</button>
                     <p><strong>WEEK</strong></p>

@@ -50,12 +50,9 @@
         .header-date-picking {
             display: flex;
             flex-direction: row;
+            justify-content: space-evenly;
         }
-
-        .day-picker {
-            width: 50%;
-        }
-
+        
         .day-control-buttons {
             width: 100%;
             justify-content: center;
@@ -63,9 +60,6 @@
             display: inline-flex;
         }
 
-        .week-picker {
-            width: 50%;
-        }
 
         .week-control-buttons {
             width: 100%;
