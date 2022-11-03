@@ -11,6 +11,10 @@
     /* box-shadow: 2px 4px 18px 1px gray; */
 }
 
+.full {
+    width: 100%;
+}
+
 /* styling for the header of the content window */
     /* styling for the headline */
         .header-top {

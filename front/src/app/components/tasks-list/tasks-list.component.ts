@@ -13,6 +13,7 @@ export class TasksListComponent implements OnInit {
   daysCounter = 0;
   isTasksListForDayEmpty = false;
   createNewTaskModal = false;
+  id!: number;
 
   // decides if tasks list widget is hidden or not
   isShowView = true;
@@ -64,5 +65,28 @@ export class TasksListComponent implements OnInit {
 
   setDateAsAllTasks() {
     this.dateToShow = "All tasks";
+  }
+
+  createNewTaskShort(event: any) {
+    this.setId();
+    
+    const createTask: Task = {
+      id: this.id,
+      name: event.value,
+      markedAsCompleted: false,
+      dateDue: this.dateToShow,
+      countTimePerDay: false,
+      hasSubTasks: false
+    }
+
+    this.taskService.onPostNewTask(createTask);
+
+    this.ngOnInit();
+  }
+
+  private setId() {
+    this.taskService.generateIdForNewTask().subscribe((generatedId) => {
+      this.id = generatedId;
+    })
   }
 }

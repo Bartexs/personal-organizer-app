@@ -47,8 +47,15 @@
                 </div>
             </div>
         </div>
-        
     </div>
+    <hr class="section-breaker full">
+
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Input to create a new task!" aria-label="Create new task" aria-describedby="button-addon2" #taskName>
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="createNewTaskShort(taskName)">Create task</button>
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="createNewTaskModal = true">Press to add more details</button>
+    </div>
+    <app-create-new-task *ngIf="createNewTaskModal" (closeModal)="createNewTaskModal = false" [defaultDatePickerDate]="dateToShow"></app-create-new-task>
     <div class="tasks-list-content-main">
         <div class="row" *ngIf="isTasksListForDayEmpty">
             <h2>You have no tasks to do so you are free on this day, or press button to add new task!</h2>
@@ -58,10 +65,7 @@
         </div>
     </div>
     <div class="tasks-list-content-bottom">
-        <button class="btn btn-outline-secondary" *ngIf="isTasksListForDayEmpty==false">Share your day</button>
-        <button class="btn btn-outline-secondary" (click)="createNewTaskModal = true">Add new task</button>
-    
-        <app-create-new-task *ngIf="createNewTaskModal" (closeModal)="createNewTaskModal = false" [defaultDatePickerDate]="dateToShow"></app-create-new-task>
+        <!-- <button class="btn btn-outline-secondary" *ngIf="isTasksListForDayEmpty==false">Share your day</button> -->
     </div>
 </div>
 
