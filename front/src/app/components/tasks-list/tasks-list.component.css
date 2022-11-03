@@ -47,6 +47,15 @@
         }
 
     /* styling for the date picker */
+        .date-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .date-shower {
+            text-align: center;
+        }
+    
         .header-date-picking {
             display: flex;
             flex-direction: row;

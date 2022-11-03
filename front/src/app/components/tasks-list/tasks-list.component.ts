@@ -61,4 +61,8 @@ export class TasksListComponent implements OnInit {
       this.checkTasksListForDayEmpty();
     });
   }
+
+  setDateAsAllTasks() {
+    this.dateToShow = "All tasks";
+  }
 }

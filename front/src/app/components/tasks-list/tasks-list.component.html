@@ -17,30 +17,37 @@
             </div>
         </div>
         <hr class="section-breaker">
-        <div class="header-date-picking"> 
-            <div>
-                <!-- <h5>Choose a day:</h5> -->
-                <div class="day-control-buttons">
-                    <button class="btn btn-outline-secondary" (click)="showDay(-1)">Prev day</button>
-                    <p><strong>{{dateToShow}}</strong></p>
-                    <button class="btn btn-outline-secondary" (click)="showDay(1)">Next day</button>
-                </div>
+        <div class="date-container">
+            <div class="date-shower">
+                <p><strong>Showing tasks for: {{dateToShow}}</strong></p>
             </div>
-            <div>
-                <!-- <h5>Choose today:</h5> -->
-                <div class="day-control-buttons">
-                    <button class="btn btn-outline-secondary" (click)="setDateToShowToToday()">Today</button>
+            <div class="header-date-picking"> 
+                <div>
+                    <div class="day-control-buttons">
+                        <button class="btn btn-outline-secondary" (click)="showDay(-1)">Prev day</button>
+                        
+                        <button class="btn btn-outline-secondary" (click)="showDay(1)">Next day</button>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <!-- <h5>Choose a week:</h5> -->
-                <div class="day-control-buttons">
-                    <button class="btn btn-outline-secondary">Prev week</button>
-                    <p><strong>WEEK</strong></p>
-                    <button class="btn btn-outline-secondary">Next week</button>
+                <div>
+                    <div class="day-control-buttons">
+                        <button class="btn btn-outline-secondary" (click)="setDateToShowToToday()">Today</button>
+                    </div>
+                </div>
+                <div>
+                    <div class="day-control-buttons">
+                        <button class="btn btn-outline-secondary" (click)="setDateAsAllTasks()">All tasks</button>
+                    </div>
+                </div>
+                <div>
+                    <div class="day-control-buttons">
+                        <button class="btn btn-outline-secondary" (click)="showDay(-7)">Prev week</button>
+                        <button class="btn btn-outline-secondary" (click)="showDay(7)">Next week</button>
+                    </div>
                 </div>
             </div>
         </div>
+        
     </div>
     <div class="tasks-list-content-main">
         <div class="row" *ngIf="isTasksListForDayEmpty">
