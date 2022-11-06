@@ -47,6 +47,6 @@ export class TaskComponent implements OnInit {
 
   public updateMarkAsCompleted() {
     this.taskToShow.markedAsCompleted == true ? this.taskToShow.markedAsCompleted = false : this.taskToShow.markedAsCompleted = true;
-    
+    console.log(this.taskToShow.markedAsCompleted);
   }
 }
