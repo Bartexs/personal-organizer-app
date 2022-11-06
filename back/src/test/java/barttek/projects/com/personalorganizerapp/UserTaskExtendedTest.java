@@ -2,6 +2,7 @@ package barttek.projects.com.personalorganizerapp;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,9 @@ class UserTaskExtendedTest {
         String name = "Throw garbage";
         String description = "Garbage are in the kitchen, just throw them";
 
-        UserTaskExtended eTask = UserTaskExtended.newBuilder(id, name)
+        LocalDate today = LocalDate.now();
+
+        UserTaskExtended eTask = UserTaskExtended.newBuilder(id, name, today)
                 .withDescription(description)
                 .build();
 
@@ -32,10 +35,12 @@ class UserTaskExtendedTest {
         String description = "Garbage are in the kitchen, just throw them";
         List<UserTask> subTasksList = new ArrayList<>();
 
-        subTasksList.add(new UserTask(3, "First garbage"));
-        subTasksList.add(new UserTask(5, "Second garbage"));
+        LocalDate today = LocalDate.now();
 
-        UserTaskExtended eTask = UserTaskExtended.newBuilder(id, name)
+        subTasksList.add(new UserTask(3, "First garbage", today));
+        subTasksList.add(new UserTask(5, "Second garbage", today));
+
+        UserTaskExtended eTask = UserTaskExtended.newBuilder(id, name, today)
                 .withDescription(description)
                 .withSubTasksList(subTasksList)
                 .build();
@@ -46,22 +51,25 @@ class UserTaskExtendedTest {
         assertFalse(eTask.isCompleted());
         System.out.println(subTasksList);
         assertEquals(subTasksList, eTask.getSubTasksList());
+        assertEquals(today, eTask.getDateTaskToBeDone());
     }
 
     @Test
     void addingToSubTasksList() {
-        UserTask uTask = new UserTask(9, "Feed kitty");
-        UserTask uTask1 = new UserTask(10, "Not to feed kitty");
+        LocalDate today = LocalDate.now();
+
+        UserTask uTask = new UserTask(9, "Feed kitty", today);
+        UserTask uTask1 = new UserTask(10, "Not to feed kitty", today);
 
         int id = 5;
         String name = "Throw garbage";
         String description = "Garbage are in the kitchen, just throw them";
         List<UserTask> subTasksList = new ArrayList<>();
 
-        subTasksList.add(new UserTask(3, "First garbage"));
-        subTasksList.add(new UserTask(5, "Second garbage"));
+        subTasksList.add(new UserTask(3, "First garbage", today));
+        subTasksList.add(new UserTask(5, "Second garbage", today));
 
-        UserTaskExtended eTask = UserTaskExtended.newBuilder(id, name)
+        UserTaskExtended eTask = UserTaskExtended.newBuilder(id, name, today)
                 .withDescription(description)
                 .withSubTasksList(subTasksList)
                 .build();
