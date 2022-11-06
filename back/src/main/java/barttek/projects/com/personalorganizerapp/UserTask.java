@@ -1,23 +1,38 @@
 package barttek.projects.com.personalorganizerapp;
 
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class UserTask {
-    private final int id;
+@Entity
+public class UserTask implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
-    private boolean completed = false;
+    private Boolean completed;
     private LocalDate dateTaskToBeDone;
     private LocalDate dateTaskCompleted;
 
-    public UserTask(int id, String name, LocalDate dateTaskToBeDone) {
-        this.id = id;
-        this.name = name;
-        this.dateTaskToBeDone = dateTaskToBeDone;
+
+    public UserTask() {
     }
 
-//    generic getters and setters
-    public int getId() {
+    public UserTask(Long id, String name, boolean completed, LocalDate dateTaskToBeDone, LocalDate dateTaskCompleted) {
+        this.id = id;
+        this.name = name;
+        this.completed = completed;
+        this.dateTaskToBeDone = dateTaskToBeDone;
+        this.dateTaskCompleted = dateTaskCompleted;
+    }
+
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -50,16 +65,5 @@ public class UserTask {
 
     public void setDateTaskCompleted(LocalDate dateTaskCompleted) {
         this.dateTaskCompleted = dateTaskCompleted;
-    }
-
-    @Override
-    public String toString() {
-        return "UserTask{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", completed=" + completed +
-                ", dateTaskToBeDone=" + dateTaskToBeDone +
-                ", dateTaskCompleted=" + dateTaskCompleted +
-                '}';
     }
 }
