@@ -4,6 +4,7 @@ package barttek.projects.com.personalorganizerapp.userTaskFeature;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 public class UserTask implements Serializable {
@@ -65,5 +66,18 @@ public class UserTask implements Serializable {
 
     public void setDateTaskCompleted(LocalDate dateTaskCompleted) {
         this.dateTaskCompleted = dateTaskCompleted;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserTask userTask = (UserTask) o;
+        return id.equals(userTask.id) && name.equals(userTask.name) && completed.equals(userTask.completed) && dateTaskToBeDone.equals(userTask.dateTaskToBeDone) && Objects.equals(dateTaskCompleted, userTask.dateTaskCompleted);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, completed, dateTaskToBeDone, dateTaskCompleted);
     }
 }
