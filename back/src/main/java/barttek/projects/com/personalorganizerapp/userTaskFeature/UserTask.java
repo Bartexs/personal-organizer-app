@@ -1,4 +1,4 @@
-package barttek.projects.com.personalorganizerapp;
+package barttek.projects.com.personalorganizerapp.userTaskFeature;
 
 
 import javax.persistence.*;

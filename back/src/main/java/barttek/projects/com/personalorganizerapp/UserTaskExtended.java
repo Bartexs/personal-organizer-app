@@ -1,8 +1,9 @@
 package barttek.projects.com.personalorganizerapp;
 
+import barttek.projects.com.personalorganizerapp.userTaskFeature.UserTask;
+
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class UserTaskExtended extends UserTask {
@@ -13,7 +14,7 @@ public class UserTaskExtended extends UserTask {
     private List<Tag> tagsList;
 
     public UserTaskExtended(Builder builder) {
-        super(builder.id, Objects.requireNonNull(builder.name), builder.dateTaskToBeDone);
+//        super(builder.id, Objects.requireNonNull(builder.name), builder.dateTaskToBeDone);
         this.description = builder.description;
         this.subTasksList = builder.subTasksList;
         this.tagsList = builder.tagsList;

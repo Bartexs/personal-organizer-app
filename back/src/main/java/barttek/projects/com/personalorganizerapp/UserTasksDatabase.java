@@ -1,6 +1,6 @@
 package barttek.projects.com.personalorganizerapp;
 
-import org.apache.catalina.User;
+import barttek.projects.com.personalorganizerapp.userTaskFeature.UserTask;
 
 import java.util.ArrayList;
 import java.util.List;
