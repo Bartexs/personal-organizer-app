@@ -73,11 +73,22 @@ public class UserTask implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserTask userTask = (UserTask) o;
-        return id.equals(userTask.id) && name.equals(userTask.name) && completed.equals(userTask.completed) && dateTaskToBeDone.equals(userTask.dateTaskToBeDone) && Objects.equals(dateTaskCompleted, userTask.dateTaskCompleted);
+        return name.equals(userTask.name) && completed.equals(userTask.completed) && dateTaskToBeDone.equals(userTask.dateTaskToBeDone) && Objects.equals(dateTaskCompleted, userTask.dateTaskCompleted);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, completed, dateTaskToBeDone, dateTaskCompleted);
+        return Objects.hash(name, completed, dateTaskToBeDone, dateTaskCompleted);
+    }
+
+    @Override
+    public String toString() {
+        return "UserTask{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", completed=" + completed +
+                ", dateTaskToBeDone=" + dateTaskToBeDone +
+                ", dateTaskCompleted=" + dateTaskCompleted +
+                '}';
     }
 }
