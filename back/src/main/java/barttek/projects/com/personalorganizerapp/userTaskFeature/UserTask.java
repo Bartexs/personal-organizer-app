@@ -20,8 +20,7 @@ public class UserTask implements Serializable {
     public UserTask() {
     }
 
-    public UserTask(Long id, String name, boolean completed, LocalDate dateTaskToBeDone, LocalDate dateTaskCompleted) {
-        this.id = id;
+    public UserTask(String name, boolean completed, LocalDate dateTaskToBeDone, LocalDate dateTaskCompleted) {
         this.name = name;
         this.completed = completed;
         this.dateTaskToBeDone = dateTaskToBeDone;
