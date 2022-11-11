@@ -93,6 +93,7 @@ class UserTaskResourceTest {
         assertEquals(completedTasks, userTaskResource.findCompletedUserTasks().getBody());
     }
 
+//    it should show tasks via COMPLETION date and only on this day
     @Test
     void findCompletedUserTasksByDate() {
         LocalDate today = LocalDate.now();
@@ -119,13 +120,15 @@ class UserTaskResourceTest {
         assertEquals(notCompletedTasks, userTaskResource.findNotCompletedUserTasks().getBody());
     }
 
+    // it should return all the tasks with that equals given that AND later date
     @Test
     void findNotCompletedUserTasksByDate() {
         LocalDate today = LocalDate.now();
         LocalDate notTodayButBefore = today.minusDays(10);
 
         List<UserTask> notCompletedTasksByDateFirstDate = List.of(
-                new UserTask("Do nothing", false, today, null)
+                new UserTask("Do nothing", false, today, null),
+                new UserTask("Wheelie around the block", false, notTodayButBefore, null)
         );
 
         List<UserTask> notCompletedTasksByDateSecondDate = List.of(
