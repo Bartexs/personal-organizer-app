@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output} from '@angular/core';
 import { TasksListService } from 'src/app/services/tasks-list.service';
-import { Task } from 'src/app/models/task.model'
+import { UserTask } from 'src/app/models/UserTask.model';
+import { UserTaskService } from 'src/app/services/user-task.service';
 
 @Component({
   selector: 'app-task',
@@ -8,18 +9,17 @@ import { Task } from 'src/app/models/task.model'
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
-  @Input() taskToShow!: Task;
+  @Input() taskToShow!: UserTask;
   timeElapsedFromStopWatch = 0;
 
   showTimer = false;
   editMode = false;
 
 
-  constructor(private taskService: TasksListService) { }
+  constructor(private userTaskService: UserTaskService) { }
 
   ngOnInit(): void {
     console.log(this.taskToShow);
-    console.log(this.taskToShow.subTaskMap);
   }
 
   toogleEditMode() {
@@ -42,11 +42,16 @@ export class TaskComponent implements OnInit {
       taskId: this.taskToShow.id,
       time: this.timeElapsedFromStopWatch
     }
-    this.taskService.onModifyTimeSpentOnTask(newUpdate);
+    // this.taskService.onModifyTimeSpentOnTask(newUpdate);
   }
 
   public updateMarkAsCompleted() {
-    this.taskToShow.markedAsCompleted == true ? this.taskToShow.markedAsCompleted = false : this.taskToShow.markedAsCompleted = true;
-    console.log(this.taskToShow.markedAsCompleted);
+    this.taskToShow.completed == true ? this.taskToShow.completed = false : this.taskToShow.completed = true;
+    console.log(this.taskToShow.completed);
+  }
+
+  public setCompleted(value: boolean) {
+    this.taskToShow.completed = value;
+    this.userTaskService.onUpdateUserTask(this.taskToShow);
   }
 }

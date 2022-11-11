@@ -24,14 +24,14 @@
             <div class="header-date-picking"> 
                 <div>
                     <div class="day-control-buttons">
-                        <button class="btn btn-outline-secondary" (click)="showDay(-1)">Prev day</button>
+                        <button class="btn btn-outline-secondary" (click)="setDate(-1)">Prev day</button>
                         
-                        <button class="btn btn-outline-secondary" (click)="showDay(1)">Next day</button>
+                        <button class="btn btn-outline-secondary" (click)="setDate(1)">Next day</button>
                     </div>
                 </div>
                 <div>
                     <div class="day-control-buttons">
-                        <button class="btn btn-outline-secondary" (click)="setDateToShowToToday()">Today</button>
+                        <button class="btn btn-outline-secondary" (click)="setDateToShowAsTodayAndFetchTasks()">Today</button>
                     </div>
                 </div>
                 <div>
@@ -41,8 +41,8 @@
                 </div>
                 <div>
                     <div class="day-control-buttons">
-                        <button class="btn btn-outline-secondary" (click)="showDay(-7)">Prev week</button>
-                        <button class="btn btn-outline-secondary" (click)="showDay(7)">Next week</button>
+                        <!-- <button class="btn btn-outline-secondary" (click)="showDay(-7)">Prev week</button>
+                        <button class="btn btn-outline-secondary" (click)="showDay(7)">Next week</button> -->
                     </div>
                 </div>
             </div>
@@ -50,9 +50,10 @@
     </div>
     <hr class="section-breaker full">
 
+    <!-- INPUT row to quickly add new tasks -->
     <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Input to create a new task!" aria-label="Create new task" aria-describedby="button-addon2" #taskName>
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="createNewTaskShort(taskName)">Create task</button>
+        <input type="text" class="form-control" placeholder="Input to quickly add new task for currently showing day!" aria-label="Create new task" aria-describedby="button-addon2" #newUserTaskName>
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="createNewUserTask(newUserTaskName.value)">Create task</button>
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="createNewTaskModal = true">Press to add more details</button>
     </div>
     <app-create-new-task *ngIf="createNewTaskModal" (closeModal)="createNewTaskModal = false" [defaultDatePickerDate]="dateToShow"></app-create-new-task>
@@ -61,7 +62,11 @@
             <h2>You have no tasks to do so you are free on this day, or press button to add new task!</h2>
         </div>
         <div class="row">
-            <app-task *ngFor="let task of tasks" [taskToShow]="task"></app-task>
+            <p> NOT Completed tasks </p>
+            <app-task *ngFor="let nTask of notCompletedTasks" [taskToShow]="nTask"></app-task>
+            <p> Completed tasks </p>
+            <app-task *ngFor="let uTask of completedTasks" [taskToShow]="uTask"></app-task>
+            <hr class="section-breaker full">
         </div>
     </div>
     <div class="tasks-list-content-bottom">
@@ -85,22 +90,6 @@
 </ng-template>
 
 
-
-<!-- PRIORITY!!!!!!!!!! -->
-<!-- date due should show day from which task should be visible -->
-<!-- if we add task without date it should set it as today by default -->
-<!-- so we should show on list all the tasks that hasnt been completed and their date due is not met yet -->
-
-<!-- in right bottom corner add button - show all tasks completed with date done -->
-<!-- it should move us to other page and show all completed tasks -->
-
-<!-- remove weeks buttons and show possibility to choose range of tasks -->
-
-<!-- add new task view without date due and tasks description -->
-
-<!-- make two lists visible one with completed tasks TODAY and second with tasks not completed -->
-<!-- add property to task when it was completed -->
-<!-- PRIORITY!!!!!!!!!! -->
 
 <!-- STATS -->
 <!-- days between between day should be done and was really done -->

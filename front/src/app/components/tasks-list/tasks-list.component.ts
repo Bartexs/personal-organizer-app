@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TasksListService } from 'src/app/services/tasks-list.service';
-import { Task } from 'src/app/models/task.model'
+import { UserTaskService } from 'src/app/services/user-task.service';
+import { UserTask } from 'src/app/models/UserTask.model';
 
 @Component({
   selector: 'app-tasks-list',
@@ -8,7 +9,8 @@ import { Task } from 'src/app/models/task.model'
   styleUrls: ['./tasks-list.component.css']
 })
 export class TasksListComponent implements OnInit {
-  tasks: Task[] = [];
+  completedTasks: UserTask[] = [];
+  notCompletedTasks: UserTask[] = [];
   dateToShow: any;
   daysCounter = 0;
   isTasksListForDayEmpty = false;
@@ -18,75 +20,67 @@ export class TasksListComponent implements OnInit {
   // decides if tasks list widget is hidden or not
   isShowView = true;
 
-  constructor(private taskService: TasksListService) { }
+  newTaskName!: string;
+
+  constructor(private taskService: TasksListService, private userTaskService: UserTaskService) { }
 
   ngOnInit(): void {
-    this.taskService.onFetchDate(this.daysCounter).subscribe((date) => {
-      this.dateToShow = date;
-    });
-
-    this.taskService.onFetchTasks(this.daysCounter).subscribe((tasksRecieved) => {
-      this.tasks = tasksRecieved;
-    });
-
-    this.onInitPopulateSingleTasksList();
+    this.setDateToShowAsTodayAndFetchTasks();
   }
 
-  checkTasksListForDayEmpty() {
-    if(this.tasks.length == 0) {
-      this.isTasksListForDayEmpty = true;
-    } else {
-      this.isTasksListForDayEmpty = false;
-    }
+  // sets date to show as today and fetch tasks
+  public setDateToShowAsTodayAndFetchTasks() {
+    var today = new Date();
+    this.dateToShow = today.toISOString().split('T')[0];
+    this.fetchTasksForDate();
   }
 
-  onInitPopulateSingleTasksList() {
-    this.taskService.onInitPopulateSingleTasksList().subscribe((message) => {
-      console.log(message);
+  // based on amount of days got as parameter it shows another day 
+  public setDate(numberOfDays: number) {
+    var currDay = new Date(this.dateToShow);
+    currDay.setDate(currDay.getDate() + numberOfDays);
+    this.dateToShow = currDay.toISOString().split('T')[0];
+    this.fetchTasksForDate();
+  }
+
+  // wrapper method
+  public fetchTasksForDate() {
+    this.userTaskService.onFetchCompletedTasksByDate(this.dateToShow).subscribe((userTasksCompletedReceived) => {
+      this.completedTasks = userTasksCompletedReceived;
+    })
+
+    // fetch NOT completed tasks using date 
+    this.userTaskService.onFetchNotCompletedTasksByDate(this.dateToShow).subscribe((userTasksNotCompletedReceived) => {
+      this.notCompletedTasks = userTasksNotCompletedReceived;
     })
   }
 
-  setDateToShowToToday() {
-    this.daysCounter = 0;
-    this.showDay(0);
+  // shows when task has been added to database
+  public showUserTaskCreatedResponse(userTaskName: string) {
+    console.log("created task named:");
+    console.log(userTaskName);
   }
 
-  showDay(dayCounter: number) {
-    this.daysCounter += dayCounter;
-    this.taskService.onFetchDate(this.daysCounter).subscribe((date) => {
-      this.dateToShow = date;
-    });
-
-    this.taskService.onFetchTasks(this.daysCounter).subscribe((tasksRecieved) => {
-      this.tasks = tasksRecieved;
-      this.checkTasksListForDayEmpty();
-    });
+  // shows when something went wrong 
+  public showUserTaskNotCreatedResponse() {
+    console.log("NOT created");
   }
 
+  // creating new user via usertask service and processing response we got from it, to not forget status 201 means CREATED 
+  public createNewUserTask(newUserTaskName: string) {
+    const createNewUserTask: UserTask = {
+      name: newUserTaskName,
+      completed: false,
+      // it sets date as currently showing
+      dateTaskToBeDone: this.dateToShow,
+    }
+
+    this.userTaskService.onPostNewTask(createNewUserTask).subscribe((responseData) => {
+      // we fire propert method based on status from API 
+      responseData.status == 201 ? this.showUserTaskCreatedResponse(createNewUserTask.name) : this.showUserTaskNotCreatedResponse();
+    });
+  }
   setDateAsAllTasks() {
     this.dateToShow = "All tasks";
-  }
-
-  createNewTaskShort(event: any) {
-    this.setId();
-    
-    const createTask: Task = {
-      id: this.id,
-      name: event.value,
-      markedAsCompleted: false,
-      dateDue: this.dateToShow,
-      countTimePerDay: false,
-      hasSubTasks: false
-    }
-
-    this.taskService.onPostNewTask(createTask);
-
-    this.ngOnInit();
-  }
-
-  private setId() {
-    this.taskService.generateIdForNewTask().subscribe((generatedId) => {
-      this.id = generatedId;
-    })
   }
 }
