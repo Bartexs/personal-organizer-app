@@ -86,8 +86,11 @@ export class TasksListComponent implements OnInit {
     });
   }
 
-  setDateAsAllTasks() {
-    this.dateToShow = "All tasks";
+  showAllScheduledUserTasks() {
+    this.userTaskService.onFetchAllNotCompletedTasks().subscribe((responseList) => {
+      this.notCompletedTasks = responseList;
+      this.completedTasks = [];
+    });
   }
 
   // fires success notification with give message and object type, and refresh lists 
