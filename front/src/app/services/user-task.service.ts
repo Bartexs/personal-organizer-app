@@ -44,4 +44,10 @@ export class UserTaskService {
     let pathToDelete = `http://localhost:8080/user-task/delete/${id}`
     return this.httpClient.delete(pathToDelete);
   }
+
+  // return all scheduled tasks
+  onFetchAllNotCompletedTasks() {
+    let pathToGet = `http://localhost:8080/user-task/not-completed`
+    return this.httpClient.get<UserTask[]>(pathToGet);
+  }
 }
