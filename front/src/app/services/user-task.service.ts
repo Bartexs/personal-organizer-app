@@ -22,14 +22,22 @@ export class UserTaskService {
   onFetchCompletedTasksByDate(d: string) {
     // create new http parameters
     const parameters = new HttpParams().set("date", d);
-    let pathToGet = 'http://localhost:8080/user-task/completed/'
+    let pathToGet = 'http://localhost:8080/user-task/completed'
     return this.httpClient.get<UserTask[]>(pathToGet, {params: parameters});
   }
 
   // fetch NOT complted tasks via date
   onFetchNotCompletedTasksByDate(d: string) {
     const parameters = new HttpParams().set("date", d);
-    let pathToGet = 'http://localhost:8080/user-task/all/'
+    let pathToGet = 'http://localhost:8080/user-task/not-completed'
     return this.httpClient.get<UserTask[]>(pathToGet, {params: parameters});
+  }
+
+  // update given userTask
+  onUpdateUserTask(updateTask: UserTask) {
+    let pathToPut = 'http://localhost:8080/user-task/update'
+    return this.httpClient.put<UserTask>(pathToPut, updateTask).subscribe((responseData) => {
+      console.log("updated");
+    });
   }
 }
