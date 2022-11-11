@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
 @RestController
 @RequestMapping("/user-task")
 public class UserTaskResource {
@@ -49,23 +51,30 @@ public class UserTaskResource {
         List<UserTask> userTasks = userTaskService.findCompletedUserTasks();
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
-    //get userTask by date but COMPLETED
-    @GetMapping("/completed/{date}")
-    public ResponseEntity<List<UserTask>> findCompletedUserTasksByDate(@PathVariable("date") String date) {
-        List<UserTask> userTasks = userTaskService.findCompletedUserTasksByDate(date);
-        return new ResponseEntity<>(userTasks, HttpStatus.OK);
-    }
 
-    //get all not completed tasks
     @GetMapping("/not-completed")
     public ResponseEntity<List<UserTask>> findNotCompletedUserTasks() {
         List<UserTask> userTasks = userTaskService.findNotCompletedUserTasks();
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
+    //get userTask by date but COMPLETED
+    @RequestMapping(
+            value = "/completed",
+            params = { "date" },
+            method = GET
+    )
+    public ResponseEntity<List<UserTask>> findCompletedUserTasksByDate(@RequestParam("date")String date) {
+        List<UserTask> userTasks = userTaskService.findCompletedUserTasksByDate(date);
+        return new ResponseEntity<>(userTasks, HttpStatus.OK);
+    }
 
     //get userTask by date but NOT COMPLETED
-    @GetMapping("/not-completed/{date}")
-    public ResponseEntity<List<UserTask>> findNotCompletedUserTasksByDate(@PathVariable("date")String date) {
+    @RequestMapping(
+            value = "/not-completed",
+            params = { "date" },
+            method = GET
+    )
+    public ResponseEntity<List<UserTask>> findNotCompletedUserTasksByDate(@RequestParam("date")String date) {
         List<UserTask> userTasks = userTaskService.findNotCompletedUserTasksByDate(date);
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
