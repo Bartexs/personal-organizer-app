@@ -63,7 +63,7 @@
         </div>
         <div class="row">
             <p> NOT Completed tasks </p>
-            <app-task *ngFor="let nTask of notCompletedTasks" [taskToShow]="nTask"></app-task>
+            <app-task *ngFor="let nTask of notCompletedTasks" (deletedMyself)="onTaskDeleted(nTask)" [taskToShow]="nTask"></app-task>
             <p> Completed tasks </p>
             <app-task *ngFor="let uTask of completedTasks" [taskToShow]="uTask"></app-task>
             <hr class="section-breaker full">
@@ -73,6 +73,9 @@
         <!-- <button class="btn btn-outline-secondary" *ngIf="isTasksListForDayEmpty==false">Share your day</button> -->
     </div>
 </div>
+
+<!-- if any task has been deleted shows this confirmation -->
+<app-success-notification *ngIf="showSuccessfullyDeletedNotification" [message]="deletedUserTaskMessageForNotification"></app-success-notification>
 
 <ng-template #hideTasksListView>
     <div class="hiddenWidgetContainer">

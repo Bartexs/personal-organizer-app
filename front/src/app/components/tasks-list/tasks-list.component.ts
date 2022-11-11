@@ -16,6 +16,8 @@ export class TasksListComponent implements OnInit {
   isTasksListForDayEmpty = false;
   createNewTaskModal = false;
   id!: number;
+  showSuccessfullyDeletedNotification = false;
+  deletedUserTaskMessageForNotification!: {messageContent: string, objectType: string};
 
   // decides if tasks list widget is hidden or not
   isShowView = true;
@@ -80,7 +82,21 @@ export class TasksListComponent implements OnInit {
       responseData.status == 201 ? this.showUserTaskCreatedResponse(createNewUserTask.name) : this.showUserTaskNotCreatedResponse();
     });
   }
+
   setDateAsAllTasks() {
     this.dateToShow = "All tasks";
+  }
+
+  public onTaskDeleted(deletedTask: UserTask) {
+    this.deletedUserTaskMessageForNotification = {
+      messageContent: deletedTask.name, 
+      objectType: "userTask"
+    }
+
+    this.showSuccessfullyDeletedNotification = true;
+
+    const myTimeout = setTimeout(() => {
+      this.showSuccessfullyDeletedNotification = false;
+    }, 5000);
   }
 }

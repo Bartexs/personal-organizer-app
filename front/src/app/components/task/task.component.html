@@ -94,5 +94,5 @@
 
 <!-- being fired when we press delete button on task -->
 <app-delete-conf-modal *ngIf="showDeleteConfirmModal" (closeModal)="setShowDeleteConfirmModal(false)" (deleteUserTaskConfirmed)="deleteUserTask()"></app-delete-conf-modal>
-<app-success-notification *ngIf="showSuccessfullyDeletedNotification" []={}></app-success-notification>
+
 <!-- if task is completed make it move to the section below current tasks and make it wyszarzony, as everything add to statistics evey done tasks -->

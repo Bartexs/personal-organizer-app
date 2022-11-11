@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { TasksListService } from 'src/app/services/tasks-list.service';
 import { UserTask } from 'src/app/models/UserTask.model';
 import { UserTaskService } from 'src/app/services/user-task.service';
@@ -11,13 +11,13 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class TaskComponent implements OnInit {
   @Input() taskToShow!: UserTask;
+  @Output() deletedMyself = new EventEmitter<void>();
   timeElapsedFromStopWatch = 0;
 
   showTimer = false;
   editMode = false;
 
   showDeleteConfirmModal = false;
-  showSuccessfullyDeletedNotification = false;
 
   constructor(private userTaskService: UserTaskService) { }
 
@@ -61,6 +61,7 @@ export class TaskComponent implements OnInit {
   public deleteUserTask() {
     this.userTaskService.deleteUserTask(this.taskToShow.id);
     this.setShowDeleteConfirmModal(false);
+    this.deletedMyself.emit();
   }
 
   public setShowDeleteConfirmModal(value: boolean) {
