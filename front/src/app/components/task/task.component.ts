@@ -62,6 +62,26 @@ export class TaskComponent implements OnInit {
     });
   }
 
+  // move task to next day
+  public scheduleForNextDay() {
+    let newDateFoUserTask: Date;
+    newDateFoUserTask = new Date(this.taskToShow.dateTaskToBeDone);
+  
+    function addDays(date: any, days: number) {
+      var result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return result;
+    }
+    newDateFoUserTask = addDays(newDateFoUserTask, 1);
+    const stringDate = newDateFoUserTask.toISOString().split('T')[0]
+
+    this.taskToShow.dateTaskToBeDone = stringDate;
+ 
+    this.userTaskService.onUpdateUserTask(this.taskToShow).subscribe((responseData) => {
+      this.emitUpdatedTaskPing();
+    });
+  }
+
   // delete userTask from database and ping list to refresh itself
   public deleteUserTask() {
     this.userTaskService.deleteUserTask(this.taskToShow.id).subscribe((responseData) => {
