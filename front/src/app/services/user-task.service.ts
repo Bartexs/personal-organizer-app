@@ -36,14 +36,12 @@ export class UserTaskService {
   // update given userTask
   onUpdateUserTask(updateTask: UserTask) {
     let pathToPut = 'http://localhost:8080/user-task/update'
-    return this.httpClient.put<UserTask>(pathToPut, updateTask).subscribe((responseData) => {
-      console.log("updated");
-    });
+    return this.httpClient.put<UserTask>(pathToPut, updateTask);
   }
 
   // delete userTask by id
   deleteUserTask(id: any) {
     let pathToDelete = `http://localhost:8080/user-task/delete/${id}`
-    return this.httpClient.delete(pathToDelete).subscribe();
+    return this.httpClient.delete(pathToDelete);
   }
 }

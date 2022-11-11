@@ -45,8 +45,10 @@ export class TasksListComponent implements OnInit {
     this.fetchTasksForDate();
   }
 
-  // wrapper method
+  // wrapper method TO REFRESH COMPLETED AND NOT COMPLETED LISTS FOR CURRENT DAY 
   public fetchTasksForDate() {
+    console.log("called fetch wrapper");
+    // fetch completed tasks using date
     this.userTaskService.onFetchCompletedTasksByDate(this.dateToShow).subscribe((userTasksCompletedReceived) => {
       this.completedTasks = userTasksCompletedReceived;
     })
@@ -68,7 +70,7 @@ export class TasksListComponent implements OnInit {
     console.log("NOT created");
   }
 
-  // creating new user via usertask service and processing response we got from it, to not forget status 201 means CREATED 
+  // creating new user via usertask service and processing response we got from it, to not forget status 201 means CREATED, refresh lists at the end of the method
   public createNewUserTask(newUserTaskName: string) {
     const createNewUserTask: UserTask = {
       name: newUserTaskName,
@@ -80,6 +82,7 @@ export class TasksListComponent implements OnInit {
     this.userTaskService.onPostNewTask(createNewUserTask).subscribe((responseData) => {
       // we fire propert method based on status from API 
       responseData.status == 201 ? this.showUserTaskCreatedResponse(createNewUserTask.name) : this.showUserTaskNotCreatedResponse();
+      this.fetchTasksForDate();
     });
   }
 
@@ -87,12 +90,12 @@ export class TasksListComponent implements OnInit {
     this.dateToShow = "All tasks";
   }
 
+  // fires success notification with give message and object type, and refresh lists 
   public onTaskDeleted(deletedTask: UserTask) {
     this.deletedUserTaskMessageForNotification = {
       messageContent: deletedTask.name, 
       objectType: "userTask"
     }
-
     this.showSuccessfullyDeletedNotification = true;
 
     const myTimeout = setTimeout(() => {

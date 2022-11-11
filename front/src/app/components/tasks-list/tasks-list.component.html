@@ -63,9 +63,9 @@
         </div>
         <div class="row">
             <p> NOT Completed tasks </p>
-            <app-task *ngFor="let nTask of notCompletedTasks" (deletedMyself)="onTaskDeleted(nTask)" [taskToShow]="nTask"></app-task>
+            <app-task *ngFor="let nTask of notCompletedTasks" (deletedMyself)="onTaskDeleted(nTask)" (updatedTask)="fetchTasksForDate()" [taskToShow]="nTask"></app-task>
             <p> Completed tasks </p>
-            <app-task *ngFor="let uTask of completedTasks" [taskToShow]="uTask"></app-task>
+            <app-task *ngFor="let uTask of completedTasks" (updatedTask)="fetchTasksForDate()" [taskToShow]="uTask"></app-task>
             <hr class="section-breaker full">
         </div>
     </div>

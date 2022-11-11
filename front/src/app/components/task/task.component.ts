@@ -12,6 +12,7 @@ import { ChangeDetectorRef } from '@angular/core';
 export class TaskComponent implements OnInit {
   @Input() taskToShow!: UserTask;
   @Output() deletedMyself = new EventEmitter<void>();
+  @Output() updatedTask = new EventEmitter<void>();
   timeElapsedFromStopWatch = 0;
 
   showTimer = false;
@@ -23,6 +24,11 @@ export class TaskComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.taskToShow);
+  }
+
+  // when called tells user task list component to refresh lists - task has been updated
+  public emitUpdatedTaskPing() {
+    this.updatedTask.emit();
   }
 
   toogleEditMode() {
@@ -48,22 +54,24 @@ export class TaskComponent implements OnInit {
     // this.taskService.onModifyTimeSpentOnTask(newUpdate);
   }
 
-  public updateMarkAsCompleted() {
-    this.taskToShow.completed == true ? this.taskToShow.completed = false : this.taskToShow.completed = true;
-    console.log(this.taskToShow.completed);
-  }
-
+  // sets usertask as completed, update it to database and ping list to refresh itself
   public setCompleted(value: boolean) {
     this.taskToShow.completed = value;
-    this.userTaskService.onUpdateUserTask(this.taskToShow);
+    this.userTaskService.onUpdateUserTask(this.taskToShow).subscribe((responseData) => {
+      this.emitUpdatedTaskPing();
+    });
   }
 
+  // delete userTask from database and ping list to refresh itself
   public deleteUserTask() {
-    this.userTaskService.deleteUserTask(this.taskToShow.id);
+    this.userTaskService.deleteUserTask(this.taskToShow.id).subscribe((responseData) => {
+      this.emitUpdatedTaskPing();
+    });
     this.setShowDeleteConfirmModal(false);
     this.deletedMyself.emit();
   }
 
+  // change variable to true when we should show modal with confirmation to delete
   public setShowDeleteConfirmModal(value: boolean) {
     this.showDeleteConfirmModal = value;
   }
