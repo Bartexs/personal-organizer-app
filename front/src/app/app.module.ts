@@ -19,6 +19,8 @@ import { AboutComponent } from './components/about/about.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 import { LoginUserComponent } from './components/login-user/login-user.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
+import { DeleteConfModalComponent } from './components/modals/delete-conf-modal/delete-conf-modal.component';
+import { SuccessNotificationComponent } from './notifications/success-notification/success-notification.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { WelcomePageComponent } from './components/welcome-page/welcome-page.com
     RegisterUserComponent,
     LoginUserComponent,
     WelcomePageComponent,
+    DeleteConfModalComponent,
+    SuccessNotificationComponent,
   ],
   imports: [
     BrowserModule,

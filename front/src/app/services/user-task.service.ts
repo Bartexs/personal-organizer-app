@@ -40,4 +40,10 @@ export class UserTaskService {
       console.log("updated");
     });
   }
+
+  // delete userTask by id
+  deleteUserTask(id: any) {
+    let pathToDelete = `http://localhost:8080/user-task/delete/${id}`
+    return this.httpClient.delete(pathToDelete).subscribe();
+  }
 }
