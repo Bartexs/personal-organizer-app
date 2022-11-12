@@ -21,6 +21,7 @@ import { LoginUserComponent } from './components/login-user/login-user.component
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { DeleteConfModalComponent } from './components/modals/delete-conf-modal/delete-conf-modal.component';
 import { SuccessNotificationComponent } from './notifications/success-notification/success-notification.component';
+import { ModifyModalComponent } from './components/userTasksFunctionality/modify-modal/modify-modal.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { SuccessNotificationComponent } from './notifications/success-notificati
     WelcomePageComponent,
     DeleteConfModalComponent,
     SuccessNotificationComponent,
+    ModifyModalComponent,
   ],
   imports: [
     BrowserModule,

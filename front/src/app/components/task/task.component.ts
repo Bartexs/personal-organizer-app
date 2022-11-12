@@ -14,6 +14,7 @@ export class TaskComponent implements OnInit {
   @Output() deletedMyself = new EventEmitter<void>();
   @Output() updatedTask = new EventEmitter<void>();
   timeElapsedFromStopWatch = 0;
+  modifyUserTaskModal = false;
 
   showTimer = false;
   editMode = false;
@@ -94,5 +95,9 @@ export class TaskComponent implements OnInit {
   // change variable to true when we should show modal with confirmation to delete
   public setShowDeleteConfirmModal(value: boolean) {
     this.showDeleteConfirmModal = value;
+  }
+
+  public setShowModifyModal(value: boolean) {
+    this.modifyUserTaskModal = value;
   }
 }

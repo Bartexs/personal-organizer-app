@@ -1,0 +1,17 @@
+<div class="backdrop">
+    <div class="modal-window">
+        <div class="container">
+            <div class="row">
+                <p>Modify user task</p>
+                <p>Current task's name: {{modifyUserTask.name}}</p>
+                <label for="birthday">Scheduled date:</label>
+                <input type="date" id="birthday" name="birthday" value={{modifyUserTask.dateTaskToBeDone}}>
+                <button (click)="setDay(-1)">Previous day</button>
+                <button (click)="setDay(1)">Next day</button>
+                <!-- <p>{{modifyUserTask.description}}</p> -->
+                <button class="btn btn-success"> Submit changes</button>
+                <button class="btn btn-secondary" (click)="emitCloseModal()"> Close modal </button>
+            </div>
+        </div>
+    </div>
+</div>
