@@ -1,18 +1,11 @@
 <div class="custom-main-container connector">
     <div class="overwritter" *ngIf="taskToShow.completed">
-        <h2>COMPLETED</h2>
+        <p><strong>COMPLETED!</strong></p>
     </div>
     <div class="name-and-description-container" [ngClass]="taskToShow.completed ? 'blur' : ''">
         <div class="tasks-name">
             <p><strong>{{taskToShow.name}}</strong></p>
-            <!-- <div class="show-description">
-                <p>show sublist</p>
-            </div> -->
         </div>
-        <!-- <hr class="section-breaker">
-        <div class="tasks-description">
-            <p>Task's description</p>
-        </div> -->
     </div>
     <div class="buttons-and-color-container">
         <!-- <hr class="section-breaker-horizontal"> -->
@@ -60,7 +53,7 @@
         <div class="tasks-color" [ngClass]="taskToShow.completed ? 'blur' : ''">
             <!-- <input type="color"> -->
             <!-- <input type="color" class="custom-color-control form-control form-control-sm form-control-color" id="exampleColorInput" value="#563d7c" title="Choose your color"> -->
-            <input (change)="saveUserTaskColor(colorPicker)" [value]=taskToShow.color class="color-picker" type="color" id="html5colorpicker" style="width: 100%" #colorPicker>
+            <input (change)="saveUserTaskColor(colorPicker)" [disabled]=taskToShow.completed [value]=taskToShow.color class="color-picker" type="color" id="html5colorpicker" style="width: 100%" #colorPicker>
         </div>
     </div>
 </div>

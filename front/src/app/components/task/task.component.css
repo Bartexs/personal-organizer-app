@@ -1,17 +1,25 @@
 .custom-main-container {
-    margin-top: 30px;
+    
     display: flex;
     flex-direction: row;
-    height: 120px;
+    height: 70px;
     /* border-style:ridge; */
-    margin-bottom: 20px;
-
+    margin-bottom: 5px;
+    margin-top: 15px;
     border-color: gray;
     border-style: solid;
     border-width: 1px;
     border-radius: 5px;
     box-shadow: 2px 4px 18px 1px black;
+    position: relative;
     
+}
+
+.overwritter {
+  position: absolute;
+  right: 50%;
+  top: 30%;
+  color: green;
 }
 
 .blur {
@@ -20,12 +28,6 @@
 
 .connector {
   filter: blur(0px) opacity(100%);
-}
-
-.overwritter {
-  position: fixed;
-  margin-top: 4%;
-  margin-left: 20%;
 }
 
 .task-completed {
@@ -47,9 +49,21 @@
 }
 
 .tasks-name {
+    margin-top: auto;
     text-align: center;
-    max-height: 20%;
-    padding-top: 9px;
+    letter-spacing: 2px;
+    text-shadow: 5px 2px 5px lightgray;
+    font-weight: lighter;
+    font-size: 1.4em;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    vertical-align: middle;
+}
+
+.tasks-name:hover {
+  overflow: visible;
 }
 
 .show-description {
