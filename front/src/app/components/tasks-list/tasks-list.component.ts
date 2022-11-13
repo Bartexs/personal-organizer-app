@@ -105,4 +105,8 @@ export class TasksListComponent implements OnInit {
       this.showSuccessfullyDeletedNotification = false;
     }, 5000);
   }
+
+  onKeydown(value: string) {
+    this.createNewUserTask(value)
+  }
 }

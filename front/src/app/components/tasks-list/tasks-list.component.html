@@ -52,7 +52,7 @@
 
     <!-- INPUT row to quickly add new tasks -->
     <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Input to quickly add new task for currently showing day!" aria-label="Create new task" aria-describedby="button-addon2" #newUserTaskName>
+        <input (keydown.Enter)="onKeydown(newUserTaskName.value)" autofocus type="text" class="form-control" placeholder="Input to quickly add new task for currently showing day!" aria-label="Create new task" aria-describedby="button-addon2" #newUserTaskName>
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="createNewUserTask(newUserTaskName.value)">Create task</button>
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="createNewTaskModal = true">Press to add more details</button>
     </div>

@@ -16,6 +16,15 @@ public class UserTask implements Serializable {
     private LocalDate dateTaskToBeDone;
     private LocalDate dateTaskCompleted;
 
+//    private String description;
+//    private LocalDate creationDate;
+//    private LocalDate scheduledDate;
+//    private LocalDate completionDate;
+//    sub task list ????
+//    custom color scheme for task widget
+//    reminder
+//    tags
+
 
     public UserTask() {
     }
