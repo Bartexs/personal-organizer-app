@@ -71,9 +71,11 @@ export class TasksListComponent implements OnInit {
   }
 
   // creating new user via usertask service and processing response we got from it, to not forget status 201 means CREATED, refresh lists at the end of the method
-  public createNewUserTask(newUserTaskName: string) {
+  public createNewUserTask(value: any) {
+    console.log(value.value);
+    
     const createNewUserTask: UserTask = {
-      name: newUserTaskName,
+      name: value.value,
       completed: false,
       // it sets date as currently showing
       dateTaskToBeDone: this.dateToShow,
@@ -84,6 +86,8 @@ export class TasksListComponent implements OnInit {
       responseData.status == 201 ? this.showUserTaskCreatedResponse(createNewUserTask.name) : this.showUserTaskNotCreatedResponse();
       this.fetchTasksForDate();
     });
+
+    value.value = "";
   }
 
   showAllScheduledUserTasks() {
