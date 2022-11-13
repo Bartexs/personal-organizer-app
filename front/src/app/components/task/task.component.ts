@@ -24,7 +24,6 @@ export class TaskComponent implements OnInit {
   constructor(private userTaskService: UserTaskService) { }
 
   ngOnInit(): void {
-    console.log(this.taskToShow);
   }
 
   // when called tells user task list component to refresh lists - task has been updated
@@ -99,5 +98,12 @@ export class TaskComponent implements OnInit {
 
   public setShowModifyModal(value: boolean) {
     this.modifyUserTaskModal = value;
+  }
+
+  public saveUserTaskColor(picker: any) {
+    this.taskToShow.color = picker.value;
+    this.userTaskService.onUpdateUserTask(this.taskToShow).subscribe((responseData) => {
+      this.emitUpdatedTaskPing();
+    });
   }
 }

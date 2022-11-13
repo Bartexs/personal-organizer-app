@@ -15,7 +15,12 @@ export class UserTaskService {
   // POST new user to backend, we set observe to get access to server response, we process it in component using this method
   onPostNewTask(newTask: UserTask) {
     let pathToPost = 'http://localhost:8080/user-task/add'
+    newTask.color = this.setDefaultColorIfNotSpecifiedByUser(newTask.color);
     return this.httpClient.post(pathToPost, newTask, {observe: 'response'});
+  }
+
+  public setDefaultColorIfNotSpecifiedByUser(color: any) {
+    return color == undefined ? "#FF0000" : color;
   }
 
   // fetch completed tasks via date

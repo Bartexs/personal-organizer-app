@@ -1,33 +1,3 @@
-<!-- <hr>
-<div class="container" style="border: 1px solid">
-    <div class="row">
-        <p><strong>{{taskToShow.name}}</strong></p>
-        <p>Marked as completed: {{taskToShow.markedAsCompleted}} </p>
-        <button class="btn btn-success btn-sm" (click)="updateMarkAsCompleted()">mark as complete</button>
-        <button class="btn btn-secondary btn-sm" (click)="toogleEditMode()">edit task</button>
-        <button class="btn btn-danger btn-sm">delete task</button>
-        <button class="btn btn-danger btn-sm">play music</button>
-        <button class="btn btn-primary btn-sm" (click)="setShowTimer()" *ngIf="taskToShow.countTimePerDay">work on task</button>
-        <p *ngIf="taskToShow.countTimePerDay"> Today's time spent on task: <strong>{{timeElapsedFromStopWatch}} seconds</strong></p>
-        <app-timer *ngIf="showTimer" (emitTimeElapsed)="saveTimeElapsedFromStopwatch($event)"></app-timer>
-    </div>
-    <div class="row" *ngIf="taskToShow.hasSubTasks">
-        <p>Has sub tasks list</p>
-        <li *ngFor="let subTask of taskToShow.subTaskMap | keyvalue"> {{subTask.key}}</li>
-    </div>
-    <div class="row" *ngIf="editMode">
-        <p>Edit mode: ON!</p>
-        <p>Task configuraion:</p>
-        <p>Task name:{{taskToShow.name}}</p>
-        <p>Task due date:{{taskToShow.dateDue}}</p>
-        <p>Count time spent on task per day? {{taskToShow.countTimePerDay}}</p>
-        <p>Does task has subTask list?{{taskToShow.hasSubTasks}}</p>
-        <hr>
-        <button class="btn btn-success" (click)="toogleEditMode()">Save modifications</button>
-    </div>
-        <button class="btn btn-secondary" *ngIf="taskToShow.hasSubTasks">Press to add to subTaskList</button>
-        <button class="btn btn-danger">SHARE TASK</button>
-</div> -->
 <div class="custom-main-container connector">
     <div class="overwritter" *ngIf="taskToShow.completed">
         <h2>COMPLETED</h2>
@@ -90,7 +60,7 @@
         <div class="tasks-color" [ngClass]="taskToShow.completed ? 'blur' : ''">
             <!-- <input type="color"> -->
             <!-- <input type="color" class="custom-color-control form-control form-control-sm form-control-color" id="exampleColorInput" value="#563d7c" title="Choose your color"> -->
-            <input class="color-picker" type="color" id="html5colorpicker" onchange="clickColor(0, -1, -1, 5)" value="#ff0000" style="width:85%;">
+            <input (change)="saveUserTaskColor(colorPicker)" [value]=taskToShow.color class="color-picker" type="color" id="html5colorpicker" style="width: 100%" #colorPicker>
         </div>
     </div>
 </div>

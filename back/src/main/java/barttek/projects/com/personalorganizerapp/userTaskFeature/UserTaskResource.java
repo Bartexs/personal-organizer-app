@@ -96,6 +96,7 @@ public class UserTaskResource {
     @PutMapping("/update")
     public ResponseEntity<UserTask> updateUserTask(@RequestBody UserTask userTask) {
         UserTask updateUserTask = userTaskService.updateUserTask(userTask);
+        System.out.println(userTask);
         return new ResponseEntity<>(updateUserTask, HttpStatus.OK);
     }
 

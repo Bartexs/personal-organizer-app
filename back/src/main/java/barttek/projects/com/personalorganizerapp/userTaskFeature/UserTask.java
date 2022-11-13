@@ -16,12 +16,13 @@ public class UserTask implements Serializable {
     private LocalDate dateTaskToBeDone;
     private LocalDate dateTaskCompleted;
 
+    private String color;
+
 //    private String description;
 //    private LocalDate creationDate;
 //    private LocalDate scheduledDate;
 //    private LocalDate completionDate;
 //    sub task list ????
-//    custom color scheme for task widget
 //    reminder
 //    tags
 
@@ -29,11 +30,13 @@ public class UserTask implements Serializable {
     public UserTask() {
     }
 
-    public UserTask(String name, boolean completed, LocalDate dateTaskToBeDone, LocalDate dateTaskCompleted) {
+    public UserTask(String name, boolean completed, LocalDate dateTaskToBeDone, LocalDate dateTaskCompleted, String color) {
         this.name = name;
         this.completed = completed;
         this.dateTaskToBeDone = dateTaskToBeDone;
         this.dateTaskCompleted = dateTaskCompleted;
+        this.color = color;
+//
     }
 
     public Long getId() {
@@ -76,6 +79,14 @@ public class UserTask implements Serializable {
         this.dateTaskCompleted = dateTaskCompleted;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -97,6 +108,7 @@ public class UserTask implements Serializable {
                 ", completed=" + completed +
                 ", dateTaskToBeDone=" + dateTaskToBeDone +
                 ", dateTaskCompleted=" + dateTaskCompleted +
+                ", color='" + color + '\'' +
                 '}';
     }
 }

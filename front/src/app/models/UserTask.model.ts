@@ -4,4 +4,5 @@ export interface UserTask {
     completed: boolean;
     dateTaskToBeDone: string;
     dateTaskCompleted?: string;
+    color?: string;
 }

@@ -72,7 +72,6 @@ export class TasksListComponent implements OnInit {
 
   // creating new user via usertask service and processing response we got from it, to not forget status 201 means CREATED, refresh lists at the end of the method
   public createNewUserTask(value: any) {
-    console.log(value.value);
     
     const createNewUserTask: UserTask = {
       name: value.value,
@@ -110,7 +109,7 @@ export class TasksListComponent implements OnInit {
     }, 5000);
   }
 
-  onKeydown(value: string) {
+  onKeydown(value: any) {
     this.createNewUserTask(value)
   }
 }
