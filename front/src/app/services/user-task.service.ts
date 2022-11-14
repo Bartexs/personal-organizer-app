@@ -55,4 +55,10 @@ export class UserTaskService {
     let pathToGet = `http://localhost:8080/user-task/not-completed`
     return this.httpClient.get<UserTask[]>(pathToGet);
   }
+  
+  // get usertasks for certain days 
+  onFetchAllUserTasksByDate(date: string) {
+    let pathToGet = `http://localhost:8080/user-task/all/` + date;
+    return this.httpClient.get<UserTask[]>(pathToGet);
+  }
 }

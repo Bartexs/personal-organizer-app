@@ -8,11 +8,28 @@
     width: 30%;
     padding-bottom: 15px;
     border-width: 1.9px;
-    /* box-shadow: 2px 4px 18px 1px gray; */
+}
+
+.short {
+    width: 20%;
+    padding-bottom: 0px;
 }
 
 .full {
     width: 100%;
+}
+
+/* .tasks-list-container {
+    position: relative;
+} */
+
+.tasks-list {
+    padding-bottom: 20px;
+}
+
+.empty-tasks-list {
+    margin-top: 50px;
+    text-align: center;
 }
 
 /* styling for the header of the content window */
@@ -27,17 +44,7 @@
 
         .header-image-for-component {
             width: 39%;
-            /* border-style: solid; */
         }
-
-        /* .roll-up-section-button {
-            font-size: xx-small;
-            position: relative;
-            left: 5%;
-            bottom: 30px;
-            text-decoration: underline;
-            display: inline-flex;
-        } */
 
         .hide-widget {
             padding: 0;

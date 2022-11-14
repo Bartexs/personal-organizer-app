@@ -39,12 +39,6 @@
                         <button class="btn btn-outline-secondary" (click)="showAllScheduledUserTasks()">All tasks NOT COMPLETED</button>
                     </div>
                 </div>
-                <div>
-                    <div class="day-control-buttons">
-                        <!-- <button class="btn btn-outline-secondary" (click)="showDay(-7)">Prev week</button>
-                        <button class="btn btn-outline-secondary" (click)="showDay(7)">Next week</button> -->
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -57,16 +51,19 @@
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="createNewTaskModal = true">Press to add more details</button>
     </div>
     <app-create-new-task *ngIf="createNewTaskModal" (closeModal)="createNewTaskModal = false" [defaultDatePickerDate]="dateToShow"></app-create-new-task>
-    <div class="tasks-list-content-main">
-        <div class="row" *ngIf="isTasksListForDayEmpty">
-            <h2>You have no tasks to do so you are free on this day, or press button to add new task!</h2>
-        </div>
-        <div class="row">
-            <p> NOT Completed tasks </p>
+    <div class="tasks-list-container">
+        <div class="tasks-list" *ngIf="!isScheduledTasksListEmpty">
+            <h4>Scheduled tasks:</h4>
+            <hr class="section-breaker short">
             <app-task *ngFor="let nTask of notCompletedTasks" (deletedMyself)="onTaskDeleted(nTask)" (updatedTask)="fetchTasksForDate()" [taskToShow]="nTask"></app-task>
-            <p> Completed tasks </p>
+        </div>
+        <div class="tasks-list" *ngIf="!isCompletedTasksListEmpty">
+            <h4>Completed tasks:</h4>
+            <hr class="section-breaker short">
             <app-task *ngFor="let uTask of completedTasks" (updatedTask)="fetchTasksForDate()" [taskToShow]="uTask"></app-task>
-            <hr class="section-breaker full">
+        </div>
+        <div class="empty-tasks-list" *ngIf="isBothListsEmpty">
+            <h4>Your lists are empty!</h4>
         </div>
     </div>
     <div class="tasks-list-content-bottom">
