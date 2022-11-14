@@ -66,9 +66,6 @@
             <h4>Your lists are empty!</h4>
         </div>
     </div>
-    <div class="tasks-list-content-bottom">
-        <!-- <button class="btn btn-outline-secondary" *ngIf="isTasksListForDayEmpty==false">Share your day</button> -->
-    </div>
 </div>
 
 <!-- if any task has been deleted shows this confirmation -->
@@ -76,11 +73,12 @@
 
 <ng-template #hideTasksListView>
     <div class="hiddenWidgetContainer">
-        <div class="hiddenWdigetViewName">
-            <h1> Your tasks list</h1>
+        <h1> Your tasks list</h1>
+        <div class="amount-positioning">
+            <p class="amount-styling">{{scheduledUserTasksAmount}}</p>
         </div>
-        <div class="roll-up-section-button-hidden"> 
-            <button class="hide-widget"(click)="isShowView = !isShowView">show widget</button>
+        <div class="roll-up-section-button"> 
+            <button class="hide-widget"(click)="isShowView = !isShowView">show full view</button>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down hide-arrow-down" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
                 <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>

@@ -15,22 +15,41 @@ export class TasksListComponent implements OnInit {
   isCompletedTasksListEmpty!: boolean;
   isBothListsEmpty!: boolean;
   dateToShow: any;
-  daysCounter = 0;
-  isTasksListForDayEmpty = false;
   createNewTaskModal = false;
   id!: number;
   showSuccessfullyDeletedNotification = false;
   deletedUserTaskMessageForNotification!: {messageContent: string, objectType: string};
-
-  // decides if tasks list widget is hidden or not
-  isShowView = true;
-
   newTaskName!: string;
+  isShowView = false;
+  scheduledUserTasksAmount!: number;
 
   constructor(private taskService: TasksListService, private userTaskService: UserTaskService) { }
 
   ngOnInit(): void {
     this.setDateToShowAsTodayAndFetchTasks();
+  }
+
+  // wrapper method TO REFRESH COMPLETED AND NOT COMPLETED LISTS FOR CURRENT DAY 
+  public fetchTasksForDate() {
+    console.log("called fetch wrapper");
+    
+    // fetch completed tasks using date
+    this.userTaskService.onFetchCompletedTasksByDate(this.dateToShow).subscribe((userTasksCompletedReceived) => {
+      this.completedTasks = userTasksCompletedReceived;
+      // check if lists are empty or not
+      this.setIsCompletedTasksListyEmpty();
+      
+    })
+
+    // fetch NOT completed tasks using date 
+    this.userTaskService.onFetchNotCompletedTasksByDate(this.dateToShow).subscribe((userTasksNotCompletedReceived) => {
+      this.notCompletedTasks = userTasksNotCompletedReceived;
+      // check if lists are empty or not
+      this.setIsSheduledTasksListEmpty();
+      this.scheduledUserTasksAmount = userTasksNotCompletedReceived.length;
+    })
+
+    this.setIsBothListsEmpty();
   }
 
   public setIsSheduledTasksListEmpty() {
@@ -62,31 +81,6 @@ export class TasksListComponent implements OnInit {
     currDay.setDate(currDay.getDate() + numberOfDays);
     this.dateToShow = currDay.toISOString().split('T')[0];
     this.fetchTasksForDate();
-  }
-
-  // wrapper method TO REFRESH COMPLETED AND NOT COMPLETED LISTS FOR CURRENT DAY 
-  public fetchTasksForDate() {
-    console.log("called fetch wrapper");
-
-    // ----------------- HOW TO IMPLEMENT CHECKING BOTH LISTS -----------------
-    // we should use streams/pipes to analyze if lists contains anything or we could send a http request to easily check it on backend 
-
-
-    // fetch completed tasks using date
-    this.userTaskService.onFetchCompletedTasksByDate(this.dateToShow).subscribe((userTasksCompletedReceived) => {
-      this.completedTasks = userTasksCompletedReceived;
-      // check if lists are empty or not
-    this.setIsCompletedTasksListyEmpty();
-    })
-
-    // fetch NOT completed tasks using date 
-    this.userTaskService.onFetchNotCompletedTasksByDate(this.dateToShow).subscribe((userTasksNotCompletedReceived) => {
-      this.notCompletedTasks = userTasksNotCompletedReceived;
-      // check if lists are empty or not
-    this.setIsSheduledTasksListEmpty();
-    })
-
-    this.setIsBothListsEmpty();
   }
 
   // shows when task has been added to database
