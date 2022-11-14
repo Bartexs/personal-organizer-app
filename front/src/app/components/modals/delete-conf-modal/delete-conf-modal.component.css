@@ -15,11 +15,21 @@
     width: 60vw;
     padding: 16px;
     z-index: 100;
-    background: white;
-    box-shadow: 0 2px, 8px, rgba(0, 0, 0, 0.26);
+    background: rgb(245, 241, 241);
+    
+    border-color: lightgray;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    box-shadow: 2px 4px 18px 1px gray;
 }
 
-.modal-window-actions {
-    text-align: right;
+.modal-container {
+
+}
+
+.section-breaker {
+    width: 100%;
+    border-width: 1.9px;
 }
 

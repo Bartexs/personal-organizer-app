@@ -59,7 +59,7 @@
 </div>
 
 <!-- being fired when we press delete button on task -->
-<app-delete-conf-modal *ngIf="showDeleteConfirmModal" (closeModal)="setShowDeleteConfirmModal(false)" (deleteUserTaskConfirmed)="deleteUserTask()"></app-delete-conf-modal>
+<app-delete-conf-modal *ngIf="showDeleteConfirmModal" (closeModal)="setShowDeleteConfirmModal(false)" (deleteUserTaskConfirmed)="deleteUserTask()" [userTasksToDeleteName]="taskToShow.name"></app-delete-conf-modal>
 
 <!-- fire this modal when we press modify user task button -->
 <app-modify-modal *ngIf="modifyUserTaskModal" (closeModal)="setShowModifyModal(false)" [modifyUserTask]="taskToShow"></app-modify-modal>

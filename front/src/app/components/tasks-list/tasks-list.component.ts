@@ -20,7 +20,7 @@ export class TasksListComponent implements OnInit {
   showSuccessfullyDeletedNotification = false;
   deletedUserTaskMessageForNotification!: {messageContent: string, objectType: string};
   newTaskName!: string;
-  isShowView = false;
+  isShowView = true;
   scheduledUserTasksAmount!: number;
 
   constructor(private taskService: TasksListService, private userTaskService: UserTaskService) { }

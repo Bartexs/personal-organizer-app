@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 
 @Component({
@@ -9,10 +9,12 @@ import { EventEmitter } from '@angular/core';
 export class DeleteConfModalComponent implements OnInit {
   @Output() closeModal = new EventEmitter<void>();
   @Output() deleteUserTaskConfirmed = new EventEmitter<void>();
+  @Input() userTasksToDeleteName!: string;
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.userTasksToDeleteName);
   }
 
   closeModalWindow() {
