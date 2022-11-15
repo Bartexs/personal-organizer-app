@@ -11,8 +11,8 @@
 .modal-window {
     position: fixed;
     top: 30vh;
-    left: 20vw;
-    width: 60vw;
+    left: 36vw;
+    width: 30vw;
     padding: 16px;
     z-index: 100;
     background: rgb(245, 241, 241);
@@ -24,12 +24,24 @@
     box-shadow: 2px 4px 18px 1px gray;
 }
 
-.modal-container {
+.content {
+    text-align: center;
+}
 
+.footer {
+    display: flex;
+    padding-top: 2vh;
+    justify-content: center;
+    gap: 30px;
 }
 
 .section-breaker {
     width: 100%;
     border-width: 1.9px;
+}
+
+button:hover {
+    background-color: #888888;
+    box-shadow: 2px 2px #888888;
 }
 

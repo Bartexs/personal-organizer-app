@@ -1,16 +1,16 @@
 <div class="backdrop" (click)="closeModalWindow()"></div>
 <div class="modal-window">
-    <div class="modal-container">
+    <div>
         <div class="header">
-            <h1> Confirmation</h1>
+            <h4> Confirmation</h4>
         </div>
         <hr class="section-breaker">
         <div class="content">
-            <h1>Are you sure you want to delete <strong>{{userTasksToDeleteName}}</strong> task?</h1>
+            <h5>Are you sure you want to delete <strong>{{userTasksToDeleteName}}</strong> task?</h5>
         </div>
         <div class="footer">
-            <div class="btn btn-danger" (click)="confirmDeletingUserTask()">Delete task</div>
-            <div class="btn btn-success" (click)="closeModalWindow()">Cancel</div>
+            <button class="btn btn-danger" (click)="confirmDeletingUserTask()">Confirm</button>
+            <button class="btn btn-success" (click)="closeModalWindow()">Decline</button>
         </div>
     </div>
 </div>
