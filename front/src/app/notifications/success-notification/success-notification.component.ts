@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Input } from '@angular/core';
+import { TitleStrategy } from '@angular/router';
 
 @Component({
   selector: 'app-success-notification',
@@ -8,10 +9,24 @@ import { Input } from '@angular/core';
 })
 export class SuccessNotificationComponent implements OnInit {
   @Input() message!: {messageContent: string, objectType: string};
+  objectTypeNameToShow!: string;
+  @Output() closeNotification = new EventEmitter<void>();
 
   constructor() { }
 
   ngOnInit(): void {
+    this.setObjecTypeNameToShow();
   }
 
+  emitCloseNotification() {
+    this.closeNotification.emit();
+  }
+
+  setObjecTypeNameToShow() {
+    switch(this.message.objectType) {
+      case "userTask":
+        this.objectTypeNameToShow = "Task";
+        break;
+    }
+  }
 }

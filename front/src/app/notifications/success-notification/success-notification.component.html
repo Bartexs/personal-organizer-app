@@ -1,5 +1,10 @@
 <div class="notification-window">
-    <h1>success-notification works!</h1>
-    <p> {{message.messageContent}}</p>
-    <p> {{message.objectType}}</p>
+    <div class="header">
+        <h4><strong>Success!</strong></h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="emitCloseNotification()"></button>
+    </div>
+    <hr>
+    <div class="content">
+        <h5> {{objectTypeNameToShow}} named "{{message.messageContent}}" has been deleted successfully!</h5>
+    </div>
 </div>

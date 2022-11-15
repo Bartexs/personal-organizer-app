@@ -69,7 +69,7 @@
 </div>
 
 <!-- if any task has been deleted shows this confirmation -->
-<app-success-notification *ngIf="showSuccessfullyDeletedNotification" [message]="deletedUserTaskMessageForNotification"></app-success-notification>
+<app-success-notification *ngIf="showSuccessfullyDeletedNotification" [message]="deletedUserTaskMessageForNotification" (closeNotification)="showSuccessfullyDeletedNotification = false"></app-success-notification>
 
 <ng-template #hideTasksListView>
     <div class="hiddenWidgetContainer">

@@ -17,6 +17,7 @@ export class TasksListComponent implements OnInit {
   dateToShow: any;
   createNewTaskModal = false;
   id!: number;
+  // showSuccessfullyDeletedNotification = false;
   showSuccessfullyDeletedNotification = false;
   deletedUserTaskMessageForNotification!: {messageContent: string, objectType: string};
   newTaskName!: string;
