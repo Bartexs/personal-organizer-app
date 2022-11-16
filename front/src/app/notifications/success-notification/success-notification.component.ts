@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Input } from '@angular/core';
-import { TitleStrategy } from '@angular/router';
 
 @Component({
   selector: 'app-success-notification',
