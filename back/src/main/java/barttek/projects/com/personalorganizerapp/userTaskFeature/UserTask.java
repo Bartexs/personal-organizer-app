@@ -14,13 +14,13 @@ public class UserTask implements Serializable {
     private String name;
     private Boolean completed;
     private LocalDate dateTaskToBeDone;
-    private LocalDate dateTaskCompleted;
+    private LocalDate completionDate;
 
     private String color;
 
 //    private String description;
 //    private LocalDate creationDate;
-//    private LocalDate scheduledDate;
+//    private LocalDate scheduleDate;
 //    private LocalDate completionDate;
 //    sub task list ????
 //    reminder
@@ -34,7 +34,7 @@ public class UserTask implements Serializable {
         this.name = name;
         this.completed = completed;
         this.dateTaskToBeDone = dateTaskToBeDone;
-        this.dateTaskCompleted = dateTaskCompleted;
+        this.completionDate = dateTaskCompleted;
         this.color = color;
 //
     }
@@ -72,11 +72,11 @@ public class UserTask implements Serializable {
     }
 
     public LocalDate getDateTaskCompleted() {
-        return dateTaskCompleted;
+        return completionDate;
     }
 
     public void setDateTaskCompleted(LocalDate dateTaskCompleted) {
-        this.dateTaskCompleted = dateTaskCompleted;
+        this.completionDate = dateTaskCompleted;
     }
 
     public String getColor() {
@@ -92,12 +92,12 @@ public class UserTask implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserTask userTask = (UserTask) o;
-        return name.equals(userTask.name) && completed.equals(userTask.completed) && dateTaskToBeDone.equals(userTask.dateTaskToBeDone) && Objects.equals(dateTaskCompleted, userTask.dateTaskCompleted);
+        return name.equals(userTask.name) && completed.equals(userTask.completed) && dateTaskToBeDone.equals(userTask.dateTaskToBeDone) && Objects.equals(completionDate, userTask.completionDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, completed, dateTaskToBeDone, dateTaskCompleted);
+        return Objects.hash(name, completed, dateTaskToBeDone, completionDate);
     }
 
     @Override
@@ -107,7 +107,7 @@ public class UserTask implements Serializable {
                 ", name='" + name + '\'' +
                 ", completed=" + completed +
                 ", dateTaskToBeDone=" + dateTaskToBeDone +
-                ", dateTaskCompleted=" + dateTaskCompleted +
+                ", dateTaskCompleted=" + completionDate +
                 ", color='" + color + '\'' +
                 '}';
     }

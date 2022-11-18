@@ -3,6 +3,6 @@ export interface UserTask {
     name: string;
     completed: boolean;
     dateTaskToBeDone: string;
-    dateTaskCompleted?: string;
+    completionDate?: string;
     color?: string;
 }
