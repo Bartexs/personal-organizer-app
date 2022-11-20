@@ -4,6 +4,12 @@
     position: relative;
 }
 
+.header-top {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 15vw;
+}
+
 .section-breaker {
     width: 30%;
     padding-bottom: 15px;
@@ -31,7 +37,7 @@
 .btn-custom {
     color: white;
     background-color: #581845c4;
-    width: 170px;
+    width: 9vw;
     height: 30px;
     border-style: none;
     border-radius: 3.5px;
@@ -39,18 +45,7 @@
 }
 
 /* styling for the header of the content window */
-    /* styling for the headline */
-        .header-top {
-            display: flex;
-        }
-
-        .headline {
-            width: 50%;
-        }
-
-        .header-image-for-component {
-            width: 39%;
-        }
+        
 
         .hide-widget {
             padding: 0;
@@ -67,16 +62,14 @@
         .date-container {
             display: flex;
             flex-direction: column;
+            padding-bottom: 4vh;
         }
         
-        .date-shower {
-            text-align: center;
-        }
-    
         .header-date-picking {
             display: flex;
             flex-direction: row;
             justify-content: space-evenly;
+            flex-wrap: wrap;
         }
         
         .day-control-buttons {
@@ -86,13 +79,6 @@
             display: inline-flex;
         }
 
-
-        .week-control-buttons {
-            width: 100%;
-            justify-content: center;
-            align-items: baseline;
-            display: inline-flex;
-        }
 
 /* styling for information when tasks are hidden - rolled up*/
 .hiddenWidgetContainer {
@@ -120,12 +106,4 @@
     position: absolute;
     left: 85%;
     top: 15px;
-}
-
-.header-image {
-    width: 500px;
-    height: 150px;
-    border-style: solid;
-    border-radius: 50px;
-    box-shadow: 5px 5px lightblue;
 }

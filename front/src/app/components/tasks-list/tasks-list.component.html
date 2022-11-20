@@ -7,18 +7,20 @@
             <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
         </svg>
     </div>
-    <div class="tasks-list-header">
+    <div>
         <div class="header-top"> 
-            <h1>Your tasks:</h1>
+            <div>
+                <h1>Your tasks:</h1>
+            </div>
+            <div>
+                <h4>Showing tasks for: {{dateToShow}}</h4>
+            </div>
         </div>
         <hr class="section-breaker">
         <div class="date-container">
-            <div class="date-shower">
-                <p><strong>Showing tasks for: {{dateToShow}}</strong></p>
-            </div>
             <div class="header-date-picking"> 
                 <div>
-                    <div class="day-control-buttons">
+                    <div class="input-group day-control-buttons">
                         <button class="btn-custom" (click)="setDate(-1)">Prev day</button>
                         <button class="btn-custom" (click)="setDate(1)">Next day</button>
                     </div>
@@ -29,7 +31,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="day-control-buttons">
+                    <div class="input-group day-control-buttons">
                         <button class="btn-custom" (click)="showAllScheduledUserTasks()">All tasks</button>
                         <button class="btn-custom" (click)="showAllScheduledUserTasks()">Pick day</button>
                     </div>
@@ -37,7 +39,6 @@
             </div>
         </div>
     </div>
-    <hr class="section-breaker full">
 
     <!-- INPUT row to quickly add new tasks -->
     <div class="input-group mb-3">
