@@ -37,10 +37,8 @@ export class TasksListComponent implements OnInit {
     // fetch completed tasks using date
     this.userTaskService.onFetchCompletedTasksByDate(this.dateToShow).subscribe((userTasksCompletedReceived) => {
       this.completedTasks = userTasksCompletedReceived;
-      console.log(this.completedTasks);
       // check if lists are empty or not
       this.setIsCompletedTasksListyEmpty();
-      
     })
 
     // fetch NOT completed tasks using date 
@@ -72,8 +70,8 @@ export class TasksListComponent implements OnInit {
   }
 
   public setIsBothListsEmpty() {
-    this.userTaskService.onFetchAllUserTasksByDate(this.dateToShow).subscribe((responseData) => {
-      this.isBothListsEmpty = responseData.length == 0;
+    this.userTaskService.getIsBothListsEmpty(this.dateToShow).subscribe((responseData) => {
+      this.isBothListsEmpty = responseData;
     })
   }
 

@@ -61,4 +61,9 @@ export class UserTaskService {
     let pathToGet = `http://localhost:8080/user-task/all/` + date;
     return this.httpClient.get<UserTask[]>(pathToGet);
   }
+
+  getIsBothListsEmpty(date: string) {
+    let pathToGet = `http://localhost:8080/user-task/is-both-lists-empty/` + date;
+    return this.httpClient.get<boolean>(pathToGet);
+  }
 }

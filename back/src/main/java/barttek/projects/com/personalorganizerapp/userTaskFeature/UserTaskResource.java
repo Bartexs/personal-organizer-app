@@ -68,7 +68,6 @@ public class UserTaskResource {
             params = { "date" },
             method = GET
     )
-
     public ResponseEntity<List<UserTask>> findScheduledUserTasksByDate(@RequestParam("date")String date) {
         List<UserTask> userTasks = userTaskService.findScheduledUserTasksByDate(date);
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
@@ -99,5 +98,11 @@ public class UserTaskResource {
     public ResponseEntity<UserTask> deleteUserTask(@PathVariable("id")Long id) {
          userTaskService.deleteUserTask(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/is-both-lists-empty/{date}")
+    public ResponseEntity<Boolean> isBothListsEmpty(@PathVariable("date")String date) {
+        boolean empty = userTaskService.findScheduledUserTasksByDate(date).isEmpty() && userTaskService.findCompletedUserTasksByDate(date).isEmpty();
+        return new ResponseEntity<>(empty, HttpStatus.OK);
     }
 }
