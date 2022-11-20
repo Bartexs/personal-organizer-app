@@ -10,13 +10,13 @@
     <div class="buttons-and-color-container">
         <!-- <hr class="section-breaker-horizontal"> -->
         <div class="buttons-container">
-            <div class="completed-button" *ngIf="taskToShow.completed == true">
+            <div *ngIf="taskToShow.completed == true">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check2" viewBox="0 0 16 16" (click)="setCompleted(false)">
                     <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
                 </svg>
             </div>
-            <div class="not-completed-button" *ngIf="taskToShow.completed == false">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x" viewBox="0 0 16 16" (click)="setCompleted(true)">
+            <div *ngIf="taskToShow.completed == false">
+                <svg class="not-completed" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x" viewBox="0 0 16 16" (click)="setCompleted(true)">
                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                 </svg>
             </div>
@@ -32,17 +32,6 @@
                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                 </svg>
             </div>
-            <!-- <div class="dropup" [ngClass]="taskToShow.completed ? 'blur' : ''">
-                <div class="share-button dropbtn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
-                        <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
-                    </svg>
-                </div>
-                <div class="dropup-content">    
-                    <a href="#">Email</a>
-                    <a href="#">Link</a>
-                </div>
-            </div> -->
             <div class="delete-button" [ngClass]="taskToShow.completed ? 'blur' : ''">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" (click)="setShowDeleteConfirmModal(true)">
                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -51,8 +40,6 @@
             </div>
         </div>
         <div class="tasks-color" [ngClass]="taskToShow.completed ? 'blur' : ''">
-            <!-- <input type="color"> -->
-            <!-- <input type="color" class="custom-color-control form-control form-control-sm form-control-color" id="exampleColorInput" value="#563d7c" title="Choose your color"> -->
             <input (change)="saveUserTaskColor(colorPicker)" [disabled]=taskToShow.completed [value]=taskToShow.color class="color-picker" type="color" id="html5colorpicker" style="width: 100%" #colorPicker>
         </div>
     </div>

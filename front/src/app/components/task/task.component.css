@@ -11,8 +11,12 @@
     border-width: 1px;
     border-radius: 5px;
     box-shadow: 2px 4px 18px 1px black;
-    position: relative;
-    
+    position: relative;   
+    transition: transform .1s;
+}
+
+.custom-main-container:hover {
+  transform: scale(1.03);
 }
 
 .overwritter {
@@ -179,15 +183,28 @@
   }
 
 /* icons styling */
+
+
+
   svg {
     width: 30px;
     height: 30px;
-    color: gray;
+    color: rgb(110, 107, 107);
   }
 
   svg:hover {
-    fill: red;
-    background-color: lightgray
+    fill: rgba(0, 0, 0, 0.788);
+    position: relative;
+    top: -3px;
+    border-bottom: solid;
+    border-color: black;
+    border-collapse: collapse;
+    border-bottom-width: 1px;
+    transition: transform .2s;
+  }
+
+  svg:active {
+    transform: scale(1.7);
   }
 
  
