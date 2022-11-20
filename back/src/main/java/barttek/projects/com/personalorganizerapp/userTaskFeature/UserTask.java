@@ -1,6 +1,8 @@
 package barttek.projects.com.personalorganizerapp.userTaskFeature;
 
 
+import org.springframework.cglib.core.Local;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -15,13 +17,14 @@ public class UserTask implements Serializable {
     private String name;
     private String description;
     private Boolean completed;
-
     private LocalDateTime creationDateTime;
     private LocalDate scheduleDate;
     private LocalDate completionDate;
-
+    private Boolean overDueTask;
+    private Boolean importantTask;
     private String color;
 
+//    create StatisticsLogger, create is as interface and then use it for habits goals etc.
 //    sub task list ????
 //    reminder
 //    tags
@@ -30,14 +33,26 @@ public class UserTask implements Serializable {
     public UserTask() {
     }
 
-    public UserTask(String name, String description, boolean completed, LocalDate scheduleDate, LocalDate completionDate, String color) {
+    public UserTask(Long id,
+                    String name,
+                    String description,
+                    Boolean completed,
+                    LocalDate scheduleDate,
+                    LocalDate completionDate,
+                    Boolean overDueTask,
+                    Boolean importantTask,
+                    String color) {
+
+        this.id = id;
         this.name = name;
         this.description = description;
         this.completed = completed;
+        this.creationDateTime = LocalDateTime.now();
         this.scheduleDate = scheduleDate;
         this.completionDate = completionDate;
+        this.overDueTask = overDueTask;
+        this.importantTask = importantTask;
         this.color = color;
-//
     }
 
     public Long getId() {
@@ -96,6 +111,22 @@ public class UserTask implements Serializable {
         this.completionDate = completionDate;
     }
 
+    public Boolean getOverDueTask() {
+        return overDueTask;
+    }
+
+    public void setOverDueTask(Boolean overDueTask) {
+        this.overDueTask = overDueTask;
+    }
+
+    public Boolean getImportantTask() {
+        return importantTask;
+    }
+
+    public void setImportantTask(Boolean importantTask) {
+        this.importantTask = importantTask;
+    }
+
     public String getColor() {
         return color;
     }
@@ -109,12 +140,12 @@ public class UserTask implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserTask userTask = (UserTask) o;
-        return name.equals(userTask.name) && completed.equals(userTask.completed) && dateTaskToBeDone.equals(userTask.dateTaskToBeDone) && Objects.equals(completionDate, userTask.completionDate);
+        return id.equals(userTask.id) && name.equals(userTask.name) && Objects.equals(description, userTask.description) && completed.equals(userTask.completed) && creationDateTime.equals(userTask.creationDateTime) && scheduleDate.equals(userTask.scheduleDate) && Objects.equals(completionDate, userTask.completionDate) && overDueTask.equals(userTask.overDueTask) && importantTask.equals(userTask.importantTask) && color.equals(userTask.color);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, completed, dateTaskToBeDone, completionDate);
+        return Objects.hash(id, name, description, completed, creationDateTime, scheduleDate, completionDate, overDueTask, importantTask, color);
     }
 
     @Override
@@ -122,9 +153,13 @@ public class UserTask implements Serializable {
         return "UserTask{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 ", completed=" + completed +
-                ", dateTaskToBeDone=" + dateTaskToBeDone +
-                ", dateTaskCompleted=" + completionDate +
+                ", creationDateTime=" + creationDateTime +
+                ", scheduleDate=" + scheduleDate +
+                ", completionDate=" + completionDate +
+                ", overDueTask=" + overDueTask +
+                ", importantTask=" + importantTask +
                 ", color='" + color + '\'' +
                 '}';
     }
