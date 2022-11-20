@@ -9,12 +9,7 @@
     </div>
     <div class="tasks-list-header">
         <div class="header-top"> 
-            <div class="headline">
-                <h1>Your tasks:</h1>
-            </div>
-            <div class="header-image-for-component"> 
-                <p>Image</p>
-            </div>
+            <h1>Your tasks:</h1>
         </div>
         <hr class="section-breaker">
         <div class="date-container">
@@ -24,19 +19,19 @@
             <div class="header-date-picking"> 
                 <div>
                     <div class="day-control-buttons">
-                        <button class="btn btn-outline-secondary" (click)="setDate(-1)">Prev day</button>
-                        
-                        <button class="btn btn-outline-secondary" (click)="setDate(1)">Next day</button>
+                        <button class="btn-custom" (click)="setDate(-1)">Prev day</button>
+                        <button class="btn-custom" (click)="setDate(1)">Next day</button>
                     </div>
                 </div>
                 <div>
                     <div class="day-control-buttons">
-                        <button class="btn btn-outline-secondary" (click)="setDateToShowAsTodayAndFetchTasks()">Today</button>
+                        <button class="btn-custom" (click)="setDateToShowAsTodayAndFetchTasks()">Today</button>
                     </div>
                 </div>
                 <div>
                     <div class="day-control-buttons">
-                        <button class="btn btn-outline-secondary" (click)="showAllScheduledUserTasks()">All tasks NOT COMPLETED</button>
+                        <button class="btn-custom" (click)="showAllScheduledUserTasks()">All tasks</button>
+                        <button class="btn-custom" (click)="showAllScheduledUserTasks()">Pick day</button>
                     </div>
                 </div>
             </div>

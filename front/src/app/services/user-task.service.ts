@@ -20,7 +20,7 @@ export class UserTaskService {
   }
 
   public setDefaultColorIfNotSpecifiedByUser(color: any) {
-    return color == undefined ? "#FF0000" : color;
+    return color == undefined ? "#581845" : color;
   }
 
   // fetch completed tasks via date

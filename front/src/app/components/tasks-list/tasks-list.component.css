@@ -19,10 +19,6 @@
     width: 100%;
 }
 
-/* .tasks-list-container {
-    position: relative;
-} */
-
 .tasks-list {
     padding-bottom: 20px;
 }
@@ -30,6 +26,16 @@
 .empty-tasks-list {
     margin-top: 50px;
     text-align: center;
+}
+
+.btn-custom {
+    color: white;
+    background-color: #581845c4;
+    width: 170px;
+    height: 30px;
+    border-style: none;
+    border-radius: 3.5px;
+    box-shadow: 1px 1px 5px black;
 }
 
 /* styling for the header of the content window */
@@ -114,4 +120,12 @@
     position: absolute;
     left: 85%;
     top: 15px;
+}
+
+.header-image {
+    width: 500px;
+    height: 150px;
+    border-style: solid;
+    border-radius: 50px;
+    box-shadow: 5px 5px lightblue;
 }
