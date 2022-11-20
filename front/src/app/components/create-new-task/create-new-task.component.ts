@@ -42,7 +42,8 @@ export class CreateNewTaskComponent implements OnInit {
     const createNewTask: UserTask = {
       name: this.creatingNewHabitForm.value.name,
       completed: false,
-      dateTaskToBeDone: this.creatingNewHabitForm.value.scheduleDatePicker
+      scheduleDate: this.creatingNewHabitForm.value.scheduleDatePicker,
+      importantTask: false
     }
 
       this.userTaskService.onPostNewTask(createNewTask).subscribe((responseData) => {

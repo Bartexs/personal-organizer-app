@@ -102,7 +102,8 @@ export class TasksListComponent implements OnInit {
       name: value.value,
       completed: false,
       // it sets date as currently showing
-      dateTaskToBeDone: this.dateToShow,
+      scheduleDate: this.dateToShow,
+      importantTask: false
     }
 
     this.userTaskService.onPostNewTask(createNewUserTask).subscribe((responseData) => {

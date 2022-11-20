@@ -17,16 +17,16 @@ public interface UserTaskRepository extends JpaRepository<UserTask, Long> {
     @Query("select u from UserTask u where u.completed = false")
     List<UserTask> findUserTasksByNotCompleted();
 
-    @Query("select u from UserTask u where u.dateTaskToBeDone >= ?1 and u.dateTaskToBeDone <= ?2")
-    List<UserTask> findAllUserTasksByDateRange(LocalDate dateTaskToBeDone, LocalDate dateTaskToBeDone1);
+    @Query("select u from UserTask u where u.scheduleDate >= ?1 and u.scheduleDate <= ?2")
+    List<UserTask> findAllUserTasksByDateRange(LocalDate scheduleDate1, LocalDate scheduleDate2);
 
-    @Query("select u from UserTask u where u.dateTaskToBeDone = ?1 and u.completed = true")
-    List<UserTask> findCompletedUserTasksByDate(LocalDate dateTaskToBeDone);
+    @Query("select u from UserTask u where u.completionDate = ?1 and u.completed = true")
+    List<UserTask> findCompletedUserTasksByDate(LocalDate completionDate);
 
-    @Query("select u from UserTask u where u.completed = false and u.dateTaskToBeDone <= ?1")
-    List<UserTask> findNotCompletedUserTasksByDate(LocalDate dateTaskToBeDone);
+    @Query("select u from UserTask u where u.completed = false and u.scheduleDate <= ?1")
+    List<UserTask> findNotCompletedUserTasksByDate(LocalDate scheduleDate);
 
-    @Query("select u from UserTask u where u.dateTaskToBeDone <= ?1")
+    @Query("select u from UserTask u where u.scheduleDate <= ?1")
     List<UserTask> findUserTasksByDateTaskToBeDone(LocalDate dateTaskToBeDone);
 
     @Override

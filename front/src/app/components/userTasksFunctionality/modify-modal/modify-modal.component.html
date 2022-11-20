@@ -5,7 +5,7 @@
                 <p>Modify user task</p>
                 <p>Current task's name: {{modifyUserTask.name}}</p>
                 <label for="birthday">Scheduled date:</label>
-                <input type="date" id="birthday" name="birthday" value={{modifyUserTask.dateTaskToBeDone}}>
+                <input type="date" id="birthday" name="birthday" value={{modifyUserTask.scheduleDate}}>
                 <button (click)="setDay(-1)">Previous day</button>
                 <button (click)="setDay(1)">Next day</button>
                 <!-- <p>{{modifyUserTask.description}}</p> -->

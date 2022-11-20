@@ -18,12 +18,6 @@ public class UserTaskResource {
         this.userTaskService = userTaskService;
     }
 
-//    maybe make universal method with getting statuses and setting it as variable to choose
-    //    @GetMapping("/{status}/{date}")
-//    public ResponseEntity<List<UserTask>> findByStatusAndDate(@PathVariable("status") String status, @PathVariable("date")String date) {
-//
-//    }
-
     //get userTasks ALL
     @GetMapping("/all")
     public ResponseEntity<List<UserTask>> getAllUserTasks() {

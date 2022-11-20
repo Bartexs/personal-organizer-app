@@ -1,8 +1,13 @@
 export interface UserTask {
     id?: number;
     name: string;
+    description?: string;
     completed: boolean;
-    dateTaskToBeDone: string;
-    completionDate?: string;
+    scheduleDate: string,
+    completionDate?: string,
+    overDueTask?: boolean,
+    importantTask: boolean,
     color?: string;
 }
+
+                    

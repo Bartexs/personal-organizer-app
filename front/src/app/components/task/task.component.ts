@@ -65,7 +65,7 @@ export class TaskComponent implements OnInit {
   // move task to next day
   public scheduleForNextDay() {
     let newDateFoUserTask: Date;
-    newDateFoUserTask = new Date(this.taskToShow.dateTaskToBeDone);
+    newDateFoUserTask = new Date(this.taskToShow.scheduleDate);
   
     function addDays(date: any, days: number) {
       var result = new Date(date);
@@ -75,7 +75,7 @@ export class TaskComponent implements OnInit {
     newDateFoUserTask = addDays(newDateFoUserTask, 1);
     const stringDate = newDateFoUserTask.toISOString().split('T')[0]
 
-    this.taskToShow.dateTaskToBeDone = stringDate;
+    this.taskToShow.scheduleDate = stringDate;
  
     this.userTaskService.onUpdateUserTask(this.taskToShow).subscribe((responseData) => {
       this.emitUpdatedTaskPing();

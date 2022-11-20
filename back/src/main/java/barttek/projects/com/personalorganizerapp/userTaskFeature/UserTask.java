@@ -33,8 +33,7 @@ public class UserTask implements Serializable {
     public UserTask() {
     }
 
-    public UserTask(Long id,
-                    String name,
+    public UserTask(String name,
                     String description,
                     Boolean completed,
                     LocalDate scheduleDate,
@@ -43,7 +42,6 @@ public class UserTask implements Serializable {
                     Boolean importantTask,
                     String color) {
 
-        this.id = id;
         this.name = name;
         this.description = description;
         this.completed = completed;

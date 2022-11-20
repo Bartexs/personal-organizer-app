@@ -33,11 +33,11 @@ class UserTaskResourceTest {
         LocalDate notTodayButAfter = today.plusDays(5);
         LocalDate notTodayButBefore = today.minusDays(10);
 
-        UserTask uTask1 = new UserTask("Throw garbage", true, today, null, null);
-        UserTask uTask2 = new UserTask("Feed kitty", true, today, null, null);
-        UserTask uTask3 = new UserTask("Do nothing", false, today, null, null);
-        UserTask uTask4 = new UserTask("Wheelie around the city", true, notTodayButAfter, null, null);
-        UserTask uTask5 = new UserTask("Wheelie around the block", false, notTodayButBefore, null, null);
+        UserTask uTask1 = new UserTask("Throw garbage",null, true, today, null, false, false, null);
+        UserTask uTask2 = new UserTask("Feed kitty",null, true, today, null, false, false, null);
+        UserTask uTask3 = new UserTask("Do nothing", null, false, today, null, false, false, null);
+        UserTask uTask4 = new UserTask("Wheelie around the city", null, true, notTodayButAfter, null, false, false, null);
+        UserTask uTask5 = new UserTask("Wheelie around the block", null, false, notTodayButBefore, null, false, false, null);
 
         userTasksForTests = List.of(uTask1, uTask2, uTask3, uTask4,uTask5);
 
@@ -60,9 +60,9 @@ class UserTaskResourceTest {
         assertEquals(userTaskList, userTaskResource.getUserTaskByDate("2022-10-03").getBody());
 
         userTaskList = List.of(
-                new UserTask("Throw garbage", true, today, null, null),
-                new UserTask("Feed kitty", true, today, null, null),
-                new UserTask("Do nothing", false, today, null, null));
+                new UserTask("Throw garbage",null, true, today, null, false, false, null),
+                new UserTask("Feed kitty",null, true, today, null, false, false, null),
+                new UserTask("Do nothing", null, false, today, null, false, false, null));
 
         assertEquals(userTaskList, userTaskResource.getUserTaskByDate(today.toString()).getBody());
     }
@@ -84,9 +84,9 @@ class UserTaskResourceTest {
         LocalDate notTodayButAfter = today.plusDays(5);
 
         List<UserTask> completedTasks = List.of(
-                new UserTask("Throw garbage", true, today, null, null),
-                new UserTask("Feed kitty", true, today, null, null),
-                new UserTask("Wheelie around the city", true, notTodayButAfter, null, null)
+                new UserTask("Throw garbage",null, true, today, null, false, false, null),
+                new UserTask("Feed kitty",null, true, today, null, false, false, null),
+                new UserTask("Wheelie around the city", null, true, notTodayButAfter, null, false, false, null)
         );
 
 
@@ -99,8 +99,8 @@ class UserTaskResourceTest {
         LocalDate today = LocalDate.now();
 
         List<UserTask> completedTasksByDate = List.of(
-                new UserTask("Throw garbage", true, today, null, null),
-                new UserTask("Feed kitty", true, today, null, null)
+                new UserTask("Throw garbage",null, true, today, null, false, false, null),
+                new UserTask("Feed kitty",null, true, today, null, false, false, null),
         );
 
         assertEquals(completedTasksByDate, userTaskResource.findCompletedUserTasksByDate(today.toString()).getBody());

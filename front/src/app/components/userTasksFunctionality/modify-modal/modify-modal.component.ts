@@ -22,7 +22,7 @@ export class ModifyModalComponent implements OnInit {
 
   public setDay(value: number) {
     let newDateFoUserTask: Date;
-    newDateFoUserTask = new Date(this.modifyUserTask.dateTaskToBeDone);
+    newDateFoUserTask = new Date(this.modifyUserTask.scheduleDate);
 
     function addDays(date: any, value: number) {
       var result = new Date(date);
@@ -33,6 +33,6 @@ export class ModifyModalComponent implements OnInit {
     newDateFoUserTask = addDays(newDateFoUserTask, value);
     const stringDate = newDateFoUserTask.toISOString().split('T')[0]
 
-    this.modifyUserTask.dateTaskToBeDone = stringDate;
+    this.modifyUserTask.scheduleDate = stringDate;
   }
 }
