@@ -23,8 +23,8 @@ public interface UserTaskRepository extends JpaRepository<UserTask, Long> {
     @Query("select u from UserTask u where u.completionDate = ?1 and u.completed = true")
     List<UserTask> findCompletedUserTasksByDate(LocalDate completionDate);
 
-    @Query("select u from UserTask u where u.completed = false and u.scheduleDate <= ?1")
-    List<UserTask> findNotCompletedUserTasksByDate(LocalDate scheduleDate);
+    @Query("select u from UserTask u where u.completed = false and u.scheduleDate = ?1")
+    List<UserTask> findScheduledUserTasksByDate(LocalDate scheduleDate);
 
     @Query("select u from UserTask u where u.scheduleDate <= ?1")
     List<UserTask> findUserTasksByDateTaskToBeDone(LocalDate dateTaskToBeDone);

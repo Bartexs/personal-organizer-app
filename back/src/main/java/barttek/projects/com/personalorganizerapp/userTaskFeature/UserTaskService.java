@@ -40,10 +40,10 @@ public class UserTaskService {
         return userTaskRepository.findUserTasksByNotCompleted();
     }
 
-    public List<UserTask> findNotCompletedUserTasksByDate(String date) {
+    public List<UserTask> findScheduledUserTasksByDate(String date) {
         //        converts from iso to java localDate format, getting as XXXX-XX-XX
         LocalDate localDate = LocalDate.parse(date);
-        return userTaskRepository.findNotCompletedUserTasksByDate(localDate);
+        return userTaskRepository.findScheduledUserTasksByDate(localDate);
     }
 
     public List<UserTask> findUserTaskByDate(String date) {

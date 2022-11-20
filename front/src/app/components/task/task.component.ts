@@ -57,6 +57,8 @@ export class TaskComponent implements OnInit {
   // sets usertask as completed, update it to database and ping list to refresh itself
   public setCompleted(value: boolean) {
     this.taskToShow.completed = value;
+    var today = new Date();
+    this.taskToShow.completionDate = today.toISOString().split('T')[0];
     this.userTaskService.onUpdateUserTask(this.taskToShow).subscribe((responseData) => {
       this.emitUpdatedTaskPing();
     });

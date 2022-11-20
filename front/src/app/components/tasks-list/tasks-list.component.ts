@@ -37,6 +37,7 @@ export class TasksListComponent implements OnInit {
     // fetch completed tasks using date
     this.userTaskService.onFetchCompletedTasksByDate(this.dateToShow).subscribe((userTasksCompletedReceived) => {
       this.completedTasks = userTasksCompletedReceived;
+      console.log(this.completedTasks);
       // check if lists are empty or not
       this.setIsCompletedTasksListyEmpty();
       

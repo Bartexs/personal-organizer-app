@@ -62,14 +62,15 @@ public class UserTaskResource {
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
 
-    //get userTask by date but NOT COMPLETED
+    //get userTask scheduled on given day
     @RequestMapping(
             value = "/not-completed",
             params = { "date" },
             method = GET
     )
-    public ResponseEntity<List<UserTask>> findNotCompletedUserTasksByDate(@RequestParam("date")String date) {
-        List<UserTask> userTasks = userTaskService.findNotCompletedUserTasksByDate(date);
+
+    public ResponseEntity<List<UserTask>> findScheduledUserTasksByDate(@RequestParam("date")String date) {
+        List<UserTask> userTasks = userTaskService.findScheduledUserTasksByDate(date);
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
 
