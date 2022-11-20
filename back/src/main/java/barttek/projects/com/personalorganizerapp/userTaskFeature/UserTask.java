@@ -4,6 +4,7 @@ package barttek.projects.com.personalorganizerapp.userTaskFeature;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -12,16 +13,15 @@ public class UserTask implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String description;
     private Boolean completed;
-    private LocalDate dateTaskToBeDone;
+
+    private LocalDateTime creationDateTime;
+    private LocalDate scheduleDate;
     private LocalDate completionDate;
 
     private String color;
 
-//    private String description;
-//    private LocalDate creationDate;
-//    private LocalDate scheduleDate;
-//    private LocalDate completionDate;
 //    sub task list ????
 //    reminder
 //    tags
@@ -30,11 +30,12 @@ public class UserTask implements Serializable {
     public UserTask() {
     }
 
-    public UserTask(String name, boolean completed, LocalDate dateTaskToBeDone, LocalDate dateTaskCompleted, String color) {
+    public UserTask(String name, String description, boolean completed, LocalDate scheduleDate, LocalDate completionDate, String color) {
         this.name = name;
+        this.description = description;
         this.completed = completed;
-        this.dateTaskToBeDone = dateTaskToBeDone;
-        this.completionDate = dateTaskCompleted;
+        this.scheduleDate = scheduleDate;
+        this.completionDate = completionDate;
         this.color = color;
 //
     }
@@ -55,28 +56,44 @@ public class UserTask implements Serializable {
         this.name = name;
     }
 
-    public boolean isCompleted() {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Boolean getCompleted() {
         return completed;
     }
 
-    public void setCompleted(boolean completed) {
+    public void setCompleted(Boolean completed) {
         this.completed = completed;
     }
 
-    public LocalDate getDateTaskToBeDone() {
-        return dateTaskToBeDone;
+    public LocalDateTime getCreationDateTime() {
+        return creationDateTime;
     }
 
-    public void setDateTaskToBeDone(LocalDate dateTaskToBeDone) {
-        this.dateTaskToBeDone = dateTaskToBeDone;
+    public void setCreationDateTime(LocalDateTime creationDateTime) {
+        this.creationDateTime = creationDateTime;
     }
 
-    public LocalDate getDateTaskCompleted() {
+    public LocalDate getScheduleDate() {
+        return scheduleDate;
+    }
+
+    public void setScheduleDate(LocalDate scheduleDate) {
+        this.scheduleDate = scheduleDate;
+    }
+
+    public LocalDate getCompletionDate() {
         return completionDate;
     }
 
-    public void setDateTaskCompleted(LocalDate dateTaskCompleted) {
-        this.completionDate = dateTaskCompleted;
+    public void setCompletionDate(LocalDate completionDate) {
+        this.completionDate = completionDate;
     }
 
     public String getColor() {
