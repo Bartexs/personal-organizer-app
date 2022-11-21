@@ -1,34 +1,30 @@
 package barttek.projects.com.personalorganizerapp.userTaskFeature;
 
-import org.apache.catalina.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class UserTaskResourceTest {
+class UserTaskControllerTest {
     List<UserTask> userTasksForTests;
 
     @Autowired
     private UserTaskService userTaskService;
 
-    UserTaskResource userTaskResource;
+    UserTaskController userTaskController;
 
     @BeforeEach
     void setUp() {
-        userTaskResource = new UserTaskResource(userTaskService);
+        userTaskController = new UserTaskController(userTaskService);
         LocalDate today = LocalDate.now();
         LocalDate notTodayButAfter = today.plusDays(5);
         LocalDate notTodayButBefore = today.minusDays(10);
@@ -50,21 +46,21 @@ class UserTaskResourceTest {
 
     @Test
     void getAllUserTasks() {
-        assertEquals(this.userTasksForTests, userTaskResource.getAllUserTasks().getBody());
+        assertEquals(this.userTasksForTests, userTaskController.getAllUserTasks().getBody());
     }
     @Test
     void getUserTaskByDate() {
         LocalDate today = LocalDate.now();
 
         List<UserTask> userTaskList = new ArrayList<>();
-        assertEquals(userTaskList, userTaskResource.getUserTaskByDate("2022-10-03").getBody());
+        assertEquals(userTaskList, userTaskController.getUserTaskByDate("2022-10-03").getBody());
 
         userTaskList = List.of(
                 new UserTask("Throw garbage",null, true, today, null, false, false, null),
                 new UserTask("Feed kitty",null, true, today, null, false, false, null),
                 new UserTask("Do nothing", null, false, today, null, false, false, null));
 
-        assertEquals(userTaskList, userTaskResource.getUserTaskByDate(today.toString()).getBody());
+        assertEquals(userTaskList, userTaskController.getUserTaskByDate(today.toString()).getBody());
     }
 
     @Test
@@ -73,7 +69,7 @@ class UserTaskResourceTest {
         LocalDate notTodayButAfter = today.plusDays(5);
         LocalDate notTodayButBefore = today.minusDays(10);
 
-        List<UserTask> userTaskListFromDatabase = userTaskResource.getUserTasksTasksByDateRange(notTodayButBefore.toString(), notTodayButAfter.toString()).getBody();
+        List<UserTask> userTaskListFromDatabase = userTaskController.getUserTasksTasksByDateRange(notTodayButBefore.toString(), notTodayButAfter.toString()).getBody();
 
         assertEquals(this.userTasksForTests, userTaskListFromDatabase);
     }
@@ -90,7 +86,7 @@ class UserTaskResourceTest {
         );
 
 
-        assertEquals(completedTasks, userTaskResource.findCompletedUserTasks().getBody());
+        assertEquals(completedTasks, userTaskController.findCompletedUserTasks().getBody());
     }
 
 //    it should show tasks via COMPLETION date and only on this day
@@ -103,7 +99,7 @@ class UserTaskResourceTest {
                 new UserTask("Feed kitty",null, true, today, null, false, false, null),
         );
 
-        assertEquals(completedTasksByDate, userTaskResource.findCompletedUserTasksByDate(today.toString()).getBody());
+        assertEquals(completedTasksByDate, userTaskController.findCompletedUserTasksByDate(today.toString()).getBody());
     }
 
     @Test
@@ -117,7 +113,7 @@ class UserTaskResourceTest {
                 new UserTask("Wheelie around the block", false, notTodayButBefore, null, null)
         );
 
-        assertEquals(notCompletedTasks, userTaskResource.findNotCompletedUserTasks().getBody());
+        assertEquals(notCompletedTasks, userTaskController.findNotCompletedUserTasks().getBody());
     }
 
     // it should return all the tasks with that equals given that AND later date
@@ -136,17 +132,17 @@ class UserTaskResourceTest {
         );
 
         System.out.println(notCompletedTasksByDateFirstDate.toString());
-        System.out.println(userTaskResource.findNotCompletedUserTasksByDate(today.toString()).getBody());
+        System.out.println(userTaskController.findNotCompletedUserTasksByDate(today.toString()).getBody());
 
-        assertEquals(notCompletedTasksByDateFirstDate, userTaskResource.findNotCompletedUserTasksByDate(today.toString()).getBody());
-        assertEquals(notCompletedTasksByDateSecondDate, userTaskResource.findNotCompletedUserTasksByDate(notTodayButBefore.toString()).getBody());
+        assertEquals(notCompletedTasksByDateFirstDate, userTaskController.findNotCompletedUserTasksByDate(today.toString()).getBody());
+        assertEquals(notCompletedTasksByDateSecondDate, userTaskController.findNotCompletedUserTasksByDate(notTodayButBefore.toString()).getBody());
     }
 
     @Test
     void getUserTaskById() {
         for (UserTask userTasksForTest : this.userTasksForTests) {
             Long testingId = userTasksForTest.getId();
-            assertEquals(userTasksForTest, this.userTaskResource.getUserTaskById(testingId).getBody());
+            assertEquals(userTasksForTest, this.userTaskController.getUserTaskById(testingId).getBody());
         }
 //        create test assert throws to check if it throws exception task not found
     }
@@ -157,9 +153,9 @@ class UserTaskResourceTest {
 
         UserTask userTaskTest = new UserTask("Bench press 200kgs", false, today, null, null);
 
-        userTaskResource.addUserTask(userTaskTest);
+        userTaskController.addUserTask(userTaskTest);
 
-        assertEquals(userTaskTest, userTaskResource.getUserTaskById(6L).getBody());
+        assertEquals(userTaskTest, userTaskController.getUserTaskById(6L).getBody());
     }
 
     @Test
@@ -168,12 +164,12 @@ class UserTaskResourceTest {
         UserTask uTask2 = new UserTask("Feed kitty", true, today, null, null);
         uTask2.setCompleted(false);
 
-        UserTask uTaskFromDatabase = userTaskResource.getUserTaskById(2L).getBody();
+        UserTask uTaskFromDatabase = userTaskController.getUserTaskById(2L).getBody();
 
         assert uTaskFromDatabase != null;
         uTaskFromDatabase.setCompleted(false);
 
-        userTaskResource.updateUserTask(uTaskFromDatabase);
+        userTaskController.updateUserTask(uTaskFromDatabase);
 
         assertEquals(uTask2, uTaskFromDatabase);
     }
@@ -185,13 +181,13 @@ class UserTaskResourceTest {
 
         UserTask mostImportantTask = new UserTask("Find job as a programmer", false, tomorrow, null, null);
 
-        this.userTaskResource.addUserTask(mostImportantTask);
+        this.userTaskController.addUserTask(mostImportantTask);
 
-        assertEquals(mostImportantTask, this.userTaskResource.getUserTaskById(6L).getBody());
+        assertEquals(mostImportantTask, this.userTaskController.getUserTaskById(6L).getBody());
 
-        this.userTaskResource.deleteUserTask(6L);
+        this.userTaskController.deleteUserTask(6L);
 
-        Exception exception = assertThrows(UserNotFoundException.class, () -> this.userTaskResource.getUserTaskById(6L).getBody());
+        Exception exception = assertThrows(UserNotFoundException.class, () -> this.userTaskController.getUserTaskById(6L).getBody());
 
         String expectedMessage = "UserTask with id 6not found";
         String actualMessage = exception.getMessage();
