@@ -15,9 +15,6 @@ public class PersonalOrganizerAppApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PersonalOrganizerAppApplication.class, args);
-		HabitLogger habitLogger = new HabitLogger();
-		Controller cntrl = new Controller(habitLogger);
-		cntrl.runApp();
 	}
 
 	@Bean

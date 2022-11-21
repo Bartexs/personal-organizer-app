@@ -1,9 +1,0 @@
-<hr>
-<div class="row bordered">
-  <p><strong>{{habitToShow.name}}</strong></p>
-  <div class="col-xs-6 col-md-2" *ngFor="let dayToShow of nextFiveDaysView">
-    <p>{{dayToShow.day}}</p>
-    <button (click)="setHabitTrained(dayToShow)">{{dayToShow.habitTrained}}</button>
-  </div>
-</div>
-<!-- add progress bar per week and congratulations msg if 100% -->

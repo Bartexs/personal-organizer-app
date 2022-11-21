@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Task } from 'src/app/models/task.model'
 import { UserTask } from 'src/app/models/UserTask.model';
-import { TasksListService } from 'src/app/services/tasks-list.service';
 import { UserTaskService } from 'src/app/services/user-task.service';
 
 @Component({

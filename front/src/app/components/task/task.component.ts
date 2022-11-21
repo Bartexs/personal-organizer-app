@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import { TasksListService } from 'src/app/services/tasks-list.service';
 import { UserTask } from 'src/app/models/UserTask.model';
 import { UserTaskService } from 'src/app/services/user-task.service';
-import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-task',

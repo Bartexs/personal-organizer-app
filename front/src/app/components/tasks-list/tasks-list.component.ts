@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TasksListService } from 'src/app/services/tasks-list.service';
 import { UserTaskService } from 'src/app/services/user-task.service';
 import { UserTask } from 'src/app/models/UserTask.model';
 
@@ -24,7 +23,7 @@ export class TasksListComponent implements OnInit {
   isShowView = true;
   scheduledUserTasksAmount!: number;
 
-  constructor(private taskService: TasksListService, private userTaskService: UserTaskService) { }
+  constructor(private userTaskService: UserTaskService) { }
 
   ngOnInit(): void {
     this.setDateToShowAsTodayAndFetchTasks();
