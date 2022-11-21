@@ -16,7 +16,6 @@ export class TasksListComponent implements OnInit {
   dateToShow: any;
   createNewTaskModal = false;
   id!: number;
-  // showSuccessfullyDeletedNotification = false;
   showSuccessfullyDeletedNotification = false;
   deletedUserTaskMessageForNotification!: {messageContent: string, objectType: string};
   newTaskName!: string;
@@ -40,8 +39,8 @@ export class TasksListComponent implements OnInit {
       this.setIsCompletedTasksListyEmpty();
     })
 
-    // fetch NOT completed tasks using date 
-    this.userTaskService.onFetchNotCompletedTasksByDate(this.dateToShow).subscribe((userTasksNotCompletedReceived) => {
+    // fetch SCHEDULED tasks using date 
+    this.userTaskService.onFetchScheduledTasksByDate(this.dateToShow).subscribe((userTasksNotCompletedReceived) => {
       this.notCompletedTasks = userTasksNotCompletedReceived;
       // check if lists are empty or not
       this.setIsSheduledTasksListEmpty();
@@ -63,9 +62,7 @@ export class TasksListComponent implements OnInit {
   public setDateToShowAsTodayAndFetchTasks() {
     var today = new Date();
     this.dateToShow = today.toISOString().split('T')[0];
-    //change name of it to wrapperForFetchScheduledAndCompletedSeparately
     this.fetchTasksForDate();
-    
   }
 
   public setIsBothListsEmpty() {
@@ -114,7 +111,7 @@ export class TasksListComponent implements OnInit {
   }
 
   showAllScheduledUserTasks() {
-    this.userTaskService.onFetchAllNotCompletedTasks().subscribe((responseList) => {
+    this.userTaskService.onFetchAllScheduledTasks().subscribe((responseList) => {
       this.notCompletedTasks = responseList;
       this.completedTasks = [];
     });

@@ -1,7 +1,6 @@
 .custom-container {
     padding-top: 60px;
     display: flex;
-    /* border-style: solid; */
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-evenly;
@@ -16,7 +15,6 @@
 .contact-form {
     min-width: 45vw;
     max-height: inherit;
-    /* border-style: solid; */
 }
 
 .encourage-to-contact-info {

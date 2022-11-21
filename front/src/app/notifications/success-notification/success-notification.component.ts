@@ -14,14 +14,14 @@ export class SuccessNotificationComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.setObjecTypeNameToShow();
+    this.setObjectTypeNameToShow();
   }
 
   emitCloseNotification() {
     this.closeNotification.emit();
   }
 
-  setObjecTypeNameToShow() {
+  setObjectTypeNameToShow() {
     switch(this.message.objectType) {
       case "userTask":
         this.objectTypeNameToShow = "Task";

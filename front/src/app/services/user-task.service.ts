@@ -31,8 +31,8 @@ export class UserTaskService {
     return this.httpClient.get<UserTask[]>(pathToGet, {params: parameters});
   }
 
-  // fetch NOT complted tasks via date
-  onFetchNotCompletedTasksByDate(d: string) {
+  // fetch SCHEDULED tasks via date
+  onFetchScheduledTasksByDate(d: string) {
     const parameters = new HttpParams().set("date", d);
     let pathToGet = 'http://localhost:8080/user-task/not-completed'
     return this.httpClient.get<UserTask[]>(pathToGet, {params: parameters});
@@ -51,12 +51,12 @@ export class UserTaskService {
   }
 
   // return all scheduled tasks
-  onFetchAllNotCompletedTasks() {
+  onFetchAllScheduledTasks() {
     let pathToGet = `http://localhost:8080/user-task/not-completed`
     return this.httpClient.get<UserTask[]>(pathToGet);
   }
   
-  // get usertasks for certain days 
+  // get usertasks for given day
   onFetchAllUserTasksByDate(date: string) {
     let pathToGet = `http://localhost:8080/user-task/all/` + date;
     return this.httpClient.get<UserTask[]>(pathToGet);

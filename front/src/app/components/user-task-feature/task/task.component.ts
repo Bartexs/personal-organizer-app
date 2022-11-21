@@ -11,12 +11,7 @@ export class TaskComponent implements OnInit {
   @Input() taskToShow!: UserTask;
   @Output() deletedMyself = new EventEmitter<void>();
   @Output() updatedTask = new EventEmitter<void>();
-  timeElapsedFromStopWatch = 0;
   modifyUserTaskModal = false;
-
-  showTimer = false;
-  editMode = false;
-
   showDeleteConfirmModal = false;
 
   constructor(private userTaskService: UserTaskService) { }
@@ -27,29 +22,6 @@ export class TaskComponent implements OnInit {
   // when called tells user task list component to refresh lists - task has been updated
   public emitUpdatedTaskPing() {
     this.updatedTask.emit();
-  }
-
-  toogleEditMode() {
-    this.editMode == true ? this.editMode = false : this.editMode = true;
-  }
-
-  setShowTimer() {
-    this.showTimer = true;
-  }
-
-  saveTimeElapsedFromStopwatch(timeRecievedFromStopwatch: number) {
-    this.timeElapsedFromStopWatch = timeRecievedFromStopwatch;
-    this.showTimer = false;
-    this.updateTimeSpentOnTaskToDatabase()
-    console.log("Tasks's time elapsed from stopwatch: " + this.timeElapsedFromStopWatch);
-  }
-
-  updateTimeSpentOnTaskToDatabase() {
-    let newUpdate = {
-      taskId: this.taskToShow.id,
-      time: this.timeElapsedFromStopWatch
-    }
-    // this.taskService.onModifyTimeSpentOnTask(newUpdate);
   }
 
   // sets usertask as completed, update it to database and ping list to refresh itself
@@ -107,7 +79,3 @@ export class TaskComponent implements OnInit {
     });
   }
 }
-
-
-// SHOW ORANGE SHADOW UNDER TASKS THAT WAS SCHEDULED EARLIER THAN CURRENTLY SHOWING DAY,
-// SHOW RED SHADOW UNDER TASKS THAT ARE IMPORTANT
