@@ -34,6 +34,18 @@ public class UserTask implements Serializable {
     }
 
     public UserTask(String name,
+                    Boolean completed,
+                    LocalDate scheduleDate,
+                    LocalDate completionDate) {
+
+        this.name = name;
+        this.completed = completed;
+        this.creationDateTime = LocalDateTime.now();
+        this.scheduleDate = scheduleDate;
+        this.completionDate = completionDate;
+    }
+
+    public UserTask(String name,
                     String description,
                     Boolean completed,
                     LocalDate scheduleDate,
