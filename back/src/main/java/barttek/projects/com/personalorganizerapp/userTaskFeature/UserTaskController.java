@@ -19,35 +19,35 @@ public class UserTaskController {
 
     //get userTasks ALL
     @GetMapping("/all")
-    public ResponseEntity<List<UserTask>> getAllUserTasks() {
-        List<UserTask> userTasks = userTaskService.findAllUserTasks();
+    public ResponseEntity<List<UserTask>> findAllUserTasks() {
+        List<UserTask> userTasks = userTaskService.findAll();
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
 
     //get userTask by date ALL
     @GetMapping("/all/{date}")
-    public ResponseEntity<List<UserTask>> getUserTaskByDate(@PathVariable("date")String date) {
-        List<UserTask> userTasks = userTaskService.findUserTaskByDate(date);
-        return new ResponseEntity<>(userTasks, HttpStatus.OK);
+    public ResponseEntity<List<UserTask>> findUserTasksByDateTaskToBeDone(@PathVariable("date")String date) {
+
+        return new ResponseEntity<>( HttpStatus.OK);
     }
 
     //get userTask from date to date
     @GetMapping("/all/{date-from}/{date-end}")
-    public ResponseEntity<List<UserTask>> getUserTasksTasksByDateRange(@PathVariable("date-from") String dateFrom, @PathVariable("date-end") String dateEnd) {
-        List<UserTask> userTasks = userTaskService.findAllUserTasksByDateRange(dateFrom, dateEnd);
+    public ResponseEntity<List<UserTask>> findAllScheduledUserTasksWithinScheduledDateRange(@PathVariable("date-from") String dateFrom, @PathVariable("date-end") String dateEnd) {
+        List<UserTask> userTasks = userTaskService.findAllScheduledUserTasksWithinScheduledDateRange(dateFrom, dateEnd);
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
 
     //get all completed tasks <- archive
     @GetMapping("/completed")
-    public ResponseEntity<List<UserTask>> findCompletedUserTasks() {
-        List<UserTask> userTasks = userTaskService.findCompletedUserTasks();
+    public ResponseEntity<List<UserTask>> findAllCompletedUserTasks() {
+        List<UserTask> userTasks = userTaskService.findAllCompletedUserTasks();
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
 
     @GetMapping("/not-completed")
-    public ResponseEntity<List<UserTask>> findNotCompletedUserTasks() {
-        List<UserTask> userTasks = userTaskService.findNotCompletedUserTasks();
+    public ResponseEntity<List<UserTask>> findAllScheduledUserTasks() {
+        List<UserTask> userTasks = userTaskService.findAllScheduledUserTasks();
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
     //get userTask by date but COMPLETED
@@ -56,8 +56,8 @@ public class UserTaskController {
             params = { "date" },
             method = GET
     )
-    public ResponseEntity<List<UserTask>> findCompletedUserTasksByDate(@RequestParam("date")String date) {
-        List<UserTask> userTasks = userTaskService.findCompletedUserTasksByDate(date);
+    public ResponseEntity<List<UserTask>> findCompletedUserTasksByCompletionDate(@RequestParam("date")String date) {
+        List<UserTask> userTasks = userTaskService.findCompletedUserTasksByCompletionDate(date);
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
 
@@ -67,8 +67,8 @@ public class UserTaskController {
             params = { "date" },
             method = GET
     )
-    public ResponseEntity<List<UserTask>> findScheduledUserTasksByDate(@RequestParam("date")String date) {
-        List<UserTask> userTasks = userTaskService.findScheduledUserTasksByDate(date);
+    public ResponseEntity<List<UserTask>> findScheduledUserTasksByScheduleDate(@RequestParam("date")String date) {
+        List<UserTask> userTasks = userTaskService.findScheduledUserTasksByScheduleDate(date);
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
 
@@ -101,7 +101,7 @@ public class UserTaskController {
 
     @GetMapping("/is-both-lists-empty/{date}")
     public ResponseEntity<Boolean> isBothListsEmpty(@PathVariable("date")String date) {
-        boolean empty = userTaskService.findScheduledUserTasksByDate(date).isEmpty() && userTaskService.findCompletedUserTasksByDate(date).isEmpty();
+        boolean empty = userTaskService.findScheduledUserTasksByScheduleDate(date).isEmpty() && userTaskService.findCompletedUserTasksByCompletionDate(date).isEmpty();
         return new ResponseEntity<>(empty, HttpStatus.OK);
     }
 }

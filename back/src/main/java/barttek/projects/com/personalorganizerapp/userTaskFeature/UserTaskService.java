@@ -16,40 +16,30 @@ public class UserTaskService {
         this.userTaskRepository = userTaskRepository;
     }
 
-    public List<UserTask> findAllUserTasks() {
-        return userTaskRepository.findAll();
-    }
-
-    public List<UserTask> findAllUserTasksByDateRange(String dateFrom, String dateEnd) {
+    public List<UserTask> findAllScheduledUserTasksWithinScheduledDateRange(String dateFrom, String dateEnd) {
         LocalDate localDate = LocalDate.parse(dateFrom);
         LocalDate localDateEnd = LocalDate.parse(dateEnd);
-        return userTaskRepository.findAllUserTasksByDateRange(localDate, localDateEnd);
+        return userTaskRepository.findAllScheduledUserTasksWithinScheduledDateRange(localDate, localDateEnd);
     }
 
-    public List<UserTask> findCompletedUserTasks() {
-        return userTaskRepository.findUserTasksByCompleted();
+    public List<UserTask> findAllCompletedUserTasks() {
+        return userTaskRepository.findAllCompletedUserTasks();
     }
 
-    public List<UserTask> findCompletedUserTasksByDate(String date) {
+    public List<UserTask> findCompletedUserTasksByCompletionDate(String date) {
         //        converts from iso to java localDate format, getting as XXXX-XX-XX
         LocalDate localDate = LocalDate.parse(date);
-        return userTaskRepository.findCompletedUserTasksByDate(localDate);
+        return userTaskRepository.findCompletedUserTasksByCompletionDate(localDate);
     }
 
-    public List<UserTask> findNotCompletedUserTasks() {
-        return userTaskRepository.findUserTasksByNotCompleted();
+    public List<UserTask> findAllScheduledUserTasks() {
+        return userTaskRepository.findAllScheduledUserTasks();
     }
 
-    public List<UserTask> findScheduledUserTasksByDate(String date) {
+    public List<UserTask> findScheduledUserTasksByScheduleDate(String date) {
         //        converts from iso to java localDate format, getting as XXXX-XX-XX
         LocalDate localDate = LocalDate.parse(date);
-        return userTaskRepository.findScheduledUserTasksByDate(localDate);
-    }
-
-    public List<UserTask> findUserTaskByDate(String date) {
-        //        converts from iso to java localDate format, getting as XXXX-XX-XX
-        LocalDate localDate = LocalDate.parse(date);
-        return userTaskRepository.findUserTasksByDateTaskToBeDone(localDate);
+        return userTaskRepository.findScheduledUserTasksByScheduleDate(localDate);
     }
 
     public UserTask findUserTaskById(Long id) {
@@ -67,5 +57,9 @@ public class UserTaskService {
 
     public UserTask addUserTask(UserTask userTask) {
         return userTaskRepository.save(userTask);
+    }
+
+    public List<UserTask> findAll() {
+        return userTaskRepository.findAll();
     }
 }

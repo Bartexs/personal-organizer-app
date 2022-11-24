@@ -34,6 +34,18 @@ public class UserTask implements Serializable {
     }
 
     public UserTask(String name,
+                    Boolean completed,
+                    LocalDate scheduleDate,
+                    LocalDate completionDate) {
+
+        this.name = name;
+        this.completed = completed;
+        this.creationDateTime = LocalDateTime.now();
+        this.scheduleDate = scheduleDate;
+        this.completionDate = completionDate;
+    }
+
+    public UserTask(String name,
                     String description,
                     Boolean completed,
                     LocalDate scheduleDate,
@@ -138,12 +150,12 @@ public class UserTask implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserTask userTask = (UserTask) o;
-        return id.equals(userTask.id) && name.equals(userTask.name) && Objects.equals(description, userTask.description) && completed.equals(userTask.completed) && creationDateTime.equals(userTask.creationDateTime) && scheduleDate.equals(userTask.scheduleDate) && Objects.equals(completionDate, userTask.completionDate) && overDueTask.equals(userTask.overDueTask) && importantTask.equals(userTask.importantTask) && color.equals(userTask.color);
+        return id.equals(userTask.id) && name.equals(userTask.name) && Objects.equals(description, userTask.description) && completed.equals(userTask.completed) && scheduleDate.equals(userTask.scheduleDate) && Objects.equals(completionDate, userTask.completionDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, completed, creationDateTime, scheduleDate, completionDate, overDueTask, importantTask, color);
+        return Objects.hash(id, name, description, completed, scheduleDate, completionDate);
     }
 
     @Override
