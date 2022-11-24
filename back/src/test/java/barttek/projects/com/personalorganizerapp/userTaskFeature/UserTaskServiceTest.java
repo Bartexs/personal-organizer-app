@@ -48,22 +48,7 @@ class UserTaskServiceTest {
         userTaskService.addUserTask(ut1);
         userTaskService.deleteUserTask(1L);
 
-        assertNotEquals(ut1, userTaskService.findUserTaskById(1L));
-    }
-
-    @Test
-    void findAllCreatedUserTasks() {
-        LocalDate scheduleDate = LocalDate.of(2022, 11,10);
-        LocalDate completionDate = scheduleDate.plusDays(2);
-
-        UserTask ut1 = new UserTask("Throw garbage", false, scheduleDate, completionDate);
-        UserTask ut2 = new UserTask("Make monies", true, scheduleDate, completionDate);
-        List<UserTask> testList = List.of(ut1, ut2);
-
-        userTaskService.addUserTask(ut1);
-        userTaskService.addUserTask(ut2);
-
-        assertEquals(testList, userTaskService.findAllCreatedUserTasks());
+        assertNotEquals(ut1, userTaskService.findAll());
     }
 
     @Test
@@ -86,7 +71,7 @@ class UserTaskServiceTest {
         userTaskService.addUserTask(ut3);
         userTaskService.addUserTask(ut4);
 
-        assertEquals(testList, userTaskService.findAllScheduledUserTasksWithinScheduledDateRange("2022-11-9", "2022-11-13"));
+        assertEquals(testList, userTaskService.findAllScheduledUserTasksWithinScheduledDateRange("2022-11-09", "2022-11-13"));
 
         LocalDate firstBoundary = LocalDate.of(2022, 11,9);
         LocalDate secondBoundary = LocalDate.of(2022, 11,13);
@@ -98,7 +83,7 @@ class UserTaskServiceTest {
         testList.add(ut6);
         userTaskService.addUserTask(ut5);
         userTaskService.addUserTask(ut6);
-        assertEquals(testList, userTaskService.findAllScheduledUserTasksWithinScheduledDateRange("2022-11-9", "2022-11-13"));
+        assertEquals(testList, userTaskService.findAllScheduledUserTasksWithinScheduledDateRange("2022-11-09", "2022-11-13"));
     }
 
     @Test
@@ -110,13 +95,14 @@ class UserTaskServiceTest {
         UserTask ut2 = new UserTask("Make monies", true, scheduleDate, completionDate);
         UserTask ut3 = new UserTask("Make more monies", false, scheduleDate.plusDays(50), completionDate);
         UserTask ut4 = new UserTask("Make less monies", false, scheduleDate.minusDays(50), completionDate);
+        List<UserTask> testList = List.of(ut2);
 
         userTaskService.addUserTask(ut1);
         userTaskService.addUserTask(ut2);
         userTaskService.addUserTask(ut3);
         userTaskService.addUserTask(ut4);
 
-        assertEquals(ut2, userTaskService.findAllCompletedUserTasks());
+        assertEquals(testList, userTaskService.findAllCompletedUserTasks());
     }
 
     @Test
@@ -172,7 +158,7 @@ class UserTaskServiceTest {
         UserTask ut4 = new UserTask("Find new job", true, scheduleDate, completionDate);
         UserTask ut5 = new UserTask("Make more monies", false, scheduleDate.plusDays(50), completionDate);
         UserTask ut6 = new UserTask("Make less monies", false, scheduleDate.minusDays(50), completionDate);
-        List<UserTask> testList = List.of(ut3);
+        List<UserTask> testList = List.of(ut1, ut3);
 
         userTaskService.addUserTask(ut1);
         userTaskService.addUserTask(ut2);
@@ -181,7 +167,7 @@ class UserTaskServiceTest {
         userTaskService.addUserTask(ut5);
         userTaskService.addUserTask(ut6);
 
-        assertEquals(testList, userTaskService.findCompletedUserTasksByCompletionDate("2022-11-10"));
+        assertEquals(testList, userTaskService.findScheduledUserTasksByScheduleDate("2022-11-10"));
     }
 
     @Test
