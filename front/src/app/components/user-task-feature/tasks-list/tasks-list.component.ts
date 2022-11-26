@@ -14,6 +14,8 @@ export class TasksListComponent implements OnInit {
   isCompletedTasksListEmpty!: boolean;
   isBothListsEmpty!: boolean;
   dateToShow: any;
+  todayDate: any;
+  allTasks = false;
   createNewTaskModal = false;
   id!: number;
   showSuccessfullyDeletedNotification = false;
@@ -31,6 +33,7 @@ export class TasksListComponent implements OnInit {
   // wrapper method TO REFRESH COMPLETED AND NOT COMPLETED LISTS FOR CURRENT DAY 
   public fetchTasksForDate() {
     console.log("called fetch wrapper");
+    this.allTasks = false;
     
     // fetch completed tasks using date
     this.userTaskService.onFetchCompletedTasksByDate(this.dateToShow).subscribe((userTasksCompletedReceived) => {
@@ -43,14 +46,14 @@ export class TasksListComponent implements OnInit {
     this.userTaskService.onFetchScheduledTasksByDate(this.dateToShow).subscribe((userTasksNotCompletedReceived) => {
       this.notCompletedTasks = userTasksNotCompletedReceived;
       // check if lists are empty or not
-      this.setIsSheduledTasksListEmpty();
+      this.setIsScheduledTasksListEmpty();
       this.scheduledUserTasksAmount = userTasksNotCompletedReceived.length;
     })
 
     this.setIsBothListsEmpty();
   }
 
-  public setIsSheduledTasksListEmpty() {
+  public setIsScheduledTasksListEmpty() {
     this.isScheduledTasksListEmpty = this.notCompletedTasks.length == 0;
   }
 
@@ -60,9 +63,14 @@ export class TasksListComponent implements OnInit {
 
   // sets date to show as today and fetch tasks
   public setDateToShowAsTodayAndFetchTasks() {
-    var today = new Date();
-    this.dateToShow = today.toISOString().split('T')[0];
+    this.setTodayDate();
+    this.dateToShow = this.todayDate;
     this.fetchTasksForDate();
+  }
+
+  public setTodayDate() {
+    var today = new Date();
+    this.todayDate = today.toISOString().split('T')[0];
   }
 
   public setIsBothListsEmpty() {
@@ -114,6 +122,11 @@ export class TasksListComponent implements OnInit {
     this.userTaskService.onFetchAllScheduledTasks().subscribe((responseList) => {
       this.notCompletedTasks = responseList;
       this.completedTasks = [];
+      this.setIsCompletedTasksListyEmpty();
+      this.setIsScheduledTasksListEmpty();
+      this.isBothListsEmpty = this.isScheduledTasksListEmpty;
+      this.dateToShow = this.todayDate;
+      this.allTasks = true;
     });
   }
 

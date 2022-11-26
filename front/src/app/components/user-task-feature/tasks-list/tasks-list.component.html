@@ -12,8 +12,11 @@
             <div>
                 <h1>Your tasks:</h1>
             </div>
-            <div>
-                <h4>Showing tasks for: {{dateToShow}}</h4>
+            <div *ngIf="!allTasks">
+                <h4>Showing tasks for: <strong>{{dateToShow}}</strong></h4>
+            </div>
+            <div *ngIf="allTasks">
+                <h4>Showing all scheduled tasks</h4>
             </div>
         </div>
         <hr class="section-breaker">
@@ -33,7 +36,7 @@
                 <div>
                     <div class="input-group day-control-buttons">
                         <button class="btn-custom" (click)="showAllScheduledUserTasks()">All tasks</button>
-                        <button class="btn-custom" (click)="showAllScheduledUserTasks()">Pick day</button>
+                        <button class="btn-custom" [disabled]="true" (click)="showAllScheduledUserTasks()">Pick day</button>
                     </div>
                 </div>
             </div>
@@ -51,7 +54,7 @@
         <div class="tasks-list" *ngIf="!isScheduledTasksListEmpty">
             <h4>Scheduled tasks:</h4>
             <hr class="section-breaker short">
-            <app-task *ngFor="let nTask of notCompletedTasks" (deletedMyself)="onTaskDeleted(nTask)" (updatedTask)="fetchTasksForDate()" [taskToShow]="nTask" [currDate]="dateToShow"></app-task>
+            <app-task *ngFor="let nTask of notCompletedTasks" (deletedMyself)="onTaskDeleted(nTask)" (updatedTask)="fetchTasksForDate()" [taskToShow]="nTask" [currDate]="todayDate"></app-task>
         </div>
         <div class="tasks-list" *ngIf="!isCompletedTasksListEmpty">
             <h4>Completed tasks:</h4>
