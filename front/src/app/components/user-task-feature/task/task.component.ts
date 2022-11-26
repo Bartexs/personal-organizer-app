@@ -9,6 +9,7 @@ import { UserTaskService } from 'src/app/services/user-task.service';
 })
 export class TaskComponent implements OnInit {
   @Input() taskToShow!: UserTask;
+  @Input() currDate!: any;
   @Output() deletedMyself = new EventEmitter<void>();
   @Output() updatedTask = new EventEmitter<void>();
   modifyUserTaskModal = false;
@@ -28,7 +29,7 @@ export class TaskComponent implements OnInit {
   public setCompleted(value: boolean) {
     this.taskToShow.completed = value;
     var today = new Date();
-    this.taskToShow.completionDate = today.toISOString().split('T')[0];
+    this.taskToShow.completionDate = this.currDate;
     this.userTaskService.onUpdateUserTask(this.taskToShow).subscribe((responseData) => {
       this.emitUpdatedTaskPing();
     });
