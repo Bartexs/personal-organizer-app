@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UserTask } from 'src/app/models/UserTask.model';
 import { UserTaskService } from 'src/app/services/user-task.service';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-new-task',
@@ -29,9 +30,10 @@ export class CreateNewTaskComponent implements OnInit {
 
   private setCreatingNewHabitForm() {
     this.creatingNewHabitForm = new FormGroup({
-      'name': new FormControl(),
+      'name': new FormControl('', Validators.required),
       'description': new FormControl(),
       'scheduleDatePicker': new FormControl(this.defaultDatePickerDate),
+      'color': new FormControl()
     });
   }
 

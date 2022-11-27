@@ -7,14 +7,19 @@
     <hr>
     <div class="content">
         <form [formGroup]="creatingNewHabitForm">
-            <div class="form-group">
+            <div class="form-group" >
                 <label for="name">Name:</label>
                 <input
                     type="text"
                     id="name"
                     formControlName="name"
                     class="form-control inputlg"
+                    [ngClass]="creatingNewHabitForm.invalid && (creatingNewHabitForm.dirty || creatingNewHabitForm.touched) ?  'is-invalid' : ''"
                     placeholder="Enter task's name">
+                <div *ngIf="creatingNewHabitForm.invalid && (creatingNewHabitForm.dirty || creatingNewHabitForm.touched)" class="invalid-feedback">
+                    Name is required. 
+                </div>
+                <br>
                 <label for="description" class="form-check-label"> Description:</label>
                 <textarea
                     type="text"
@@ -24,17 +29,29 @@
                     rows="3"
                     placeholder="Enter task's description"
                     ></textarea>
-                <label for="scheduleDatePicker" class="form-check-label"> Set due date on task:</label>
+                <br>
+                <label for="scheduleDatePicker" class="form-check-label"> Set schedule date for task:</label>
                 <input 
                     type="date"
                     id="scheduleDatePicker"
                     class="form-control"
-                    formControlName="scheduleDatePicker">
+                    formControlName="scheduleDatePicker"
+                    title="Set schedule date for task">
+                <br>
+                <label for="colorPicker" class="form-check-label"> Pick color for task:</label>
+                <input
+                    type="color"
+                    id="color"
+                    class="form-control form-control-color"
+                    style="width: 100%"
+                    formControlName="scheduleDatePicker"
+                    title="Choose your task color">
             </div>
         </form>
     </div>
-    <div class="footer">
-        <button class="btn btn-success" (click)="onSubmitCreatingNewHabitForm()">Create new task</button>
+    <p>Form Status: {{ creatingNewHabitForm.status }}</p>
+    <div class="footer btn-group">
+        <button [disabled]="!creatingNewHabitForm.valid" type="submit" class="btn btn-success" (click)="onSubmitCreatingNewHabitForm()">Create new task</button>
         <button class="btn btn-secondary" (click)="emitCloseNotification()">Cancel</button>
     </div>
 </div>
