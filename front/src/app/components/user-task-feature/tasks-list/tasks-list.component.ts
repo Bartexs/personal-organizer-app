@@ -23,7 +23,9 @@ export class TasksListComponent implements OnInit {
   newTaskName!: string;
   isShowView = true;
   scheduledUserTasksAmount!: number;
-
+  userTaskNameEmpty = false;
+  isUserTaskNameInputInvalid = false;
+  
   constructor(private userTaskService: UserTaskService) { }
 
   ngOnInit(): void {
@@ -94,8 +96,8 @@ export class TasksListComponent implements OnInit {
   }
 
   // shows when something went wrong 
-  public showUserTaskNotCreatedResponse() {
-    console.log("NOT created");
+  public showUserTaskNotCreatedResponse(message: string) {
+    console.log(message);
   }
 
   // creating new user via usertask service and processing response we got from it, to not forget status 201 means CREATED, refresh lists at the end of the method
@@ -111,7 +113,7 @@ export class TasksListComponent implements OnInit {
 
     this.userTaskService.onPostNewTask(createNewUserTask).subscribe((responseData) => {
       // we fire propert method based on status from API 
-      responseData.status == 201 ? this.showUserTaskCreatedResponse(createNewUserTask.name) : this.showUserTaskNotCreatedResponse();
+      responseData.status == 201 ? this.showUserTaskCreatedResponse(createNewUserTask.name) : this.showUserTaskNotCreatedResponse("Something went wrong");
       this.fetchTasksForDate();
     });
 
@@ -143,7 +145,20 @@ export class TasksListComponent implements OnInit {
     }, 5000);
   }
 
-  onKeydown(value: any) {
-    this.createNewUserTask(value)
+  isUserTaskNameValid(userTaskName: any) {
+    return userTaskName.value.length > 0;
+  }
+
+  validateUserTaskNameAndCreateNewUserTask(value: any) {
+    if(this.isUserTaskNameValid(value)) {
+      this.createNewUserTask(value)
+    } else {
+      this.showUserTaskNotCreatedResponse("Task name can not be empty!");
+      this.isUserTaskNameInputInvalid = true;
+
+      const myTimeout = setTimeout(() => {
+        this.isUserTaskNameInputInvalid = false;
+      }, 2000);
+    }
   }
 }
