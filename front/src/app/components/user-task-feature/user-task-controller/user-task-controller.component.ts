@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UserTasksListService } from 'src/app/services/user-tasks-list.service';
 
 @Component({
@@ -11,19 +11,16 @@ export class UserTaskControllerComponent implements OnInit {
   currentlyShowingDate!: any;
   isShowView = true;
 
-  constructor(private userTasksListService: UserTasksListService ) { }
+  constructor(private userTasksListService: UserTasksListService ) { 
+    this.todayDate = userTasksListService.getCurrentDateValue();
+  }
 
   ngOnInit(): void {
-    this.setTodayDate();
-    console.log(this.todayDate);
     this.userTasksListService.setMessage(this.todayDate);
-    console.log(this.userTasksListService.getMessage());
   }
 
-  public setTodayDate() {
-    var today = new Date();
-    this.todayDate = today.toISOString().split('T')[0];
-    this.userTasksListService.setCurrentlyShowingDate(today);
+  public setTodayFieldToSomethingElse() {
+    console.log("called new message");
+    this.userTasksListService.setMessage("new message");
   }
-
 }
