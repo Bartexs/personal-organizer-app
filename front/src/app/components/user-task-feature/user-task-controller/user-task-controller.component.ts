@@ -12,11 +12,18 @@ export class UserTaskControllerComponent implements OnInit {
   isShowView = true;
 
   constructor(private userTasksListService: UserTasksListService ) { 
-    this.todayDate = userTasksListService.getCurrentDateValue();
+    this.subscribeUserTasksListService();
   }
 
   ngOnInit(): void {
     this.userTasksListService.setMessage(this.todayDate);
+  }
+
+  public subscribeUserTasksListService() {
+    console.log()
+    return this.userTasksListService.getMessage().subscribe((msg) => {
+      this.todayDate = msg;
+    });
   }
 
   public setTodayFieldToSomethingElse() {

@@ -14,24 +14,21 @@ export class UserTaskHeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribeUserTasksListService();
-    this.setDateToShow();
   }
 
   public subscribeUserTasksListService() {
-    return this.userTasksListService.getMessage().subscribe((mt) => {
-      this.setDateToShow();
+    console.log()
+    return this.userTasksListService.getMessage().subscribe((msg) => {
+      this.dateToShow = msg;
     });
   }
 
-  public setDateToShow() {
-    this.dateToShow = this.userTasksListService.getCurrentDateValue();
-  }
-
   // based on amount of days got as parameter it shows another day 
-  // public setDate(numberOfDays: number) {
-  //   var currDay = new Date(this.dateToShow);
-  //   currDay.setDate(currDay.getDate() + numberOfDays);
-  //   this.dateToShow = currDay.toISOString().split('T')[0];
-  //   this.fetchTasksForDate();
-  // }
+  public setDate(numberOfDays: number) {
+    var currDay = new Date(this.dateToShow);
+    currDay.setDate(currDay.getDate() + numberOfDays);
+    this.dateToShow = currDay.toISOString().split('T')[0];
+    this.userTasksListService.setMessage(this.dateToShow);
+    // this.fetchTasksForDate();
+  }
 }

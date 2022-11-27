@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserTasksListService {
-  private dateSource = new Subject<String>();
-  currentDateValue: string;
+  private dateSource = new ReplaySubject<String>();
 
   constructor() { 
-    this.currentDateValue = this.setTodayDate();
+    this.setMessage(this.setTodayDate());
   }
 
   public setTodayDate() {
@@ -21,15 +20,8 @@ export class UserTasksListService {
     
   }
 
-  public setCurrentDateValue(value: string) {
-    this.currentDateValue = value;
-  }
-
-  public getCurrentDateValue() {
-    return this.currentDateValue;
-  }
-
   public getMessage(): Observable<String> {
+    console.log(this.dateSource);
     return this.dateSource.asObservable();
   }
 
