@@ -6,8 +6,8 @@ import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-new-task',
-  templateUrl: './create-new-task.component.html',
-  styleUrls: ['./create-new-task.component.css']
+  templateUrl: './create-new-task-modal.component.html',
+  styleUrls: ['./create-new-task-modal.component.css']
 })
 export class CreateNewTaskComponent implements OnInit {
   @Output() closeModal = new EventEmitter<void>();

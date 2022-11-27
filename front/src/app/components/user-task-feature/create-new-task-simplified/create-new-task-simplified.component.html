@@ -1,0 +1,9 @@
+<div class="input-group mb-3" >
+    <input (keydown.Enter)="validateUserTaskNameAndCreateNewUserTask(newUserTaskName)" autofocus type="text" [ngClass]="isUserTaskNameInputInvalid ?  'is-invalid' : ''" class="form-control" placeholder="Input to quickly add new task for currently showing day!" aria-label="Create new task" aria-describedby="button-addon2" #newUserTaskName>
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="validateUserTaskNameAndCreateNewUserTask(newUserTaskName)">Create task</button>
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="createNewTaskModal = true">Press to add more details</button>
+    <div *ngIf="isUserTaskNameInputInvalid" class="invalid-feedback">
+        Task name can't be empty!
+    </div>
+</div>
+<app-create-new-task *ngIf="createNewTaskModal" (closeModal)="createNewTaskModal = false" [defaultDatePickerDate]="defaultDateForTaskCreation"></app-create-new-task>

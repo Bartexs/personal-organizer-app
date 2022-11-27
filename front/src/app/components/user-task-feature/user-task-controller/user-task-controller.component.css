@@ -1,0 +1,37 @@
+.hiddenWidgetContainer {
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.amount-positioning {
+    position: absolute;
+    left: 70%;
+    top: 15px;
+}
+
+.amount-styling {
+    height: 25px;
+    width: 25px;
+    color: white;
+    background-color: rgba(204, 16, 16, 0.733);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.roll-up-section-button {
+    position: absolute;
+    left: 85%;
+    top: 15px;
+}
+
+.hide-widget {
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.hide-arrow-down {
+    margin-left: 3px;
+    height: 14px;
+}

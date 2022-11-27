@@ -10,12 +10,6 @@
     column-gap: 15vw;
 }
 
-.section-breaker {
-    width: 30%;
-    padding-bottom: 15px;
-    border-width: 1.9px;
-}
-
 .short {
     width: 18%;
     padding-bottom: 0px;
@@ -56,63 +50,3 @@
 /* styling for the header of the content window */
         
 
-        .hide-widget {
-            padding: 0;
-            border: none;
-            background: none;
-        }
-
-        .hide-arrow-down {
-            margin-left: 3px;
-            height: 14px;
-        }
-
-    /* styling for the date picker */
-        .date-container {
-            display: flex;
-            flex-direction: column;
-            padding-bottom: 4vh;
-        }
-        
-        .header-date-picking {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-evenly;
-            flex-wrap: wrap;
-        }
-        
-        .day-control-buttons {
-            width: 100%;
-            justify-content: center;
-            align-items: baseline;
-            display: inline-flex;
-        }
-
-
-/* styling for information when tasks are hidden - rolled up*/
-.hiddenWidgetContainer {
-    position: relative;
-    text-align: center;
-    width: 100%;
-}
-
-.amount-positioning {
-    position: absolute;
-    left: 70%;
-    top: 15px;
-}
-
-.amount-styling {
-    height: 25px;
-    width: 25px;
-    color: white;
-    background-color: rgba(204, 16, 16, 0.733);
-    border-radius: 50%;
-    display: inline-block;
-}
-
-.roll-up-section-button {
-    position: absolute;
-    left: 85%;
-    top: 15px;
-}

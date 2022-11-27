@@ -16,15 +16,14 @@ export class TasksListComponent implements OnInit {
   dateToShow: any;
   todayDate: any;
   allTasks = false;
-  createNewTaskModal = false;
   id!: number;
   showSuccessfullyDeletedNotification = false;
   deletedUserTaskMessageForNotification!: {messageContent: string, objectType: string};
   newTaskName!: string;
-  isShowView = true;
+  
   scheduledUserTasksAmount!: number;
   userTaskNameEmpty = false;
-  isUserTaskNameInputInvalid = false;
+  
   
   constructor(private userTaskService: UserTaskService) { }
 
@@ -81,45 +80,6 @@ export class TasksListComponent implements OnInit {
     })
   }
 
-  // based on amount of days got as parameter it shows another day 
-  public setDate(numberOfDays: number) {
-    var currDay = new Date(this.dateToShow);
-    currDay.setDate(currDay.getDate() + numberOfDays);
-    this.dateToShow = currDay.toISOString().split('T')[0];
-    this.fetchTasksForDate();
-  }
-
-  // shows when task has been added to database
-  public showUserTaskCreatedResponse(userTaskName: string) {
-    console.log("created task named:");
-    console.log(userTaskName);
-  }
-
-  // shows when something went wrong 
-  public showUserTaskNotCreatedResponse(message: string) {
-    console.log(message);
-  }
-
-  // creating new user via usertask service and processing response we got from it, to not forget status 201 means CREATED, refresh lists at the end of the method
-  public createNewUserTask(value: any) {
-    
-    const createNewUserTask: UserTask = {
-      name: value.value,
-      completed: false,
-      // it sets date as currently showing
-      scheduleDate: this.dateToShow,
-      importantTask: false
-    }
-
-    this.userTaskService.onPostNewTask(createNewUserTask).subscribe((responseData) => {
-      // we fire propert method based on status from API 
-      responseData.status == 201 ? this.showUserTaskCreatedResponse(createNewUserTask.name) : this.showUserTaskNotCreatedResponse("Something went wrong");
-      this.fetchTasksForDate();
-    });
-
-    value.value = "";
-  }
-
   showAllScheduledUserTasks() {
     this.userTaskService.onFetchAllScheduledTasks().subscribe((responseList) => {
       this.notCompletedTasks = responseList;
@@ -143,22 +103,5 @@ export class TasksListComponent implements OnInit {
     const myTimeout = setTimeout(() => {
       this.showSuccessfullyDeletedNotification = false;
     }, 5000);
-  }
-
-  isUserTaskNameValid(userTaskName: any) {
-    return userTaskName.value.length > 0;
-  }
-
-  validateUserTaskNameAndCreateNewUserTask(value: any) {
-    if(this.isUserTaskNameValid(value)) {
-      this.createNewUserTask(value)
-    } else {
-      this.showUserTaskNotCreatedResponse("Task name can not be empty!");
-      this.isUserTaskNameInputInvalid = true;
-
-      const myTimeout = setTimeout(() => {
-        this.isUserTaskNameInputInvalid = false;
-      }, 2000);
-    }
   }
 }

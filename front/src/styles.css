@@ -7,3 +7,9 @@ html {
 body {
     margin-bottom: 60px;
 }
+
+.section-breaker {
+    width: 30%;
+    padding-bottom: 15px;
+    border-width: 1.9px;
+}
