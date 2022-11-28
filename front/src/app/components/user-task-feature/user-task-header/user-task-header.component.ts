@@ -29,6 +29,12 @@ export class UserTaskHeaderComponent implements OnInit {
     currDay.setDate(currDay.getDate() + numberOfDays);
     this.dateToShow = currDay.toISOString().split('T')[0];
     this.userTasksListService.setMessage(this.dateToShow);
-    // this.fetchTasksForDate();
+    this.userTasksListService.fetchTasksEmit();
+  }
+
+  // sets date to show as today and fetch tasks
+  public setDateToShowAsTodayAndFetchTasks() {
+    this.userTasksListService.setMessage(this.userTasksListService.todayDate);
+    this.userTasksListService.fetchTasksEmit();
   }
 }

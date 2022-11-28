@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserTaskService } from 'src/app/services/user-task.service';
 import { UserTask } from 'src/app/models/UserTask.model';
+import { UserTasksListService } from 'src/app/services/user-tasks-list.service';
 
 @Component({
   selector: 'app-tasks-list',
@@ -22,14 +23,24 @@ export class TasksListComponent implements OnInit {
   newTaskName!: string;
   
   scheduledUserTasksAmount!: number;
-  userTaskNameEmpty = false;
   
   
-  constructor(private userTaskService: UserTaskService) { }
+  constructor(private userTaskService: UserTaskService, private userTasksListService: UserTasksListService) { }
 
   ngOnInit(): void {
     this.setDateToShowAsTodayAndFetchTasks();
+    this.userTasksListService.onFetchUserTasksList.subscribe(() => {
+      this.fetchTasksForDate();
+    });
+    this.subscribeUserTasksListServiceDate();
   }
+
+  public subscribeUserTasksListServiceDate() {
+    return this.userTasksListService.getMessage().subscribe((msg) => {
+      this.dateToShow = msg;
+    });
+  }
+
 
   // wrapper method TO REFRESH COMPLETED AND NOT COMPLETED LISTS FOR CURRENT DAY 
   public fetchTasksForDate() {
@@ -38,6 +49,8 @@ export class TasksListComponent implements OnInit {
     
     // fetch completed tasks using date
     this.userTaskService.onFetchCompletedTasksByDate(this.dateToShow).subscribe((userTasksCompletedReceived) => {
+      console.log(userTasksCompletedReceived);
+      console.log(this.dateToShow);
       this.completedTasks = userTasksCompletedReceived;
       // check if lists are empty or not
       this.setIsCompletedTasksListyEmpty();

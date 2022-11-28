@@ -1,15 +1,3 @@
-/* style wrapper for whole component view */
-.window-wrapper {
-    padding: 50px;
-    position: relative;
-}
-
-.header-top {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 15vw;
-}
-
 .short {
     width: 18%;
     padding-bottom: 0px;
@@ -27,26 +15,3 @@
     margin-top: 50px;
     text-align: center;
 }
-
-.btn-custom {
-    color: white;
-    background-color: #581845c4;
-    width: 9vw;
-    height: 30px;
-    border-style: none;
-    border-radius: 3.5px;
-    box-shadow: 1px 1px 5px black;
-    transition: transform .2s;
-}
-
-.btn-custom:hover {
-    background-color: #581845ef;
-}
-
-.btn-custom:active {
-    transform: scale(1.2);
-}
-
-/* styling for the header of the content window */
-        
-

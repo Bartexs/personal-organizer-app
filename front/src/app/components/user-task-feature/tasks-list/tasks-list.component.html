@@ -1,35 +1,19 @@
-<!-- if hide widget button is pressed we dont show anything else, we are showing component -->
-<!-- <div class="window-wrapper" *ngIf="isShowView else hideTasksListView">
-    <div class="roll-up-section-button"> 
-        <button class="hide-widget"(click)="isShowView = !isShowView">hide widget</button>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down hide-arrow-down" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-            <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-        </svg>
+
+<div class="tasks-list-container">
+    <div class="tasks-list" *ngIf="!isScheduledTasksListEmpty">
+        <h4>Scheduled tasks:</h4>
+        <hr class="section-breaker short">
+        <app-task *ngFor="let nTask of notCompletedTasks" (deletedMyself)="onTaskDeleted(nTask)" (updatedTask)="fetchTasksForDate()" [taskToShow]="nTask" [currDate]="todayDate"></app-task>
     </div>
-     -->
-
-    <!-- INPUT row to quickly add new tasks -->
-    
-
-    <div class="tasks-list-container">
-        <div class="tasks-list" *ngIf="!isScheduledTasksListEmpty">
-            <h4>Scheduled tasks:</h4>
-            <hr class="section-breaker short">
-            <app-task *ngFor="let nTask of notCompletedTasks" (deletedMyself)="onTaskDeleted(nTask)" (updatedTask)="fetchTasksForDate()" [taskToShow]="nTask" [currDate]="todayDate"></app-task>
-        </div>
-        <div class="tasks-list" *ngIf="!isCompletedTasksListEmpty">
-            <h4>Completed tasks:</h4>
-            <hr class="section-breaker short">
-            <app-task *ngFor="let uTask of completedTasks" (updatedTask)="fetchTasksForDate()" [taskToShow]="uTask"></app-task>
-        </div>
-        <div class="empty-tasks-list" *ngIf="isBothListsEmpty">
-            <h4>Your lists are empty!</h4>
-        </div>
+    <div class="tasks-list" *ngIf="!isCompletedTasksListEmpty">
+        <h4>Completed tasks:</h4>
+        <hr class="section-breaker short">
+        <app-task *ngFor="let uTask of completedTasks" (updatedTask)="fetchTasksForDate()" [taskToShow]="uTask"></app-task>
     </div>
-    
-<!-- </div> -->
+    <div class="empty-tasks-list" *ngIf="isBothListsEmpty">
+        <h4>Your lists are empty!</h4>
+    </div>
+</div>
 
-<!-- if any task has been deleted shows this confirmation -->
 <app-success-notification *ngIf="showSuccessfullyDeletedNotification" [message]="deletedUserTaskMessageForNotification" (closeNotification)="showSuccessfullyDeletedNotification = false"></app-success-notification>
 

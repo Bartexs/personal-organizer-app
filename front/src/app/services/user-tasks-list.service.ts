@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 
 @Injectable({
@@ -6,9 +6,12 @@ import { Observable, ReplaySubject } from 'rxjs';
 })
 export class UserTasksListService {
   private dateSource = new ReplaySubject<String>();
+  onFetchUserTasksList = new EventEmitter<any>();
+  todayDate: string;
 
   constructor() { 
     this.setMessage(this.setTodayDate());
+    this.todayDate = this.setTodayDate();
   }
 
   public setTodayDate() {
@@ -16,8 +19,9 @@ export class UserTasksListService {
     return today.toISOString().split('T')[0];
   }
 
-  public refreshBothLists() {
-    
+  public fetchTasksEmit() {
+    console.log("Emit ping to fetch tasks");
+    this.onFetchUserTasksList.emit();
   }
 
   public getMessage(): Observable<String> {

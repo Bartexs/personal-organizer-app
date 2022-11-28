@@ -11,11 +11,18 @@ import { UserTaskService } from 'src/app/services/user-task.service';
 export class CreateNewTaskSimplifiedComponent implements OnInit {
   isUserTaskNameInputInvalid = false;
   createNewTaskModal = false;
-  @Input() defaultDateForTaskCreation!: string;
+  @Input() defaultDateForTaskCreation!: any;
 
   constructor(private userTasksListService: UserTasksListService, private userTaskService: UserTaskService) { }
 
   ngOnInit(): void {
+    this.subscribeUserTasksListServiceDate();
+  }
+
+  public subscribeUserTasksListServiceDate() {
+    return this.userTasksListService.getMessage().subscribe((msg) => {
+      this.defaultDateForTaskCreation = msg;
+    });
   }
 
   // creating new user via usertask service and processing response we got from it, to not forget status 201 means CREATED, refresh lists at the end of the method
@@ -32,9 +39,9 @@ export class CreateNewTaskSimplifiedComponent implements OnInit {
     this.userTaskService.onPostNewTask(createNewUserTask).subscribe((responseData) => {
       // we fire propert method based on status from API 
       responseData.status == 201 ? this.showUserTaskCreatedResponse(createNewUserTask.name) : this.showUserTaskNotCreatedResponse("Something went wrong");
-      this.userTasksListService.refreshBothLists();
+      this.userTasksListService.fetchTasksEmit();
     });
-
+    console.log(createNewUserTask);
     value.value = "";
   }
 

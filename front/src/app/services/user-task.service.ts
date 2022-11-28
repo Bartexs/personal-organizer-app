@@ -28,6 +28,7 @@ export class UserTaskService {
     // create new http parameters
     const parameters = new HttpParams().set("date", d);
     let pathToGet = 'http://localhost:8080/user-task/completed'
+    console.log(d);
     return this.httpClient.get<UserTask[]>(pathToGet, {params: parameters});
   }
 
