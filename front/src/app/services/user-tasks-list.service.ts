@@ -18,7 +18,7 @@ export class UserTasksListService {
     this.setMessage(this.setTodayDate());
     this.todayDate = this.setTodayDate();
     this.setMessageToShow("date");
-    this.setShowAllSchedulesUserTasksObservable(true);
+    this.setShowAllSchedulesUserTasksObservable(false);
   }
 
   public getMessageToShow(): Observable<String> {

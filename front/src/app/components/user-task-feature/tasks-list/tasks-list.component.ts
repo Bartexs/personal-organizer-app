@@ -35,6 +35,7 @@ export class TasksListComponent implements OnInit {
     this.subscribeUserTasksListServiceDate();
   }
 
+
   public subscribeUserTasksListServiceDate() {
     return this.userTasksListService.getMessage().subscribe((msg) => {
       this.dateToShow = msg;

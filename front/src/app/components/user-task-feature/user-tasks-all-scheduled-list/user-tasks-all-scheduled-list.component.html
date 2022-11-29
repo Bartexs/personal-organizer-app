@@ -1,1 +1,12 @@
-<p>user-tasks-all-scheduled-list works!</p>
+<div class="tasks-list-container">
+    <div class="tasks-list" *ngIf="!isScheduledTasksListEmpty">
+        <h4>Scheduled tasks:</h4>
+        <hr class="section-breaker short">
+        <app-task *ngFor="let nTask of scheduledTasksList" (deletedMyself)="onTaskDeleted(nTask)" (updatedTask)="fetchAllScheduledUserTasks()" [taskToShow]="nTask"></app-task>
+    </div>
+    <div class="empty-tasks-list" *ngIf="isScheduledTasksListEmpty">
+        <h4>You have no scheduled tasks!</h4>
+    </div>
+</div>
+
+<app-success-notification *ngIf="showSuccessfullyDeletedNotification" [message]="deletedUserTaskMessageForNotification" (closeNotification)="showSuccessfullyDeletedNotification = false"></app-success-notification>
