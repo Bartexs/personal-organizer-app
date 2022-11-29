@@ -11,7 +11,7 @@ import { UserTaskService } from 'src/app/services/user-task.service';
 export class CreateNewTaskSimplifiedComponent implements OnInit {
   isUserTaskNameInputInvalid = false;
   createNewTaskModal = false;
-  @Input() defaultDateForTaskCreation!: any;
+  defaultDateForTaskCreation!: any;
 
   constructor(private userTasksListService: UserTasksListService, private userTaskService: UserTaskService) { }
 

@@ -45,7 +45,6 @@ export class TasksListComponent implements OnInit {
   // wrapper method TO REFRESH COMPLETED AND NOT COMPLETED LISTS FOR CURRENT DAY 
   public fetchTasksForDate() {
     console.log("called fetch wrapper");
-    this.allTasks = false;
     
     // fetch completed tasks using date
     this.userTaskService.onFetchCompletedTasksByDate(this.dateToShow).subscribe((userTasksCompletedReceived) => {

@@ -6,12 +6,27 @@ import { Observable, ReplaySubject } from 'rxjs';
 })
 export class UserTasksListService {
   private dateSource = new ReplaySubject<String>();
+
+  private showAllScheduledTasksList = new ReplaySubject<boolean>();
+  private messageToShow = new ReplaySubject<String>();
+  onFetchAllScheduledUserTasks = new EventEmitter<string>();
+
   onFetchUserTasksList = new EventEmitter<any>();
   todayDate: string;
 
   constructor() { 
     this.setMessage(this.setTodayDate());
     this.todayDate = this.setTodayDate();
+    this.setMessageToShow("date");
+    this.setShowAllSchedulesUserTasksObservable(true);
+  }
+
+  public getMessageToShow(): Observable<String> {
+    return this.messageToShow.asObservable();
+  }
+
+  public setMessageToShow(value: string) {
+    this.messageToShow.next(value);
   }
 
   public setTodayDate() {
@@ -20,16 +35,22 @@ export class UserTasksListService {
   }
 
   public fetchTasksEmit() {
-    console.log("Emit ping to fetch tasks");
     this.onFetchUserTasksList.emit();
   }
 
+  public getShowAllSchedulesUserTasksObservable(): Observable<boolean> {
+    return this.showAllScheduledTasksList.asObservable();
+  }
+
+  public setShowAllSchedulesUserTasksObservable(value: boolean) {
+    this.showAllScheduledTasksList.next(value);
+  }
+
   public getMessage(): Observable<String> {
-    console.log(this.dateSource);
     return this.dateSource.asObservable();
   }
 
-  public setMessage(value: String) {
+  public setMessage(value: string) {
     this.dateSource.next(value);
   }
 }

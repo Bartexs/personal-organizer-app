@@ -18,6 +18,7 @@ import { ModifyModalComponent } from './components/user-task-feature/modify-moda
 import { CreateNewTaskSimplifiedComponent } from './components/user-task-feature/create-new-task-simplified/create-new-task-simplified.component';
 import { UserTaskControllerComponent } from './components/user-task-feature/user-task-controller/user-task-controller.component';
 import { UserTaskHeaderComponent } from './components/user-task-feature/user-task-header/user-task-header.component';
+import { UserTasksAllScheduledListComponent } from './components/user-task-feature/user-tasks-all-scheduled-list/user-tasks-all-scheduled-list.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { UserTaskHeaderComponent } from './components/user-task-feature/user-tas
     CreateNewTaskSimplifiedComponent,
     UserTaskControllerComponent,
     UserTaskHeaderComponent,
+    UserTasksAllScheduledListComponent,
   ],
   imports: [
     BrowserModule,

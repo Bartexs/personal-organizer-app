@@ -1,15 +1,18 @@
 <!-- if hide widget button is pressed we dont show anything else, we are showing component -->
-<div class="window-wrapper" *ngIf="isShowView else hideTasksListView">
+<div class="window-wrapper" *ngIf="isWidgetView else hideTasksListView">
     <div class="roll-up-section-button"> 
-        <button class="hide-widget"(click)="isShowView = !isShowView">hide widget</button>
+        <button class="hide-widget"(click)="isWidgetView = !isWidgetView">hide widget</button>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down hide-arrow-down" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
             <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
         </svg>
     </div>
-    <app-user-task-header></app-user-task-header>
-    <app-create-new-task-simplified [defaultDateForTaskCreation]="currentlyShowingDate"></app-create-new-task-simplified>
-    <app-tasks-list></app-tasks-list>
+    <div>
+        <app-user-task-header></app-user-task-header>
+        <app-create-new-task-simplified></app-create-new-task-simplified>
+        <app-tasks-list *ngIf="!showAllScheduledTasksList"></app-tasks-list>
+        <app-user-tasks-all-scheduled-list *ngIf="showAllScheduledTasksList"></app-user-tasks-all-scheduled-list>
+    </div>
 </div>
 
 <ng-template #hideTasksListView>
@@ -19,7 +22,7 @@
             <!-- <p class="amount-styling">{{scheduledUserTasksAmount}}</p> -->
         </div>
         <div class="roll-up-section-button"> 
-            <button class="hide-widget"(click)="isShowView = !isShowView">show full view</button>
+            <button class="hide-widget"(click)="isWidgetView = !isWidgetView">show full view</button>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down hide-arrow-down" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
                 <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
