@@ -27,7 +27,6 @@ export class UserTaskHeaderComponent implements OnInit {
   }
 
   public subscribeUserTasksListServiceDateToShow() {
-    console.log()
     return this.userTasksListService.getMessage().subscribe((msg) => {
       this.dateToShow = msg;
     });
@@ -39,13 +38,17 @@ export class UserTaskHeaderComponent implements OnInit {
 
   // based on amount of days got as parameter it shows another day 
   public setDate(numberOfDays: number) {
+    this.addDaysToCurrentlyShowingDate(numberOfDays);
+    this.userTasksListService.setMessage(this.dateToShow);
+    this.setObservableMessageToShow("date");
+    this.userTasksListService.fetchTasksEmit();
+    this.userTasksListService.setShowAllSchedulesUserTasksObservable(false);
+  }
+
+  public addDaysToCurrentlyShowingDate(numberOfDays: number) {
     var currDay = new Date(this.dateToShow);
     currDay.setDate(currDay.getDate() + numberOfDays);
     this.dateToShow = currDay.toISOString().split('T')[0];
-    this.userTasksListService.setMessage(this.dateToShow);
-    this.userTasksListService.fetchTasksEmit();
-    this.setObservableMessageToShow("date");
-    this.userTasksListService.setShowAllSchedulesUserTasksObservable(false);
   }
 
   // sets date to show as today and fetch tasks
@@ -58,6 +61,7 @@ export class UserTaskHeaderComponent implements OnInit {
 
   public onFetchAllScheduledTasks() {
     this.setObservableMessageToShow("all");
+    this.userTasksListService.setMessage(this.userTasksListService.getTodayDate());
     this.userTasksListService.setShowAllSchedulesUserTasksObservable(true);
   }
 }

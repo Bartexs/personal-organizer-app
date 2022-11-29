@@ -4,38 +4,48 @@ import { UserTaskService } from 'src/app/services/user-task.service';
 import { UserTasksListService } from 'src/app/services/user-tasks-list.service';
 
 @Component({
-  selector: 'app-user-tasks-all-scheduled-list',
-  templateUrl: './user-tasks-all-scheduled-list.component.html',
-  styleUrls: ['./user-tasks-all-scheduled-list.component.css']
+  selector: 'app-user-tasks-date-scheduled-list',
+  templateUrl: './user-tasks-date-scheduled-list.component.html',
+  styleUrls: ['./user-tasks-date-scheduled-list.component.css']
 })
-export class UserTasksAllScheduledListComponent implements OnInit {
-  scheduledTasksList: UserTask[] = [];
-  isScheduledTasksListEmpty!: boolean;
+export class UserTasksDateScheduledListComponent implements OnInit {
+  scheduledUserTasksList: UserTask[] = [];
+  isListEmpty!: boolean;
+  dateToShow!: string;
   showSuccessfullyDeletedNotification = false;
   deletedUserTaskMessageForNotification!: {messageContent: string, objectType: string};
 
   constructor(private userTaskService: UserTaskService, private userTasksListService: UserTasksListService) { }
 
   ngOnInit(): void {
-    this.fetchAllScheduledUserTasks();
+    this.subscribeUserTasksListServiceDate();
+    this.fetchUserTasksScheduledByDate();
     this.subscribeToFetchUserTasks();
+  }
+
+  
+  public subscribeUserTasksListServiceDate() {
+    return this.userTasksListService.getMessage().subscribe((msg) => {
+      this.dateToShow = msg;
+    });
   }
 
   public subscribeToFetchUserTasks() {
     this.userTasksListService.onFetchUserTasksList.subscribe(() => {
-      this.fetchAllScheduledUserTasks();
+      this.fetchUserTasksScheduledByDate();
     });
   }
 
-  fetchAllScheduledUserTasks() {
-    this.userTaskService.onFetchAllScheduledTasks().subscribe((responseList) => {
-      this.scheduledTasksList = responseList;
-      this.setIsScheduledTasksListEmpty();
-    });
+  public fetchUserTasksScheduledByDate() {
+    this.userTaskService.onFetchScheduledTasksByDate(this.dateToShow).subscribe((userTasksCompletedReceived) => {
+      this.scheduledUserTasksList = userTasksCompletedReceived;
+      this.setIsListEmpty();
+    })
   }
 
-  public setIsScheduledTasksListEmpty() {
-    this.isScheduledTasksListEmpty = this.scheduledTasksList.length == 0;
+
+  public setIsListEmpty() {
+    this.isListEmpty = this.scheduledUserTasksList.length == 0;
   }
 
   // fires success notification with give message and object type, and refresh lists 
@@ -50,4 +60,5 @@ export class UserTasksAllScheduledListComponent implements OnInit {
       this.showSuccessfullyDeletedNotification = false;
     }, 5000);
   }
+
 }

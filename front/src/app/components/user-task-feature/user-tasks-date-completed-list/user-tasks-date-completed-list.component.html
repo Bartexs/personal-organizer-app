@@ -1,0 +1,10 @@
+<div class="tasks-list-container">
+    <div class="tasks-list" *ngIf="!isListEmpty">
+        <h4>Completed tasks:</h4>
+        <hr class="section-breaker short">
+        <app-task *ngFor="let uTask of completedTasksList" (updatedTask)="fetchUserTasksCompletedByDate()" [taskToShow]="uTask"></app-task>
+    </div>
+</div>
+
+<app-success-notification *ngIf="showSuccessfullyDeletedNotification" [message]="deletedUserTaskMessageForNotification" (closeNotification)="showSuccessfullyDeletedNotification = false"></app-success-notification>
+

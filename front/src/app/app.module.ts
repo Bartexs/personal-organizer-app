@@ -19,6 +19,8 @@ import { CreateNewTaskSimplifiedComponent } from './components/user-task-feature
 import { UserTaskControllerComponent } from './components/user-task-feature/user-task-controller/user-task-controller.component';
 import { UserTaskHeaderComponent } from './components/user-task-feature/user-task-header/user-task-header.component';
 import { UserTasksAllScheduledListComponent } from './components/user-task-feature/user-tasks-all-scheduled-list/user-tasks-all-scheduled-list.component';
+import { UserTasksDateScheduledListComponent } from './components/user-task-feature/user-tasks-date-scheduled-list/user-tasks-date-scheduled-list.component';
+import { UserTasksDateCompletedListComponent } from './components/user-task-feature/user-tasks-date-completed-list/user-tasks-date-completed-list.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { UserTasksAllScheduledListComponent } from './components/user-task-featu
     UserTaskControllerComponent,
     UserTaskHeaderComponent,
     UserTasksAllScheduledListComponent,
+    UserTasksDateScheduledListComponent,
+    UserTasksDateCompletedListComponent,
   ],
   imports: [
     BrowserModule,

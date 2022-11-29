@@ -5,10 +5,10 @@ import { Observable, ReplaySubject } from 'rxjs';
   providedIn: 'root'
 })
 export class UserTasksListService {
-  private dateSource = new ReplaySubject<String>();
+  private dateSource = new ReplaySubject<string>();
 
   private showAllScheduledTasksList = new ReplaySubject<boolean>();
-  private messageToShow = new ReplaySubject<String>();
+  private messageToShow = new ReplaySubject<string>();
   onFetchAllScheduledUserTasks = new EventEmitter<string>();
 
   onFetchUserTasksList = new EventEmitter<any>();
@@ -50,7 +50,7 @@ export class UserTasksListService {
     this.showAllScheduledTasksList.next(value);
   }
 
-  public getMessage(): Observable<String> {
+  public getMessage(): Observable<string> {
     return this.dateSource.asObservable();
   }
 

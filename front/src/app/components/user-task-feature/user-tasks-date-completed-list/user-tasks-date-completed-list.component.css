@@ -1,0 +1,12 @@
+.short {
+    width: 18%;
+    padding-bottom: 0px;
+}
+
+.full {
+    width: 100%;
+}
+
+.tasks-list {
+    padding-bottom: 20px;
+}

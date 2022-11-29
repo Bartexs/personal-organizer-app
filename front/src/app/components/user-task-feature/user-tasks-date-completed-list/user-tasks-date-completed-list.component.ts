@@ -4,38 +4,47 @@ import { UserTaskService } from 'src/app/services/user-task.service';
 import { UserTasksListService } from 'src/app/services/user-tasks-list.service';
 
 @Component({
-  selector: 'app-user-tasks-all-scheduled-list',
-  templateUrl: './user-tasks-all-scheduled-list.component.html',
-  styleUrls: ['./user-tasks-all-scheduled-list.component.css']
+  selector: 'app-user-tasks-date-completed-list',
+  templateUrl: './user-tasks-date-completed-list.component.html',
+  styleUrls: ['./user-tasks-date-completed-list.component.css']
 })
-export class UserTasksAllScheduledListComponent implements OnInit {
-  scheduledTasksList: UserTask[] = [];
-  isScheduledTasksListEmpty!: boolean;
+export class UserTasksDateCompletedListComponent implements OnInit {
+  completedTasksList: UserTask[] = [];
+  isListEmpty!: boolean;
+  dateToShow!: string;
   showSuccessfullyDeletedNotification = false;
   deletedUserTaskMessageForNotification!: {messageContent: string, objectType: string};
 
   constructor(private userTaskService: UserTaskService, private userTasksListService: UserTasksListService) { }
 
   ngOnInit(): void {
-    this.fetchAllScheduledUserTasks();
+    this.subscribeUserTasksListServiceDate();
+    this.fetchUserTasksCompletedByDate();
     this.subscribeToFetchUserTasks();
+  }
+
+  public subscribeUserTasksListServiceDate() {
+    return this.userTasksListService.getMessage().subscribe((msg) => {
+      this.dateToShow = msg;
+    });
   }
 
   public subscribeToFetchUserTasks() {
     this.userTasksListService.onFetchUserTasksList.subscribe(() => {
-      this.fetchAllScheduledUserTasks();
+      this.fetchUserTasksCompletedByDate();
     });
   }
 
-  fetchAllScheduledUserTasks() {
-    this.userTaskService.onFetchAllScheduledTasks().subscribe((responseList) => {
-      this.scheduledTasksList = responseList;
-      this.setIsScheduledTasksListEmpty();
-    });
+  public fetchUserTasksCompletedByDate() {
+    this.userTaskService.onFetchCompletedTasksByDate(this.dateToShow).subscribe((userTasksCompletedReceived) => {
+      this.completedTasksList = userTasksCompletedReceived;
+      this.setIsListEmpty();
+    })
   }
 
-  public setIsScheduledTasksListEmpty() {
-    this.isScheduledTasksListEmpty = this.scheduledTasksList.length == 0;
+
+  public setIsListEmpty() {
+    this.isListEmpty = this.completedTasksList.length == 0;
   }
 
   // fires success notification with give message and object type, and refresh lists 

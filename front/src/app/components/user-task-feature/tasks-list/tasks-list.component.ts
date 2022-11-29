@@ -28,17 +28,17 @@ export class TasksListComponent implements OnInit {
   constructor(private userTaskService: UserTaskService, private userTasksListService: UserTasksListService) { }
 
   ngOnInit(): void {
-    this.setDateToShowAsTodayAndFetchTasks();
+    this.subscribeUserTasksListServiceDate();
     this.userTasksListService.onFetchUserTasksList.subscribe(() => {
       this.fetchTasksForDate();
     });
-    this.subscribeUserTasksListServiceDate();
   }
 
 
   public subscribeUserTasksListServiceDate() {
     return this.userTasksListService.getMessage().subscribe((msg) => {
       this.dateToShow = msg;
+      console.log(msg);
     });
   }
 
@@ -46,11 +46,10 @@ export class TasksListComponent implements OnInit {
   // wrapper method TO REFRESH COMPLETED AND NOT COMPLETED LISTS FOR CURRENT DAY 
   public fetchTasksForDate() {
     console.log("called fetch wrapper");
+    console.log(this.dateToShow);
     
     // fetch completed tasks using date
     this.userTaskService.onFetchCompletedTasksByDate(this.dateToShow).subscribe((userTasksCompletedReceived) => {
-      console.log(userTasksCompletedReceived);
-      console.log(this.dateToShow);
       this.completedTasks = userTasksCompletedReceived;
       // check if lists are empty or not
       this.setIsCompletedTasksListyEmpty();
@@ -73,18 +72,6 @@ export class TasksListComponent implements OnInit {
 
   public setIsCompletedTasksListyEmpty() {
     this.isCompletedTasksListEmpty = this.completedTasks.length == 0;
-  }
-
-  // sets date to show as today and fetch tasks
-  public setDateToShowAsTodayAndFetchTasks() {
-    this.setTodayDate();
-    this.dateToShow = this.todayDate;
-    this.fetchTasksForDate();
-  }
-
-  public setTodayDate() {
-    var today = new Date();
-    this.todayDate = today.toISOString().split('T')[0];
   }
 
   public setIsBothListsEmpty() {
