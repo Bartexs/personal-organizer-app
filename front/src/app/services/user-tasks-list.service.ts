@@ -34,6 +34,10 @@ export class UserTasksListService {
     return today.toISOString().split('T')[0];
   }
 
+  public getTodayDate() {
+    return this.todayDate;
+  }
+
   public fetchTasksEmit() {
     this.onFetchUserTasksList.emit();
   }

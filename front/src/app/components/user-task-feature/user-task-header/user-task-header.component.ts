@@ -45,13 +45,15 @@ export class UserTaskHeaderComponent implements OnInit {
     this.userTasksListService.setMessage(this.dateToShow);
     this.userTasksListService.fetchTasksEmit();
     this.setObservableMessageToShow("date");
+    this.userTasksListService.setShowAllSchedulesUserTasksObservable(false);
   }
 
   // sets date to show as today and fetch tasks
   public setDateToShowAsTodayAndFetchTasks() {
     this.userTasksListService.setMessage(this.userTasksListService.todayDate);
-    this.userTasksListService.fetchTasksEmit();
     this.setObservableMessageToShow("date");
+    this.userTasksListService.setShowAllSchedulesUserTasksObservable(false);
+    this.userTasksListService.fetchTasksEmit();
   }
 
   public onFetchAllScheduledTasks() {
