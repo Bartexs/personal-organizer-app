@@ -21,7 +21,8 @@ import { UserTaskHeaderComponent } from './components/user-task-feature/user-tas
 import { UserTasksAllScheduledListComponent } from './components/user-task-feature/user-tasks-all-scheduled-list/user-tasks-all-scheduled-list.component';
 import { UserTasksDateScheduledListComponent } from './components/user-task-feature/user-tasks-date-scheduled-list/user-tasks-date-scheduled-list.component';
 import { UserTasksDateCompletedListComponent } from './components/user-task-feature/user-tasks-date-completed-list/user-tasks-date-completed-list.component';
-import { NotificationsComponent } from './notifications/notifications/notification.component';
+import { NotificationsComponent } from './notifications/notifications-list/notifications-list.component';
+import { NotificationComponent } from './notifications/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { NotificationsComponent } from './notifications/notifications/notificati
     UserTasksDateScheduledListComponent,
     UserTasksDateCompletedListComponent,
     NotificationsComponent,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,

@@ -92,7 +92,7 @@ export class TasksListComponent implements OnInit {
     });
   }
 
-  // fires success notification with give message and object type, and refresh lists 
+  // TO BE REMOVED
   public onTaskDeleted(deletedTask: UserTask) {
     this.deletedUserTaskMessageForNotification = {
       messageContent: deletedTask.name, 
