@@ -43,6 +43,10 @@ export class UserTasksDateScheduledListComponent implements OnInit {
     })
   }
 
+  public emitFetchTasks() {
+    this.userTasksListService.fetchTasksEmit();
+  }
+
 
   public setIsListEmpty() {
     this.isListEmpty = this.scheduledUserTasksList.length == 0;

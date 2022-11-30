@@ -42,6 +42,10 @@ export class UserTasksDateCompletedListComponent implements OnInit {
     })
   }
 
+  public emitFetchTasks() {
+    this.userTasksListService.fetchTasksEmit();
+  }
+
 
   public setIsListEmpty() {
     this.isListEmpty = this.completedTasksList.length == 0;

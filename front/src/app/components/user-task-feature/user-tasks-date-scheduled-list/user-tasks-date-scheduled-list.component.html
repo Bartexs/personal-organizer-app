@@ -2,7 +2,7 @@
     <div class="tasks-list" *ngIf="!isListEmpty">
         <h4>Scheduled tasks:</h4>
         <hr class="section-breaker short">
-        <app-task *ngFor="let nTask of scheduledUserTasksList" (deletedMyself)="onTaskDeleted(nTask)" (updatedTask)="fetchUserTasksScheduledByDate()" [taskToShow]="nTask"></app-task>
+        <app-task *ngFor="let nTask of scheduledUserTasksList" (deletedMyself)="onTaskDeleted(nTask)" (updatedTask)="emitFetchTasks()" [taskToShow]="nTask"></app-task>
     </div>
 </div>
 
