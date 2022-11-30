@@ -40,3 +40,8 @@
     padding: 50px;
     position: relative;
 }
+
+.empty-tasks-list {
+    margin-top: 50px;
+    text-align: center;
+}

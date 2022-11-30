@@ -17,6 +17,9 @@
         <div *ngIf="showAllScheduledTasksList">
             <app-user-tasks-all-scheduled-list></app-user-tasks-all-scheduled-list>
         </div>
+        <div class="empty-tasks-list" *ngIf="isBothListsEmpty">
+            <h4>Your lists are empty!</h4>
+        </div>
     </div>
 </div>
 
