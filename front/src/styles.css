@@ -8,13 +8,6 @@ body {
     margin-bottom: 60px;
 }
 
-.custom-main-container {
-    border-color: black;
-    display: flex;
-    flex-direction: column;
-    padding-top: 10px;
-}
-
 .content-window {
     display: flex;
     margin-top: 80px;
