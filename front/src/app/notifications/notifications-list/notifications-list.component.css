@@ -1,0 +1,9 @@
+.notification-container {
+    position: fixed;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 8px;
+    bottom: 0vh;
+    left: 77vw;
+    padding: 16px;
+}

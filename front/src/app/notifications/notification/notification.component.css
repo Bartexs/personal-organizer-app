@@ -1,0 +1,23 @@
+.notification-window {
+    width: 20vw;
+    height: 18vh;
+    padding: 16px;
+    z-index: 100;
+    background: rgb(245, 241, 241);
+    border-color: lightgray;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    box-shadow: 2px 4px 18px 1px rgba(38, 119, 85, 0.788);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    color: green;
+}
+
+.content {
+   text-align: center;
+}
+
