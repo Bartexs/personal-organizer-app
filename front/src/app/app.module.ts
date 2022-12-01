@@ -23,6 +23,7 @@ import { UserTasksDateScheduledListComponent } from './components/user-task-feat
 import { UserTasksDateCompletedListComponent } from './components/user-task-feature/user-tasks-date-completed-list/user-tasks-date-completed-list.component';
 import { NotificationsComponent } from './notifications/notifications-list/notifications-list.component';
 import { NotificationComponent } from './notifications/notification/notification.component';
+import { StatisticsMainComponent } from './components/statistics-page/statistics-main/statistics-main.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { NotificationComponent } from './notifications/notification/notification
     UserTasksDateCompletedListComponent,
     NotificationsComponent,
     NotificationComponent,
+    StatisticsMainComponent,
   ],
   imports: [
     BrowserModule,

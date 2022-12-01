@@ -8,6 +8,28 @@ body {
     margin-bottom: 60px;
 }
 
+.custom-main-container {
+    border-color: black;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.content-window {
+    display: flex;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    border-color: lightgray;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    width: 65vw;
+    box-shadow: 2px 4px 18px 1px gray;
+    flex-direction: column;
+}
+
 .section-breaker {
     width: 30%;
     padding-bottom: 15px;
