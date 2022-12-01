@@ -11,7 +11,7 @@ import { Notification } from '../notification-model/Notification.model';
 export class NotificationsComponent implements OnInit {
   notificationsList: Notification[] = [];
 
-  constructor(private notifServiceList : NotificationsListService, private notificationService: NotificationService) { }
+  constructor(private notifServiceList : NotificationsListService) { }
 
   ngOnInit(): void {
     this.subscribeToNotificationsReceiver();

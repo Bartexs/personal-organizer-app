@@ -27,14 +27,4 @@ export class NotificationsListService {
   public setNotificationToDelete(notif: Notification) {
     this.notificationToDelete.next(notif);
   }
-
-  
-
-
-  // receiving request to create new notification - it should contain type of notification, type of object and message describing what has happened to it
-  // create new notification
-  // add it to queue 
-    // do i have to refresh it after adding ?
-  // remove it from queue after pressing x or timeout 
-  // show next notification until empty 
 }

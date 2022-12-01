@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { NotificationService } from 'src/app/notifications/notifications-list/notifications-list.service';
+
 
 @Component({
   selector: 'app-delete-conf-modal',
@@ -12,7 +12,7 @@ export class DeleteConfModalComponent implements OnInit {
   @Output() deleteUserTaskConfirmed = new EventEmitter<void>();
   @Input() userTasksToDeleteName!: string;
 
-  constructor(private notifService: NotificationService ) { }
+  constructor() { }
 
   ngOnInit(): void {
     console.log(this.userTasksToDeleteName);
@@ -24,6 +24,5 @@ export class DeleteConfModalComponent implements OnInit {
 
   confirmDeletingUserTask() {
     this.deleteUserTaskConfirmed.emit();
-    this.notifService.setNotificationModeWithTimeout("success");
   }
 }

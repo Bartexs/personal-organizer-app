@@ -18,6 +18,7 @@ export class UserTaskControllerComponent implements OnInit {
   isWidgetView = true;
   showAllScheduledTasksList = false;
   isBothListsEmpty = false;
+  currentlyShowingDay!: string;
 
   constructor(private userTaskService: UserTaskService, private userTasksListService: UserTasksListService ) { 
 
@@ -26,10 +27,18 @@ export class UserTaskControllerComponent implements OnInit {
   ngOnInit(): void {
     this.subscribeToGetDate();
     this.subscribeToGetShowAllScheduledUserTasks();
+    this.subscribeToFetchUserTasks();
+  }
+
+  public subscribeToFetchUserTasks() {
+    this.userTasksListService.onFetchUserTasksList.subscribe(() => {
+      this.setIsBothListsEmpty(this.currentlyShowingDay);
+    });
   }
 
   public subscribeToGetDate() {
     this.userTasksListService.getMessage().subscribe((date) => {
+      this.currentlyShowingDay = date;
       this.setIsBothListsEmpty(date);
     })
   }

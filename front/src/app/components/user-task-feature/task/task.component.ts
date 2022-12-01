@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { UserTask } from 'src/app/models/UserTask.model';
 import { UserTaskService } from 'src/app/services/user-task.service';
 import { UserTasksListService } from 'src/app/services/user-tasks-list.service';
-import { NotificationService } from 'src/app/notifications/notifications-list/notifications-list.service';
 
 @Component({
   selector: 'app-task',
