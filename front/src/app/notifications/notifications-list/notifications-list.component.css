@@ -6,4 +6,5 @@
     bottom: 0vh;
     left: 77vw;
     padding: 16px;
+    z-index: 100;
 }

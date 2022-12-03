@@ -2,7 +2,7 @@
     width: 20vw;
     height: 18vh;
     padding: 16px;
-    z-index: 100;
+    z-index: 999;
     background: rgb(245, 241, 241);
     border-color: lightgray;
     border-style: solid;
