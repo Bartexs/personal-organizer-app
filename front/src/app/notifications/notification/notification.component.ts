@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Notification } from '../notification-model/Notification.model';
+import { StatusTypes } from '../statusTypesEnum/StatusTypes.model';
 import { NotificationService } from './notification.service';
 
 @Component({
@@ -9,11 +10,15 @@ import { NotificationService } from './notification.service';
 })
 export class NotificationComponent implements OnInit {
   @Input() notificationObject!: Notification;
+  notificationTitle!: string;
+  notificationColorsClass!: string;
 
   constructor(private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.setTimeoutToRemove();
+    this.setNotificationTitle();
+    this.setNotificationColorsClass();
   }
 
   public setTimeoutToRemove() {
@@ -24,5 +29,30 @@ export class NotificationComponent implements OnInit {
 
   public sendRemoveNotificationRequest(notificationObjectToRemove: Notification) {
     this.notificationService.emitRemoveNotificationRequest(notificationObjectToRemove);
+  }
+
+  public setNotificationTitle() {
+    this.notificationTitle = this.notificationObject.statusType;
+  }
+
+  public setNotificationColorsClass() {
+    switch(this.notificationTitle) {
+      case "Success": {
+        this.notificationColorsClass = "rgba(38, 119, 85, 0.788)";
+        break;
+      }
+      case "Alert": {
+        this.notificationColorsClass = "rgba(190, 148, 33, 0.753)";
+        break;
+      }
+      case "Danger": {
+        this.notificationColorsClass = "rgba(207, 36, 36, 0.788)";
+        break;
+      }
+      default: {
+        this.notificationColorsClass = "rgba(29, 11, 11, 0.76)";
+        break;
+      }
+    }
   }
 }

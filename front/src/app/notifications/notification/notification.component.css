@@ -1,23 +1,31 @@
 .notification-window {
     width: 20vw;
-    height: 18vh;
-    padding: 16px;
-    z-index: 999;
+    max-height: 18vh;
+    padding: 11px;
+    padding-top: 4px;
+    z-index: 100;
     background: rgb(245, 241, 241);
     border-color: lightgray;
     border-style: solid;
     border-width: 1px;
     border-radius: 10px;
-    box-shadow: 2px 4px 18px 1px rgba(38, 119, 85, 0.788);
+    box-shadow: 2px 4px 18px 1px;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
-    color: green;
+    border-bottom: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: lightgray;
 }
 
 .content {
    text-align: center;
+   font-size: 1em;
+   max-height: max-content;
+   padding-top: 3px;
+   color: black;
+   overflow-wrap: break-word;
 }
 

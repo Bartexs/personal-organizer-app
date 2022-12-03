@@ -4,6 +4,7 @@ import { UserTask } from 'src/app/models/UserTask.model';
 import { UserTaskService } from 'src/app/services/user-task.service';
 import { NotificationsListService } from 'src/app/notifications/notifications-list/notifications-list.service';
 import { Notification } from 'src/app/notifications/notification-model/Notification.model';
+import { StatusTypes } from 'src/app/notifications/statusTypesEnum/StatusTypes.model';
 
 @Component({
   selector: 'app-create-new-task-simplified',
@@ -55,7 +56,7 @@ export class CreateNewTaskSimplifiedComponent implements OnInit {
     if(this.isUserTaskNameValid(value)) {
       this.createNewUserTask(value)
     } else {
-      this.showUserTaskNotCreatedResponse("Task name can not be empty!");
+      this.showUserTaskNotCreatedResponse("Task name can't be empty!");
       this.isUserTaskNameInputInvalid = true;
 
       const myTimeout = setTimeout(() => {
@@ -71,10 +72,10 @@ export class CreateNewTaskSimplifiedComponent implements OnInit {
 
   // shows when task has been added to database
   public showUserTaskCreatedResponse(userTaskName: string) {
+    let msg = "Created task named '" + userTaskName + "'!";
     const notif: Notification = {
-      title: "Created",
-      message: "Created new user task",
-      typeOfObject: "UserTask"
+      statusType: StatusTypes.Success,
+      message: msg,
     }
 
     this.notificationListService.setNotification(notif);

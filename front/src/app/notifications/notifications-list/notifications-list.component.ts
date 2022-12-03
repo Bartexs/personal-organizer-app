@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationsListService } from './notifications-list.service';
 import { Notification } from '../notification-model/Notification.model';
+import { StatusTypes } from '../statusTypesEnum/StatusTypes.model';
 
 @Component({
   selector: 'app-notifications-list',

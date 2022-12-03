@@ -1,10 +1,9 @@
-<div class="notification-window">
+<div class="notification-window" [style.color]="notificationColorsClass">
     <div class="header">
-        <h4><strong>Success!</strong></h4>
+        <h5 [style.color]="notificationColorsClass"><strong>{{notificationTitle}}!</strong></h5>
         <button type="button" class="btn-close" aria-label="Close" (click)="sendRemoveNotificationRequest(notificationObject)"></button>
     </div>
-    <hr>
     <div class="content">
-        <h5> {{notificationObject.typeOfObject}} named "{{notificationObject.message}}" has been deleted successfully!</h5>
+        <p>{{notificationObject.message}}</p>
     </div>
 </div>

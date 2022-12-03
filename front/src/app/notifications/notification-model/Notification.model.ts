@@ -1,7 +1,12 @@
+// export interface Notification {
+//     title: string, 
+//     typeOfObject: string, 
+//     message: string
+// }
+import { StatusTypes } from "../statusTypesEnum/StatusTypes.model"
+
 export interface Notification {
-    title: string, 
-    typeOfObject: string, 
+    statusType: StatusTypes, 
     message: string
 }
 
-                    
