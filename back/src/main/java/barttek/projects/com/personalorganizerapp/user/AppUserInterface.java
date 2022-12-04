@@ -1,5 +1,4 @@
 package barttek.projects.com.personalorganizerapp.user;
 
-public class AppUserInterface {
-
+public interface AppUserInterface {
 }

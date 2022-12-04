@@ -1,4 +1,6 @@
 package barttek.projects.com.personalorganizerapp.user;
 
-public class AppUserByCookies {
+public enum AppUserRole {
+    USER,
+    ADMIN,
 }

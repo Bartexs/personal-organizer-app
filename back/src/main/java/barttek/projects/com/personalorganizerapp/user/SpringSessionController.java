@@ -1,42 +1,39 @@
 package barttek.projects.com.personalorganizerapp.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 public class SpringSessionController {
 
+    @Autowired
+    private SpringSessionService springSessionService;
+
     @GetMapping("/")
-    public String process(Model model, HttpSession session) {
-        @SuppressWarnings("unchecked")
-        List<String> messages = (List<String>) session.getAttribute("MY_SESSION_MESSAGES");
-
-        System.out.println("Here");
-
-        if (messages == null) {
-            messages = new ArrayList<>();
-        }
-
+    public ResponseEntity<AppUserInterface> appUserAccountName(Model model, HttpSession session) {
         Object appUser = session.getAttribute("AppUser");
 
+        System.out.println(appUser);
+
+        double num = Math.random();
+        int num2 = (int) (num * 10);
+
         if (appUser == null) {
-            AppUser appUser1 = new AppUser();
+            AppUserUnregistered appUser1 = new AppUserUnregistered(num2, "demo");
             model.addAttribute("AppUser", appUser1);
         }
 
-        System.out.println(model.getAttribute("AppUser"));
+        System.out.println(session);
 
-        model.addAttribute("sessionMessages", messages);
+        AppUserInterface aps1 = (AppUserInterface) model.getAttribute("AppUser");
 
-//        set new user account as parameter for session
-
-        return "index";
+        return new ResponseEntity<>(aps1, HttpStatus.OK);
     }
+
+//    org.springframework.session.web.http.SessionRepositoryFilter$SessionRepositoryRequestWrapper$HttpSessionWrapper@48c1e435
 }
