@@ -24,6 +24,7 @@ import { UserTasksDateCompletedListComponent } from './components/user-task-feat
 import { NotificationsComponent } from './notifications/notifications-list/notifications-list.component';
 import { NotificationComponent } from './notifications/notification/notification.component';
 import { StatisticsMainComponent } from './components/statistics-page/statistics-main/statistics-main.component';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { StatisticsMainComponent } from './components/statistics-page/statistics
     NotificationsComponent,
     NotificationComponent,
     StatisticsMainComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
