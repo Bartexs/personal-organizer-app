@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService } from 'src/app/services/session.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +8,10 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private sessionService: SessionService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.sendSessionData();
+
   }
 
   startTimer = false;
@@ -26,13 +26,8 @@ export class HomeComponent implements OnInit {
     this.secondsElapsed = newTime;
     console.log("Last time logged");
     console.log(newTime);
+    this.authService.signup().subscribe((respond) => {
+      console.log(respond);
+    })
   }
-
-  public sendSessionData() {
-    this.sessionService.sendSessionData().subscribe((response) => {
-      console.log(response);
-    }); 
-  }
-
-
 }
