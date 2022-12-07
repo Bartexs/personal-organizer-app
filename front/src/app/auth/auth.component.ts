@@ -20,9 +20,4 @@ export class AuthComponent {
         form.reset();
     }
 
-    checkIfLogged() {
-        this.authService.checkIfLogged().subscribe((response) => {
-            console.log(response);
-        })
-    }
 }

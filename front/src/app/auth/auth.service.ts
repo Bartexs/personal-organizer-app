@@ -10,18 +10,16 @@ export class AuthService {
 
     signup() {
         // this.http.post()
+        let username = "user";
+        let password = "049f3641-7b7b-4bcf-9aa5-3521894f9842";
 
-        let objectToSend = {
-            username: "user",
-            password: "ba81e6e5-d377-40a3-a902-4cf341cfa7cf"
-        }
+        const headers = new HttpHeaders({
+            Authorization: 'Basic '+btoa(username+":"+password)
+        });
 
-        let pathToPost = 'http://localhost:8080/login'
-        return this.http.post(pathToPost, objectToSend);
-    }
 
-    checkIfLogged() {
-        let pathToGet = 'http://localhost:8080/user'
-        return this.http.get(pathToGet);
+        let pathToPost = 'http://localhost:8080/res'
+    
+        return this.http.get('http://localhost:8080/res' , {headers,responseType:'text' as'json'});
     }
 }
