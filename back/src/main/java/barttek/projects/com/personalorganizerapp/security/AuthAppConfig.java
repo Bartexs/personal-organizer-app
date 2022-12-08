@@ -20,9 +20,12 @@ public class AuthAppConfig {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
+                .antMatchers("/create").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
         return http.build();
     }
+
+
 }

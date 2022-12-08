@@ -20,4 +20,10 @@ export class AuthComponent {
         form.reset();
     }
 
+    createNewUser() {
+        this.authService.createNewUser().subscribe((response) => {
+            console.log(response);
+        })
+    }
+
 }

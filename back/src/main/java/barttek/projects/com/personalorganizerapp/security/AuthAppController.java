@@ -1,5 +1,8 @@
 package barttek.projects.com.personalorganizerapp.security;
 
+import barttek.projects.com.personalorganizerapp.user.AppUser;
+import barttek.projects.com.personalorganizerapp.user.AppUserRole;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
@@ -16,16 +19,12 @@ import java.util.Base64;
 @RestController
 @CrossOrigin
 public class AuthAppController {
+    private final AuthAppService authAppService;
 
-//    @RequestMapping("/login")
-//    public boolean login(@RequestBody User user) {
-//
-//    }
-//
-//    @RequestMapping("/user")
-//    public Principal user(HttpServletRequest request) {
-//
-//    }
+    @Autowired
+    public AuthAppController(AuthAppService authAppService) {
+        this.authAppService = authAppService;
+    }
 
     @RequestMapping("/res")
     public ResponseEntity<String> resource() {
@@ -33,10 +32,10 @@ public class AuthAppController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @RequestMapping("/ant")
-    public ResponseEntity<String> ant() {
-        String response = "GIT222222222222222222222";
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    @RequestMapping("/create")
+    public ResponseEntity<AppUser> registerNewUser() {
+        AppUser appUser = new AppUser("MICHAEL", "userfirst", "hispassword", AppUserRole.USER);
+        this.authAppService.registerNewAppUser(appUser);
+        return new ResponseEntity<>(appUser, HttpStatus.CREATED);
     }
-
 }
