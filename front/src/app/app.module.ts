@@ -25,6 +25,8 @@ import { NotificationsComponent } from './notifications/notifications-list/notif
 import { NotificationComponent } from './notifications/notification/notification.component';
 import { StatisticsMainComponent } from './components/statistics-page/statistics-main/statistics-main.component';
 import { AuthComponent } from './auth/auth.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar/nav-bar.component';
+import { FooterComponent } from './components/footer/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { AuthComponent } from './auth/auth.component';
     NotificationsComponent,
     NotificationComponent,
     StatisticsMainComponent,
-    AuthComponent
+    AuthComponent,
+    NavBarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
