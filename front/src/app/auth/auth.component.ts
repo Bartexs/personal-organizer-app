@@ -13,17 +13,9 @@ export class AuthComponent {
     }
 
     onSubmit(form: NgForm) {
-        console.log(form.value);
-        this.authService.signup().subscribe((response) => {
+        this.authService.login().subscribe((response) => {
             console.log(response);
         });
         form.reset();
     }
-
-    createNewUser() {
-        this.authService.createNewUser().subscribe((response) => {
-            console.log(response);
-        })
-    }
-
 }

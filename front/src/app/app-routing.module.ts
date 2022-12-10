@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'feedback', component: ContactComponent},
   { path: 'register', component: RegisterUserComponent},
   { path: 'statistics', component: StatisticsMainComponent},
-  { path: 'auth', component: AuthComponent },
+  { path: 'login', component: AuthComponent },
   { path: '**', component: HomeComponent}
 ];
 

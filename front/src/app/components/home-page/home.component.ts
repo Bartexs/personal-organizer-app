@@ -24,10 +24,6 @@ export class HomeComponent implements OnInit {
   saveSeconds(newTime: number) {
     this.startTimer = false;
     this.secondsElapsed = newTime;
-    console.log("Last time logged");
     console.log(newTime);
-    this.authService.signup().subscribe((respond) => {
-      console.log(respond);
-    })
   }
 }
