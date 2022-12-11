@@ -3,8 +3,11 @@ package barttek.projects.com.personalorganizerapp.security;
 import barttek.projects.com.personalorganizerapp.user.AppUser;
 import barttek.projects.com.personalorganizerapp.user.AppUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +38,10 @@ public class AuthAppController {
 
     @Autowired
     private HttpServletRequest context;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private AuthAppService authAppService;
 
     @RequestMapping("/login")
     public ResponseEntity<Map<String, String>> login() {
@@ -67,11 +74,13 @@ public class AuthAppController {
         return user;
     }
 
-//    @RequestMapping("/register")
-//    public ResponseEntity<AppUser> registerNewUser() {
-//        AppUser appUser = new AppUser("MICHAEL", "userfirst@wp.pl", bCryptPasswordEncoder.encode("hispassword"), AppUserRole.USER);
-//
-////        this.authAppService.registerNewAppUser(appUser);
-//        return new ResponseEntity<>(appUser, HttpStatus.CREATED);
-//    }
+    @RequestMapping("/register")
+    public ResponseEntity<AppUser> registerNewUser() {
+        AppUser appUser = new AppUser("MICHAEL", "userfirst@wp.pl", bCryptPasswordEncoder.encode("hispassword"), AppUserRole.USER);
+
+        this.authAppService.registerNewAppUser(appUser);
+        return new ResponseEntity<>(appUser, HttpStatus.CREATED);
+    }
+
+
 }

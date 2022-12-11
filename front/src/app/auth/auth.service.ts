@@ -12,8 +12,8 @@ export class AuthService {
 
     // this one is working retrieve if needed
     login() {
-        let username = "user";
-        let password = "password";
+        let username = "userfirst@wp.pl";
+        let password = "hispassword";
 
         const headers = new HttpHeaders({
             Authorization: 'Basic '+btoa(username+":"+password)
