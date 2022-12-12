@@ -4,10 +4,13 @@ import barttek.projects.com.personalorganizerapp.user.AppUser;
 import barttek.projects.com.personalorganizerapp.user.AppUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,40 +29,15 @@ import java.util.stream.Collectors;
 @RestController
 @CrossOrigin
 public class AuthAppController {
-//    private final AuthAppService authAppService;
-//    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-//
-//    @Autowired
-//    public AuthAppController(AuthAppService authAppService, BCryptPasswordEncoder bCryptPasswordEncoder) {
-//        this.authAppService = authAppService;
-//        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-//    }
-//
-
-    @Autowired
-    private HttpServletRequest context;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private AuthAppService authAppService;
 
     @RequestMapping("/login")
-    public ResponseEntity<Map<String, String>> login() {
-
-        System.out.println(context.getHeaderNames().toString());
-
-        Map<String, List<String>> headersMap = Collections.list(context.getHeaderNames())
-                .stream()
-                .collect(Collectors.toMap(
-                        Function.identity(),
-                        h -> Collections.list(context.getHeaders(h))
-                ));
-
-        headersMap.forEach((key, value) -> System.out.println(key + " " + value));
-
-        Map<String, String> respond = new HashMap<>();
-        respond.put("Value", "NIBY ZALOGOWANY");
-        return new ResponseEntity<>(respond, HttpStatus.OK);
+    public ResponseEntity<Map<String, String>> login(Authentication authentication, HttpServletRequest request) {
+        HttpHeaders headers = authAppService.createHeadersWithJwtTokenForLoginResponse(authentication, request);
+        return new ResponseEntity<>(headers, HttpStatus.OK);
     }
 
     @RequestMapping("/some-resource")
