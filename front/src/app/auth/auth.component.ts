@@ -12,13 +12,14 @@ export class AuthComponent {
 
     }
 
-    onSubmit(form: NgForm) {
-        // this.authService.login(form).subscribe((response) => {
+    onSubmitLoginForm(form: NgForm) {
+        this.authService.login(form).subscribe((response) => {
+            console.log(response);
+            console.log("logged in");
+        });
+        // this.authService.login().subscribe((response) => {
         //     console.log(response);
         // });
-        this.authService.login().subscribe((response) => {
-            console.log(response);
-        });
         form.reset();
     }
 

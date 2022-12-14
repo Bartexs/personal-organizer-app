@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 //
@@ -61,4 +62,10 @@ public class AuthAppService implements UserDetailsService {
         headers.add("refresh_token", this.createJwtToken(appUser, request, validityTimeInMsRefreshToken));
         return headers;
     }
+
+    public boolean isUsernameAlreadyRegistered(String username) {
+        Optional<AppUser> appUserOptional = this.appUserRepository.findAppUserByUsername(username);
+        return appUserOptional.isPresent();
+    }
+
 }

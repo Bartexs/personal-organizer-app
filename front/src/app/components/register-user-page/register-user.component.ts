@@ -15,8 +15,15 @@ export class RegisterUserComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.authService.registerUser(form).subscribe((response) => {
-            console.log(response);
+    this.authService.registerUser(form).subscribe({
+      next: (respondOK) => {
+        console.log(respondOK);
+        form.reset();
+      },
+      error: (respondError) => {
+        console.log("User already exists");
+        form.reset();
+      },
     })
   }
 }

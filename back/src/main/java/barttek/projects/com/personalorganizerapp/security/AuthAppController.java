@@ -19,10 +19,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
@@ -43,9 +40,10 @@ public class AuthAppController {
     @Autowired
     private AuthAppService authAppService;
 
-    @RequestMapping("/login")
-    public ResponseEntity<Map<String, String>> login(Authentication authentication, HttpServletRequest request) {
+    @GetMapping("/login")
+    public ResponseEntity<HttpHeaders> login(Authentication authentication, HttpServletRequest request) {
         HttpHeaders headers = authAppService.createHeadersWithJwtTokenForLoginResponse(authentication, request);
+        System.out.println(headers);
         return new ResponseEntity<>(headers, HttpStatus.OK);
     }
 
@@ -87,13 +85,16 @@ public class AuthAppController {
         return user;
     }
 
-    @RequestMapping("/register")
-    public ResponseEntity<AppUser> registerNewUser() {
-        AppUser appUser = new AppUser("MICHAEL", "userfirst@wp.pl", bCryptPasswordEncoder.encode("hispassword"), AppUserRole.USER);
-
-        this.authAppService.registerNewAppUser(appUser);
-        return new ResponseEntity<>(appUser, HttpStatus.CREATED);
+    @PostMapping("/register")
+    public ResponseEntity<AppUser> registerNewUser(@RequestBody AppUser appUser) {
+        if(authAppService.isUsernameAlreadyRegistered(appUser.getUsername())) {
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        } else {
+            String currPassword = appUser.getPassword();
+            String encodedPassword = bCryptPasswordEncoder.encode(currPassword);
+            appUser.setPassword(encodedPassword);
+            authAppService.registerNewAppUser(appUser);
+            return new ResponseEntity<>(appUser, HttpStatus.CREATED);
+        }
     }
-
-
 }
