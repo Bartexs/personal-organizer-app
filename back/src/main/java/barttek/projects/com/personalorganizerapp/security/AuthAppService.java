@@ -61,5 +61,4 @@ public class AuthAppService implements UserDetailsService {
         headers.add("refresh_token", this.createJwtToken(appUser, request, validityTimeInMsRefreshToken));
         return headers;
     }
-
 }
