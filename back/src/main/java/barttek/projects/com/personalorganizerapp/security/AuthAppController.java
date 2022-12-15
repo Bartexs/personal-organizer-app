@@ -40,11 +40,24 @@ public class AuthAppController {
     @Autowired
     private AuthAppService authAppService;
 
+//    @GetMapping("/login")
+//    public ResponseEntity<JwtResponse> login(Authentication authentication, HttpServletRequest request) {
+//        HttpHeaders headers = authAppService.createHeadersWithJwtTokenForLoginResponse(authentication, request);
+//        System.out.println(headers);
+//        return ResponseEntity.ok(new JwtResponse());
+//    }
+
     @GetMapping("/login")
-    public ResponseEntity<HttpHeaders> login(Authentication authentication, HttpServletRequest request) {
-        HttpHeaders headers = authAppService.createHeadersWithJwtTokenForLoginResponse(authentication, request);
-        System.out.println(headers);
-        return new ResponseEntity<>(headers, HttpStatus.OK);
+    public ResponseEntity<JwtResponse> login(Authentication authentication, HttpServletRequest request) {
+        int validityTimeInMsAccessToken = 10 * 60 * 1000;
+        int validityTimeInMsRefreshToken = 30 * 60 * 1000;
+
+        AppUser appUser = (AppUser)authentication.getPrincipal();
+
+        String access_token = authAppService.createJwtToken(appUser, request, validityTimeInMsAccessToken);
+        String refresh_token = authAppService.createJwtToken(appUser, request, validityTimeInMsRefreshToken);
+
+        return ResponseEntity.ok(new JwtResponse(access_token, refresh_token));
     }
 
     @GetMapping("/token/refresh")

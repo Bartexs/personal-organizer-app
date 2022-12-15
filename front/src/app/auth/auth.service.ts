@@ -1,10 +1,15 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpEvent, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { HttpHeaders } from "@angular/common/http";
 import { NgForm } from "@angular/forms";
 import { HttpParams } from "@angular/common/http";
 import { AppUser } from "../models/AppUser.model";
 import { AppUserRole } from "../models/AppUserRoles.model";
+
+interface AuthResponseData {
+    access_token: string;
+    refresh_token: string;
+}
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -23,7 +28,7 @@ export class AuthService {
 
         console.log(headers);
 
-        return this.http.get('http://localhost:8080/login' , {headers, responseType: 'text'});
+        return this.http.get<AuthResponseData>('http://localhost:8080/login' , {headers});
     }
 
     onlyFetchFromLogin() {
