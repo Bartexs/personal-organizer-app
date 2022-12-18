@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TimerComponent } from './utils/timer/timer.component';
 import { TaskComponent } from './components/user-task-feature/task/task.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CreateNewTaskComponent } from './components/user-task-feature/create-new-task-modal/create-new-task-modal.component';
 import { CreateNewSubtaskListComponent } from './components/user-task-feature/create-new-subtask-list/create-new-subtask-list.component';
 import { ContactComponent } from './components/contact-page/contact.component';
@@ -27,6 +27,7 @@ import { StatisticsMainComponent } from './components/statistics-page/statistics
 import { AuthComponent } from './auth/auth.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar/nav-bar.component';
 import { FooterComponent } from './components/footer/footer/footer.component';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ import { FooterComponent } from './components/footer/footer/footer.component';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

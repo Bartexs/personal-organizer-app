@@ -17,6 +17,9 @@ export class AuthService {
 
     }
 
+    private authResponseData!: AuthResponseData;
+    
+
     // this one is working retrieve if needed
     login(form: NgForm) {
         let username = form.control.get("email")?.value;
@@ -29,6 +32,25 @@ export class AuthService {
         console.log(headers);
 
         return this.http.get<AuthResponseData>('http://localhost:8080/login' , {headers});
+    }
+
+    responseAfterLogin(form: NgForm) {
+        this.login(form).subscribe((response) => {
+            console.log(response.access_token);
+            console.log("logged in");
+            this.setAuthResponseData(response);
+            localStorage.setItem('authReponseData', JSON.stringify(response));
+        });
+        form.reset();
+    }
+
+    setAuthResponseData(value: AuthResponseData) {
+        this.authResponseData = value;
+        console.log(this.authResponseData);
+    }
+
+    getAuthResponseData() {
+        return this.authResponseData;
     }
 
     onlyFetchFromLogin() {

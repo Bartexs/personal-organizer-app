@@ -15,14 +15,7 @@ export class AuthComponent {
     }
 
     onSubmitLoginForm(form: NgForm) {
-        this.authService.login(form).subscribe((response) => {
-            console.log(response.access_token);
-            console.log("logged in");
-        });
-        // this.authService.login().subscribe((response) => {
-        //     console.log(response);
-        // });
-        form.reset();
+        this.authService.responseAfterLogin(form);
     }
 
     fetchLogin() {
