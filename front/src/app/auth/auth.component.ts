@@ -23,4 +23,8 @@ export class AuthComponent {
             console.log(response);
         }) 
     }
+
+    logout() {
+        this.authService.logoutUser();
+    }
 }

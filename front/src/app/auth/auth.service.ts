@@ -77,4 +77,8 @@ export class AuthService {
 
         return this.http.post('http://localhost:8080/register' , appUser);
     }
+
+    logoutUser() {
+        localStorage.clear();
+    }
 }
