@@ -28,6 +28,7 @@ import { AuthComponent } from './auth/auth.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar/nav-bar.component';
 import { FooterComponent } from './components/footer/footer/footer.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { LandingPageComponent } from './components/landing-page/landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
     StatisticsMainComponent,
     AuthComponent,
     NavBarComponent,
-    FooterComponent
+    FooterComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,

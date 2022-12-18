@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home-page/home.component';
 import { RegisterUserComponent } from './components/register-user-page/register-user.component';
 import { StatisticsMainComponent } from './components/statistics-page/statistics-main/statistics-main.component';
 import { AuthComponent } from './auth/auth.component';
+import { LandingPageComponent } from './components/landing-page/landing-page/landing-page.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -12,6 +13,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterUserComponent},
   { path: 'statistics', component: StatisticsMainComponent},
   { path: 'login', component: AuthComponent },
+  { path: 'landing-page', component: LandingPageComponent },
+  { path: 'dashboard', component: HomeComponent },
   { path: '**', component: HomeComponent}
 ];
 

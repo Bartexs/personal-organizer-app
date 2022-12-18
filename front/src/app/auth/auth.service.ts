@@ -13,13 +13,14 @@ interface AuthResponseData {
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
+    private authResponseData!: AuthResponseData;
+    private loggedUser!: AppUser;
+    isUserLoggedIn = false;
+
     constructor(private http: HttpClient) {
 
     }
-
-    private authResponseData!: AuthResponseData;
     
-
     // this one is working retrieve if needed
     login(form: NgForm) {
         let username = form.control.get("email")?.value;
