@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { exhaustMap, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AppUser } from 'src/app/models/AppUser.model';
 import { NavBarService } from './nav-bar.service';
@@ -9,23 +9,30 @@ import { NavBarService } from './nav-bar.service';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent implements OnInit, OnDestroy {
+export class NavBarComponent implements OnInit {
   isAuthenticated!: boolean;
   appUserName!: string;
 
   constructor(private authService: AuthService, private navBarService: NavBarService) { 
-    
   }
 
   ngOnInit(): void {
-    this.authService.fetchAppUser().subscribe(
+    this.subscribeToGettingAppUser();
+  }
+
+  public subscribeToGettingAppUser() {
+    this.authService.getAppUser().subscribe(
       recData => {
-      this.isAuthenticated = true;
-      this.appUserName = recData.name;
+        if(recData !== null) {
+          this.isAuthenticated = true;
+          this.appUserName = recData.name;
+        } else {
+          this.isAuthenticated = false;
+        }
     });
   }
 
-  ngOnDestroy(): void {
-
+  public logoutAppUser() {
+    this.authService.logoutUser();
   }
 }

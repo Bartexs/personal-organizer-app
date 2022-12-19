@@ -11,17 +11,27 @@ import { BehaviorSubject, Observable, ReplaySubject, Subject } from "rxjs";
 @Injectable({providedIn: 'root'})
 export class AuthService {
     private authResponseData!: AuthTokensData;
-    private appUserSource = new ReplaySubject<AppUser>;
+    private appUserSource = new BehaviorSubject<AppUser | null>(null);
 
     constructor(private http: HttpClient, private router: Router) {
-
+        this.setAppUserSourceFromLocalStorage();
     }
 
-    getAppUser(): Observable<AppUser> {
+    setAppUserSourceFromLocalStorage() {
+        let dataFromLocalStorage = localStorage.getItem('appUser');
+
+        if(dataFromLocalStorage == null) {
+            this.setAppUser(null);
+        } else {
+            this.setAppUser(JSON.parse(localStorage.getItem('appUser')!));
+        }
+    }
+
+    getAppUser(): Observable<AppUser | null> {
         return this.appUserSource.asObservable();
     }
 
-    setAppUser(appUser: AppUser) {
+    setAppUser(appUser: AppUser | null) {
         this.appUserSource.next(appUser);
     }
 
@@ -29,7 +39,14 @@ export class AuthService {
         this.sendLoginRequest(form).subscribe((response) => {
             this.setAuthTokensData(response);
             this.setLocalStorageTokensData(response);
+            this.setLocalStorageAppUser();
             this.router.navigate(['/dashboard']);
+        });
+    }
+
+    private setLocalStorageAppUser() {
+        this.fetchAppUser().subscribe((recAppUser) => {
+            localStorage.setItem('appUser', JSON.stringify(recAppUser));
         });
     }
     
@@ -72,6 +89,7 @@ export class AuthService {
 
     logoutUser() {
         localStorage.clear();
+        this.router.navigate(['/landing-page']);
     }
 
     fetchAppUser() {
