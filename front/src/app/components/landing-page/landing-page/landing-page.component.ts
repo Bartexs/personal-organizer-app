@@ -13,7 +13,6 @@ export class LandingPageComponent implements OnInit {
   constructor(private landingPageService: LandingPageService) { }
 
   ngOnInit(): void {
-    this.landingPageService.rerouteIfUserLoggedIn();
   }
 
   registerAsAnon() {

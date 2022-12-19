@@ -1,5 +1,8 @@
 import { Component } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { Subject } from "rxjs";
+import { AppUser } from "../models/AppUser.model";
+import { AppUserRole } from "../models/AppUserRoles.model";
 import { AuthService } from "./auth.service";
 
 
@@ -15,16 +18,16 @@ export class AuthComponent {
     }
 
     onSubmitLoginForm(form: NgForm) {
-        this.authService.responseAfterLogin(form);
-    }
-
-    fetchLogin() {
-        this.authService.onlyFetchFromLogin().subscribe((response) => {
-            console.log(response);
-        }) 
+        this.authService.login(form);
+        form.reset();
     }
 
     logout() {
         this.authService.logoutUser();
+
+    }
+
+    emitNextUser() {
+        this.authService.fetchAppUser();
     }
 }

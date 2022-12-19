@@ -8,12 +8,8 @@ import { Router } from '@angular/router';
 export class LandingPageService {
 
   constructor(private authService: AuthService, private router: Router) { 
-
   }
 
-  rerouteIfUserLoggedIn() {
-    if(!this.authService.isUserLoggedIn) {
-      this.router.navigate(['/dashboard']);
-    }
+  ngOnInit() {
   }
 }

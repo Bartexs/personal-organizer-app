@@ -1,28 +1,39 @@
-import { HttpClient, HttpEvent, HttpResponse } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { HttpHeaders } from "@angular/common/http";
 import { NgForm } from "@angular/forms";
-import { HttpParams } from "@angular/common/http";
 import { AppUser } from "../models/AppUser.model";
 import { AppUserRole } from "../models/AppUserRoles.model";
-
-interface AuthResponseData {
-    access_token: string;
-    refresh_token: string;
-}
+import { AuthTokensData } from "./AuthTokensData.model"
+import { Router } from "@angular/router";
+import { BehaviorSubject, Observable, ReplaySubject, Subject } from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-    private authResponseData!: AuthResponseData;
-    private loggedUser!: AppUser;
-    isUserLoggedIn = false;
+    private authResponseData!: AuthTokensData;
+    private appUserSource = new ReplaySubject<AppUser>;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
 
     }
-    
-    // this one is working retrieve if needed
+
+    getAppUser(): Observable<AppUser> {
+        return this.appUserSource.asObservable();
+    }
+
+    setAppUser(appUser: AppUser) {
+        this.appUserSource.next(appUser);
+    }
+
     login(form: NgForm) {
+        this.sendLoginRequest(form).subscribe((response) => {
+            this.setAuthTokensData(response);
+            this.setLocalStorageTokensData(response);
+            this.router.navigate(['/dashboard']);
+        });
+    }
+    
+    sendLoginRequest(form: NgForm) {
         let username = form.control.get("email")?.value;
         let password = form.control.get("password")?.value;
 
@@ -30,39 +41,19 @@ export class AuthService {
             Authorization: 'Basic '+btoa(username+":"+password)
         });
 
-        console.log(headers);
-
-        return this.http.get<AuthResponseData>('http://localhost:8080/login' , {headers});
+        return this.http.get<AuthTokensData>('http://localhost:8080/login' , {headers});
     }
 
-    responseAfterLogin(form: NgForm) {
-        this.login(form).subscribe((response) => {
-            console.log(response.access_token);
-            console.log("logged in");
-            this.setAuthResponseData(response);
-            localStorage.setItem('authReponseData', JSON.stringify(response));
-        });
-        form.reset();
+    setLocalStorageTokensData(authTokensData: AuthTokensData) {
+        localStorage.setItem('authReponseData', JSON.stringify(authTokensData));
     }
 
-    setAuthResponseData(value: AuthResponseData) {
+    setAuthTokensData(value: AuthTokensData) {
         this.authResponseData = value;
-        console.log(this.authResponseData);
     }
 
-    getAuthResponseData() {
+    getAuthTokensData() {
         return this.authResponseData;
-    }
-
-    onlyFetchFromLogin() {
-        let username = "user";
-        let password = "password";
-
-        const headers = new HttpHeaders({
-            Authorization: 'Basic '+btoa(username+":"+password)
-        });
-
-        return this.http.get('http://localhost:8080/user', {headers,responseType:'text' as'json'});
     }
 
     registerUser(form: NgForm) {
@@ -81,5 +72,9 @@ export class AuthService {
 
     logoutUser() {
         localStorage.clear();
+    }
+
+    fetchAppUser() {
+        return this.http.get<AppUser>('http://localhost:8080/user');
     }
 }
