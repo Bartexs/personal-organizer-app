@@ -1,9 +1,17 @@
 package barttek.projects.com.personalorganizerapp.userTaskFeature;
 
+import barttek.projects.com.personalorganizerapp.security.AuthAppService;
+import barttek.projects.com.personalorganizerapp.user.AppUser;
+import barttek.projects.com.personalorganizerapp.user.CurrentlyAuthAppUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -13,9 +21,18 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class UserTaskController {
     private final UserTaskService userTaskService;
 
+
+    @Autowired
+    AuthAppService authAppService;
+
+    @Autowired
+    private CurrentlyAuthAppUser currentlyAuthAppUser;
+
     public UserTaskController(UserTaskService userTaskService) {
         this.userTaskService = userTaskService;
     }
+
+
 
     //get userTasks ALL
     @GetMapping("/all")
@@ -35,6 +52,7 @@ public class UserTaskController {
     @GetMapping("/all/{date-from}/{date-end}")
     public ResponseEntity<List<UserTask>> findAllScheduledUserTasksWithinScheduledDateRange(@PathVariable("date-from") String dateFrom, @PathVariable("date-end") String dateEnd) {
         List<UserTask> userTasks = userTaskService.findAllScheduledUserTasksWithinScheduledDateRange(dateFrom, dateEnd);
+
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
 
@@ -42,6 +60,11 @@ public class UserTaskController {
     @GetMapping("/completed")
     public ResponseEntity<List<UserTask>> findAllCompletedUserTasks() {
         List<UserTask> userTasks = userTaskService.findAllCompletedUserTasks();
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(currentlyAuthAppUser.getAppUser());
+        System.out.println(auth);
+
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
 
@@ -82,6 +105,11 @@ public class UserTaskController {
     //post new userTask
     @PostMapping("/add")
     public ResponseEntity<UserTask> addUserTask(@RequestBody UserTask userTask) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        AppUser appUser = (AppUser) authAppService.loadUserByUsername(auth.getName());
+
+        userTask.setAppUser(appUser);
         UserTask newUserTask = userTaskService.addUserTask(userTask);
         return new ResponseEntity<>(newUserTask, HttpStatus.CREATED);
     }

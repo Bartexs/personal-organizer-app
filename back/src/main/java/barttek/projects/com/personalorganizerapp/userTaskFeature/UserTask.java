@@ -1,6 +1,7 @@
 package barttek.projects.com.personalorganizerapp.userTaskFeature;
 
 
+import barttek.projects.com.personalorganizerapp.user.AppUser;
 import org.springframework.cglib.core.Local;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
+@Table(name="UserTasks")
 public class UserTask implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +25,18 @@ public class UserTask implements Serializable {
     private Boolean overDueTask;
     private Boolean importantTask;
     private String color;
+
+    @ManyToOne
+    @JoinColumn(name = "app_user_id")
+    private AppUser appUser;
+
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
+    }
 
 //    create StatisticsLogger, create is as interface and then use it for habits goals etc.
 //    sub task list ????

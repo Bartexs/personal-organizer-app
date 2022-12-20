@@ -24,10 +24,5 @@ export class AuthComponent {
 
     logout() {
         this.authService.logoutUser();
-
-    }
-
-    emitNextUser() {
-        this.authService.fetchAppUser();
     }
 }

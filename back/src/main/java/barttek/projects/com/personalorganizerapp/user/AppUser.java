@@ -1,6 +1,7 @@
 package barttek.projects.com.personalorganizerapp.user;
 
 
+import barttek.projects.com.personalorganizerapp.userTaskFeature.UserTask;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,8 +10,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 @Entity
+@Table(name = "AppUser")
 public class AppUser implements AppUserInterface, UserDetails, Serializable {
 
     @Id
@@ -21,6 +24,8 @@ public class AppUser implements AppUserInterface, UserDetails, Serializable {
     private String password;
     @Enumerated
     private AppUserRole appUserRole;
+    @OneToMany(mappedBy = "appUser")
+    private Set<UserTask> userTasks;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -98,5 +103,17 @@ public class AppUser implements AppUserInterface, UserDetails, Serializable {
 
     public void setAppUserRole(AppUserRole appUserRole) {
         this.appUserRole = appUserRole;
+    }
+
+    @Override
+    public String toString() {
+        return "AppUser{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", appUserRole=" + appUserRole +
+                ", userTasks=" + userTasks +
+                '}';
     }
 }

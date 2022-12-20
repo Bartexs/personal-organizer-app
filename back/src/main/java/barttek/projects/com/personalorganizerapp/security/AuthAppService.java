@@ -2,6 +2,7 @@ package barttek.projects.com.personalorganizerapp.security;
 
 import barttek.projects.com.personalorganizerapp.user.AppUser;
 import barttek.projects.com.personalorganizerapp.user.AppUserRepository;
+import barttek.projects.com.personalorganizerapp.user.CurrentlyAuthAppUser;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class AuthAppService implements UserDetailsService {
     @Autowired
     private AppUserRepository appUserRepository;
 
+    @Autowired
+    private CurrentlyAuthAppUser currentlyAuthAppUser;
+
     @Override
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
@@ -34,6 +38,10 @@ public class AuthAppService implements UserDetailsService {
                 .orElseThrow(() ->
                         new UsernameNotFoundException(
                                 String.format(email)));
+    }
+
+    public void setCurrentlyAuthenticatedAppUser(AppUser appUser) {
+        this.currentlyAuthAppUser.setAppUser(appUser);
     }
 
     public AppUser registerNewAppUser(AppUser appUser) {
