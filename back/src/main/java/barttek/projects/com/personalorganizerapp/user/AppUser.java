@@ -24,8 +24,6 @@ public class AppUser implements AppUserInterface, UserDetails, Serializable {
     private String password;
     @Enumerated
     private AppUserRole appUserRole;
-    @OneToMany(mappedBy = "appUser")
-    private Set<UserTask> userTasks;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -113,7 +111,6 @@ public class AppUser implements AppUserInterface, UserDetails, Serializable {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", appUserRole=" + appUserRole +
-                ", userTasks=" + userTasks +
                 '}';
     }
 }

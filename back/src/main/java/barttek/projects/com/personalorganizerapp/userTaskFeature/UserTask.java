@@ -2,6 +2,9 @@ package barttek.projects.com.personalorganizerapp.userTaskFeature;
 
 
 import barttek.projects.com.personalorganizerapp.user.AppUser;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
 import org.springframework.cglib.core.Local;
 
 import javax.persistence.*;
@@ -10,6 +13,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@FilterDef(name = "appUserFilter", parameters = @ParamDef( name="orgId", type="long" ))
+@Filter(name = "appUserFilter", condition = "app_user_id=:orgId")
 @Entity
 @Table(name="UserTasks")
 public class UserTask implements Serializable {
@@ -26,19 +31,17 @@ public class UserTask implements Serializable {
     private Boolean importantTask;
     private String color;
 
-    @ManyToOne
-    @JoinColumn(name = "app_user_id")
-    private AppUser appUser;
+    private Long appUserId;
 
-    public AppUser getAppUser() {
-        return appUser;
+    public Long getAppUserId() {
+        return appUserId;
     }
 
-    public void setAppUser(AppUser appUser) {
-        this.appUser = appUser;
+    public void setAppUserId(Long appUserId) {
+        this.appUserId = appUserId;
     }
 
-//    create StatisticsLogger, create is as interface and then use it for habits goals etc.
+    //    create StatisticsLogger, create is as interface and then use it for habits goals etc.
 //    sub task list ????
 //    reminder
 //    tags

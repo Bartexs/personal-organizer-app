@@ -3,6 +3,8 @@ package barttek.projects.com.personalorganizerapp.userTaskFeature;
 import barttek.projects.com.personalorganizerapp.security.AuthAppService;
 import barttek.projects.com.personalorganizerapp.user.AppUser;
 import barttek.projects.com.personalorganizerapp.user.CurrentlyAuthAppUser;
+import org.hibernate.Filter;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -21,15 +24,34 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class UserTaskController {
     private final UserTaskService userTaskService;
 
-
     @Autowired
     AuthAppService authAppService;
 
     @Autowired
     private CurrentlyAuthAppUser currentlyAuthAppUser;
 
+    @Autowired(required = true)
+    private EntityManager entityManager;
+
     public UserTaskController(UserTaskService userTaskService) {
         this.userTaskService = userTaskService;
+    }
+
+    public void setHibernateFilterForAppUser() {
+        Session session = entityManager.unwrap(Session.class);
+
+
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        System.out.println(authAppService.loadUserByUsername((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
+        Long appUserId = ((AppUser)authAppService.loadUserByUsername((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal())).getId();
+        System.out.println(appUserId);
+        System.out.println(this.currentlyAuthAppUser.getAppUser().getId());
+
+
+        Filter filter = session.enableFilter("appUserFilter");
+//        filter.setParameter("orgId", this.currentlyAuthAppUser.getAppUser().getId());
+
+        filter.setParameter("orgId", appUserId);
     }
 
 
@@ -37,7 +59,9 @@ public class UserTaskController {
     //get userTasks ALL
     @GetMapping("/all")
     public ResponseEntity<List<UserTask>> findAllUserTasks() {
+        this.setHibernateFilterForAppUser();
         List<UserTask> userTasks = userTaskService.findAll();
+
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
 
@@ -109,7 +133,7 @@ public class UserTaskController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         AppUser appUser = (AppUser) authAppService.loadUserByUsername(auth.getName());
 
-        userTask.setAppUser(appUser);
+        userTask.setAppUserId(appUser.getId());
         UserTask newUserTask = userTaskService.addUserTask(userTask);
         return new ResponseEntity<>(newUserTask, HttpStatus.CREATED);
     }
