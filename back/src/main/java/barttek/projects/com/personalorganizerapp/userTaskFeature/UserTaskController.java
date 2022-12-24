@@ -68,21 +68,22 @@ public class UserTaskController {
     //get userTask by date ALL
     @GetMapping("/all/{date}")
     public ResponseEntity<List<UserTask>> findUserTasksByDateTaskToBeDone(@PathVariable("date")String date) {
-
+        this.setHibernateFilterForAppUser();
         return new ResponseEntity<>( HttpStatus.OK);
     }
 
     //get userTask from date to date
     @GetMapping("/all/{date-from}/{date-end}")
     public ResponseEntity<List<UserTask>> findAllScheduledUserTasksWithinScheduledDateRange(@PathVariable("date-from") String dateFrom, @PathVariable("date-end") String dateEnd) {
+        this.setHibernateFilterForAppUser();
         List<UserTask> userTasks = userTaskService.findAllScheduledUserTasksWithinScheduledDateRange(dateFrom, dateEnd);
-
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
 
     //get all completed tasks <- archive
     @GetMapping("/completed")
     public ResponseEntity<List<UserTask>> findAllCompletedUserTasks() {
+        this.setHibernateFilterForAppUser();
         List<UserTask> userTasks = userTaskService.findAllCompletedUserTasks();
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -94,6 +95,7 @@ public class UserTaskController {
 
     @GetMapping("/not-completed")
     public ResponseEntity<List<UserTask>> findAllScheduledUserTasks() {
+        this.setHibernateFilterForAppUser();
         List<UserTask> userTasks = userTaskService.findAllScheduledUserTasks();
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
@@ -104,6 +106,7 @@ public class UserTaskController {
             method = GET
     )
     public ResponseEntity<List<UserTask>> findCompletedUserTasksByCompletionDate(@RequestParam("date")String date) {
+        this.setHibernateFilterForAppUser();
         List<UserTask> userTasks = userTaskService.findCompletedUserTasksByCompletionDate(date);
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
@@ -115,6 +118,7 @@ public class UserTaskController {
             method = GET
     )
     public ResponseEntity<List<UserTask>> findScheduledUserTasksByScheduleDate(@RequestParam("date")String date) {
+        this.setHibernateFilterForAppUser();
         List<UserTask> userTasks = userTaskService.findScheduledUserTasksByScheduleDate(date);
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
@@ -122,6 +126,7 @@ public class UserTaskController {
     //get userTask by id
     @GetMapping("/find/{id}")
     public ResponseEntity<UserTask> getUserTaskById(@PathVariable("id")Long id) {
+        this.setHibernateFilterForAppUser();
         UserTask uTask = userTaskService.findUserTaskById(id);
         return new ResponseEntity<>(uTask, HttpStatus.OK);
     }
@@ -147,12 +152,14 @@ public class UserTaskController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<UserTask> deleteUserTask(@PathVariable("id")Long id) {
-         userTaskService.deleteUserTask(id);
+        this.setHibernateFilterForAppUser();
+        userTaskService.deleteUserTask(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/is-both-lists-empty/{date}")
     public ResponseEntity<Boolean> isBothListsEmpty(@PathVariable("date")String date) {
+        this.setHibernateFilterForAppUser();
         boolean empty = userTaskService.findScheduledUserTasksByScheduleDate(date).isEmpty() && userTaskService.findCompletedUserTasksByCompletionDate(date).isEmpty();
         return new ResponseEntity<>(empty, HttpStatus.OK);
     }
