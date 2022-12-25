@@ -26,6 +26,8 @@ export class SettingsComponent implements OnInit {
       }
       default: {
         console.log("Such color schema not specified!");
+        console.log("Going for default color");
+        this.appearanceService.onChangeColorSchema(ColorSchema.DEFAULT);
         break;
       }
     }
