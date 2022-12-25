@@ -6,6 +6,7 @@ import { RegisterUserComponent } from './components/register-user-page/register-
 import { StatisticsMainComponent } from './components/statistics-page/statistics-main/statistics-main.component';
 import { AuthComponent } from './auth/auth.component';
 import { LandingPageComponent } from './components/landing-page/landing-page/landing-page.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'login', component: AuthComponent },
   { path: 'landing-page', component: LandingPageComponent },
   { path: 'dashboard', component: HomeComponent },
+  { path: 'settings', component: SettingsComponent },
   { path: '**', component: HomeComponent}
 ];
 
