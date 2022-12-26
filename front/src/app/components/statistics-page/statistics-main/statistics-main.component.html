@@ -1,5 +1,72 @@
 <div class="custom-main-container">
     <div class="content-window">
-        <p>STATS</p>
+        <div class="inner-content">
+            <div>
+                <!-- <h1> Content window header</h1> -->
+                <h1> Task's statistics</h1>
+                <hr class="section-breaker line">
+            </div>
+            <div class="content">
+                <div class="general-stats" id="parent">
+                    <!-- create another component to show info -->
+                    <div>
+                        <p>Completed:</p>
+                        <p><strong>126</strong></p>
+                    </div>
+                    <div>
+                        <p>Avg. completions per day:</p>
+                        <p><strong>3</strong></p>
+                    </div>
+    
+                    <div>
+                        <p>Max completed in a day:</p>
+                        <p><strong>126</strong></p>
+                    </div>
+    
+                    <div>
+                        <p>Completion on time:</p>
+                        <p><strong>95%</strong></p>
+                    </div>
+    
+                    <div>
+                        <p>Time spent on organizer:</p>
+                        <p><strong>1h 36mins</strong></p>
+                    </div>
+    
+                    <div>
+                        <p>Longest session:</p>
+                        <p><strong>7h 05mins</strong></p>
+                    </div>
+    
+                    <!-- do i want to implement those below??  -->
+                    <!-- <p> Amount of postponed tasks</p>
+                    <p> Highest amount of day one task has been postponed</p>
+                    <p> User using app streak days amount </p>
+                    <p> Most busy day </p>
+                    <p> Time when user creates most of his tasks</p> -->
+                </div>
+                <!-- charts div -->
+                <div class="row-evenly">
+                    <div>
+                        <h4>Statistics Chart 1.</h4>
+                        <p>Amount of tasks created per day</p>
+                        <p>Show:</p>
+                        <input type="radio" id="week">
+                        <label for="week">Week</label>
+                        <input type="radio" id="month">
+                        <label for="month">Month</label> 
+                        <input type="radio" id="year"> 
+                        <label for="year">Year</label>
+                    </div>
+            
+                    <div>
+                        <h4>Statistics chart 2.</h4>
+                        <h4>Tasks completion rate</h4>
+                        <!-- <p>Second chart showing percentage of tasks scheduled versus completed ON TIME</p> -->
+                        <!-- <p>If user has scheduled 15 tasks on day ex. 01.12.2022 and completed 10 of them we show 10/15 * 100%</p> -->
+                    </div>
+                </div>
+            </div>  
+        </div>
     </div>
 </div>

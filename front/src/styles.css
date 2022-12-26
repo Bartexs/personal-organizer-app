@@ -28,3 +28,11 @@ body {
     padding-bottom: 15px;
     border-width: 1.9px;
 }
+
+.main-border-style {
+    border-color: lightgray;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    box-shadow: 2px 4px 18px 1px gray;
+}

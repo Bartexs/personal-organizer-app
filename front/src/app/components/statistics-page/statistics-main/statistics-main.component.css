@@ -1,0 +1,44 @@
+.content {
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 5vh;
+}
+
+.general-stats {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+    gap: 10px;
+}
+
+.row-evenly {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+#parent div {
+    width: 200px; 
+    height: 95px;
+    border-color: lightgray;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    box-shadow: 2px 4px 18px 1px gray;
+}
+
+.inner-content {
+    padding: 20px;
+}
+
+.line {
+    padding-bottom: 0px;
+    width: 100%;
+}
+
