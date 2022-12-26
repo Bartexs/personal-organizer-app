@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
 import { AppUserRole } from 'src/app/models/AppUserRoles.model';
 import { AppUser } from 'src/app/models/AppUser.model';
+import { take } from 'rxjs';
 
 interface LoginData {
   username: string,
@@ -22,14 +23,21 @@ export class LandingPageService {
 
   onTryAsAnonymousUser() {
     let appUser = this.createRandomAppUser();
-    let loginData: LoginData;
-    this.authService.sendRegisterNewAppUserRequest(appUser).subscribe((data) => {
-      console.log("Registered anonymous user:");
-      console.log(data);
-      loginData.username = "adssad";
-      loginData.password = "asdas";
-      this.authService.loginMainMethod(loginData);
+    let loginData = this.createLoginDataFromAppUser(appUser);
+    var registerDemoUserObservable = this.authService.sendRegisterNewAppUserRequest(appUser).pipe(take(1));
+
+    registerDemoUserObservable.subscribe(() => {
+          this.authService.loginMainMethod(loginData);
     });
+  }
+
+  private createLoginDataFromAppUser(appUser: AppUser) {
+    let loginData: LoginData;
+    loginData = {
+      username: appUser.username,
+      password: appUser.password
+    }
+    return loginData;
   }
 
   private createRandomAppUser() {

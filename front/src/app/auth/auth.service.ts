@@ -57,7 +57,11 @@ export class AuthService {
 
     loginMainMethod(loginData: LoginData) {
         const headers = this.createLoginHeaders(loginData);
-        this.onSendLoginRequest(headers);
+
+        this.onSendLoginRequest(headers).subscribe((loginAttempt) => {
+            // implement what to do after authentication on API, copy from old method
+            console.log(loginAttempt);
+        });
     }
 
     login(form: NgForm) {
@@ -83,6 +87,7 @@ export class AuthService {
             Authorization: 'Basic '+btoa(username+":"+password)
         });
 
+        console.log(headers);
         return this.http.get<AuthTokensData>('http://localhost:8080/login' , {headers});
     }
 
@@ -113,7 +118,7 @@ export class AuthService {
     }
 
     sendRegisterNewAppUserRequest(appUser: AppUser) {
-        return this.http.post('http://localhost:8080/register' , appUser);
+        return this.http.post<AppUser>('http://localhost:8080/register' , appUser);
     }
 
     logoutUser() {
