@@ -15,7 +15,7 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  registerAsAnon() {
-    
+  tryAsAnon() {
+    this.landingPageService.onTryAsAnonymousUser();
   }
 }

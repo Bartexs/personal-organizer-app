@@ -8,14 +8,23 @@ import { AuthTokensData } from "./AuthTokensData.model"
 import { Router } from "@angular/router";
 import { BehaviorSubject, Observable, ReplaySubject, Subject } from "rxjs";
 
+interface LoginData {
+    username: string,
+    password: string
+}
+
 @Injectable({providedIn: 'root'})
 export class AuthService {
+    
+
     private authResponseData!: AuthTokensData;
     private appUserSource = new BehaviorSubject<AppUser | null>(null);
 
     constructor(private http: HttpClient, private router: Router) {
         this.setAppUserSourceFromLocalStorage();
     }
+
+    
 
     setAppUserSourceFromLocalStorage() {
         let dataFromLocalStorage = localStorage.getItem('appUser');
@@ -33,6 +42,22 @@ export class AuthService {
 
     setAppUser(appUser: AppUser | null) {
         this.appUserSource.next(appUser);
+    }
+
+    private createLoginHeaders(loginData: LoginData) {
+        const headers = new HttpHeaders({
+            Authorization: 'Basic '+btoa(loginData.username+":"+loginData.password)
+        });
+        return headers;
+    }
+
+    private onSendLoginRequest(headers: HttpHeaders) {
+        return this.http.get<AuthTokensData>('http://localhost:8080/login' , {headers});
+    }
+
+    loginMainMethod(loginData: LoginData) {
+        const headers = this.createLoginHeaders(loginData);
+        this.onSendLoginRequest(headers);
     }
 
     login(form: NgForm) {
@@ -73,7 +98,7 @@ export class AuthService {
         return this.authResponseData;
     }
 
-    registerUser(form: NgForm) {
+    registerUserForm(form: NgForm) {
          let username = form.control.get("email")?.value;
          let password = form.control.get("password")?.value;
 
@@ -84,6 +109,10 @@ export class AuthService {
             appUserRole: AppUserRole.USER
          }
 
+         return this.http.post('http://localhost:8080/register' , appUser);
+    }
+
+    sendRegisterNewAppUserRequest(appUser: AppUser) {
         return this.http.post('http://localhost:8080/register' , appUser);
     }
 
