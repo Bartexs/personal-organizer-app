@@ -1,0 +1,6 @@
+.inner-main-container {
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+}

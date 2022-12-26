@@ -30,6 +30,7 @@ import { FooterComponent } from './components/footer/footer/footer.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { LandingPageComponent } from './components/landing-page/landing-page/landing-page.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { SettingsComponent } from './components/settings/settings.component';
     NavBarComponent,
     FooterComponent,
     LandingPageComponent,
-    SettingsComponent
+    SettingsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
