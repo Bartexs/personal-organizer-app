@@ -5,6 +5,7 @@ import barttek.projects.com.personalorganizerapp.userTaskFeature.UserTask;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,6 +25,9 @@ public class AppUser implements AppUserInterface, UserDetails, Serializable {
     private String password;
     @Enumerated
     private AppUserRole appUserRole;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private final AppUserSettingsConfig appUserSettingsConfig;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -62,6 +66,7 @@ public class AppUser implements AppUserInterface, UserDetails, Serializable {
     }
 
     public AppUser() {
+        this.appUserSettingsConfig = new AppUserSettingsConfig();
     }
 
     public AppUser(String name, String username, String password, AppUserRole appUserRole) {
@@ -69,6 +74,7 @@ public class AppUser implements AppUserInterface, UserDetails, Serializable {
         this.username = username;
         this.password = password;
         this.appUserRole = appUserRole;
+        this.appUserSettingsConfig = new AppUserSettingsConfig();
     }
 
     public Long getId() {
@@ -103,6 +109,10 @@ public class AppUser implements AppUserInterface, UserDetails, Serializable {
         this.appUserRole = appUserRole;
     }
 
+    public AppUserSettingsConfig getAppUserSettingsConfig() {
+        return appUserSettingsConfig;
+    }
+
     @Override
     public String toString() {
         return "AppUser{" +
@@ -111,6 +121,7 @@ public class AppUser implements AppUserInterface, UserDetails, Serializable {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", appUserRole=" + appUserRole +
+                ", appUserSettingsConfig=" + appUserSettingsConfig +
                 '}';
     }
 }
