@@ -6,7 +6,7 @@ import { AppUser } from "../models/AppUser.model";
 import { AppUserRole } from "../models/AppUserRoles.model";
 import { AuthTokensData } from "./AuthTokensData.model"
 import { Router } from "@angular/router";
-import { BehaviorSubject, Observable, ReplaySubject, Subject } from "rxjs";
+import { BehaviorSubject, Observable, ReplaySubject, Subject, take } from "rxjs";
 
 interface LoginData {
     username: string,
@@ -55,15 +55,29 @@ export class AuthService {
         return this.http.get<AuthTokensData>('http://localhost:8080/login' , {headers});
     }
 
-    loginMainMethod(loginData: LoginData) {
+    public loginMainMethod(loginData: LoginData) {
         const headers = this.createLoginHeaders(loginData);
 
-        this.onSendLoginRequest(headers).subscribe((loginAttempt) => {
-            // implement what to do after authentication on API, copy from old method
-            console.log(loginAttempt);
+        var onSendLoginRequestObservable = this.onSendLoginRequest(headers).pipe(take(1));
+        var fetchAppUserObservable = this.fetchAppUser().pipe(take(1));
+        
+        onSendLoginRequestObservable.subscribe((loginResponseTokens) => {
+            this.setAuthTokensData(loginResponseTokens);
+            this.setLocalStorageTokensData(loginResponseTokens);
+            fetchAppUserObservable.subscribe((receivedAppUser) => {
+                localStorage.setItem('appUser', JSON.stringify(receivedAppUser));
+                this.router.navigate(['/dashboard']);
+            });
         });
     }
 
+    private dummy() {
+        
+
+
+    }
+
+    // we have to modify it to use data from form but use loginmain method more and remove it
     login(form: NgForm) {
         this.sendLoginRequest(form).subscribe((response) => {
             this.setAuthTokensData(response);
