@@ -66,15 +66,10 @@ export class AuthService {
             this.setLocalStorageTokensData(loginResponseTokens);
             fetchAppUserObservable.subscribe((receivedAppUser) => {
                 localStorage.setItem('appUser', JSON.stringify(receivedAppUser));
+                this.setAppUser(receivedAppUser);
                 this.router.navigate(['/dashboard']);
             });
         });
-    }
-
-    private dummy() {
-        
-
-
     }
 
     // we have to modify it to use data from form but use loginmain method more and remove it
@@ -137,6 +132,7 @@ export class AuthService {
 
     logoutUser() {
         localStorage.clear();
+        this.setAppUser(null);
         this.router.navigate(['/landing-page']);
     }
 

@@ -37,6 +37,7 @@ export class NavBarComponent implements OnInit {
           this.isAuthenticated = true;
           this.appUserName = recData.name;
         } else {
+          this.appUserName = "";
           this.isAuthenticated = false;
         }
     });
