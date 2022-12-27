@@ -1,7 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { exhaustMap, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
-import { AppUser } from 'src/app/models/AppUser.model';
 import { ColorSchema } from 'src/app/models/ColorSchema.model';
 import { AppearanceService } from '../../settings/appearance.service';
 import { NavBarService } from './nav-bar.service';
