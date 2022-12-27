@@ -15,6 +15,7 @@ export class NavBarComponent implements OnInit {
   isAuthenticated!: boolean;
   appUserName!: string;
   colorSchemaBackgroundColor = ColorSchema.DEFAULT.mainColor;
+  isDemoAccount: boolean = false;
 
   constructor(private authService: AuthService, private navBarService: NavBarService, private appearenceService: AppearanceService ) { 
   }
@@ -35,12 +36,17 @@ export class NavBarComponent implements OnInit {
       recData => {
         if(recData !== null) {
           this.isAuthenticated = true;
+          this.setIsDemoAccount(recData.name);
           this.appUserName = recData.name;
         } else {
           this.appUserName = "";
           this.isAuthenticated = false;
         }
     });
+  }
+
+  private setIsDemoAccount(accountName: string) {
+    this.isDemoAccount = accountName == "DEMO ACCOUNT";
   }
 
   public logoutAppUser() {

@@ -45,7 +45,7 @@ export class LandingPageService {
     let randomPassword = "demoPassword" + this.getRandomInt(99999999);
 
     const appUser: AppUser = {
-      name: "demo account",
+      name: "DEMO ACCOUNT",
       username: randomUsername,
       password: randomPassword,
       appUserRole: AppUserRole.USER

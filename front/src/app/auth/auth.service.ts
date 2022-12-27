@@ -133,7 +133,7 @@ export class AuthService {
     logoutUser() {
         localStorage.clear();
         this.setAppUser(null);
-        this.router.navigate(['/landing-page']);
+        // this.router.navigate(['/landing-page']);
     }
 
     fetchAppUser() {
