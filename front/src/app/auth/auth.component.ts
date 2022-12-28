@@ -17,12 +17,12 @@ export class AuthComponent {
 
     }
 
-    onSubmitLoginForm(form: NgForm) {
-        this.authService.login(form);
-        form.reset();
-    }
+    // onSubmitLoginForm(form: NgForm) {
+    //     this.authService.login(form);
+    //     form.reset();
+    // }
 
-    logout() {
-        this.authService.logoutUser();
-    }
+    // logout() {
+    //     this.authService.logoutUser();
+    // }
 }

@@ -29,6 +29,10 @@ body {
     border-width: 1.9px;
 }
 
+.no-padding-bott {
+    padding-bottom: 0px;
+}
+
 .main-border-style {
     border-color: lightgray;
     border-style: solid;
