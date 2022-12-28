@@ -1,6 +1,10 @@
+.center {
+    padding-top: 10vh;
+}
+
 .inner-main-container {
     margin: 30px;
     display: flex;
     flex-direction: column;
-    gap: 3vh;
+    gap: 2vh;
 }

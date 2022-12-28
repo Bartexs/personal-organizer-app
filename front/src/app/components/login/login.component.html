@@ -1,4 +1,4 @@
-<div class="custom-main-container">
+<div class="custom-main-container center">
     <div class="content-window" style="width: fit-content">
         <div class="inner-main-container">
             <div style="text-align: center">
@@ -6,31 +6,36 @@
                 <!-- instead of personelorganizerapp title, add logo -->
                 <h2>PersonalOrganizer</h2>
             </div>
-            <div>
+            <form #authForm="ngForm" (ngSubmit)="onSubmitLoginForm(authForm)">
                 <div>
-                    <!-- change stylin for inputs -->
-                    <label for="username">Username:</label>
-                    <input 
-                        type="text" 
-                        id="username" 
-                        class="form-control"
-                        ngModel
-                        name="username"
-                        required>
+                    <div>
+                        <!-- change stylin for inputs -->
+                        <label for="username">Username:</label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            class="form-control"
+                            ngModel
+                            name="username"
+                            required>
+                    </div>
+                    <div>
+                        <label for="password">Password:</label>
+                        <input 
+                            type="text" 
+                            id="password" 
+                            class="form-control"
+                            ngModel
+                            name="password"
+                            required
+                            minlength="2">
+                    </div>
                 </div>
-                <div>
-                    <label for="password">Password:</label>
-                    <input 
-                        type="text" 
-                        id="password" 
-                        class="form-control"
-                        ngModel
-                        name="password"
-                        required>
+                <div style="text-align:center; padding-top: 1vh">
+                    <button [disabled]="!authForm.valid" type="submit">Login</button>
                 </div>
-            </div>
+            </form>
             <div style="text-align:center">
-                <button>Login</button>
                 <p><strong>Don't have an account?</strong></p>
                 <button>SIGN UP</button>
             </div>

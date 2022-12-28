@@ -89,7 +89,7 @@ export class AuthService {
     }
     
     sendLoginRequest(form: NgForm) {
-        let username = form.control.get("email")?.value;
+        let username = form.control.get("username")?.value;
         let password = form.control.get("password")?.value;
 
         const headers = new HttpHeaders({
