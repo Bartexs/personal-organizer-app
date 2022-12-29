@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { ColorSchema } from 'src/app/models/ColorSchema.model';
 import { AppearanceService } from '../../settings/appearance.service';
 import { NavBarService } from './nav-bar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -15,7 +16,7 @@ export class NavBarComponent implements OnInit {
   colorSchemaBackgroundColor = ColorSchema.DEFAULT.mainColor;
   isDemoAccount: boolean = false;
 
-  constructor(private authService: AuthService, private navBarService: NavBarService, private appearenceService: AppearanceService ) { 
+  constructor(private authService: AuthService, private navBarService: NavBarService, private appearenceService: AppearanceService, private router: Router ) { 
   }
 
   ngOnInit(): void {

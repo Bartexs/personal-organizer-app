@@ -1,29 +1,84 @@
-.cs-container-main {
+.size {
+    margin-top: 15vh;
+}
+
+.content {
     display: flex;
-    margin-top: 250px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 65vw;
     flex-direction: column;
-    border: solid;
-    gap: 50px;
+    gap: 5vh;
+    color: rgba(255, 255, 255, 0.836);
 }
 
-.cs-container {
+.main-header-container {
+    padding-top: 7vh;
+    width: 35vw;
+    position: relative;
+    left: 5vw;
+    top: 20px;
+}
+
+.font {
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+    text-shadow: 4px 3px #000000;
+}
+
+.wrapping {
+    inline-size: 10vw; 
+    overflow: visible;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+}
+
+
+.sub-header-container {
+    padding-top: 5vh;
+    position: relative;
+    bottom: 40px;
+    width: 40vw;
+}
+
+.buttons {
     display: flex;
-}
-
-.cs-columns {
-    flex-direction: column;
-}
-
-.cs-rows {
     flex-direction: row;
-    gap: 5%;
+    justify-content: space-evenly;
+    color: gray;
     flex-wrap: wrap;
-    justify-content: center;
 }
 
-.option {
-    
+button {
+    font-size: 20px;
+    color: white
+}
+
+
+.image {
+    background-image: url("bg.jpg");
+    width: 790px;
+    height: 600px;
+    background-size: cover;
+    border-color: gray;
+}
+
+.large-window {
+    width: 75vw;
+    height: 60vh;
+}
+
+.behind-texts {
+    background-color: rgba(0, 0, 0, 0.562);
+}
+
+
+
+@media screen and (max-width: 992px) {
+    .image {
+        background-image: none;
+    }
+
+    .content-window{
+        box-shadow: none;
+        border: none;
+    }
+
 }
