@@ -17,7 +17,7 @@ export class LandingPageComponent implements OnInit {
   constructor(private landingPageService: LandingPageService, private elementRef: ElementRef, private appearanceService: AppearanceService) { }
 
   ngOnInit(): void {
-    this.appearanceService.setColorSchemaObservable(ColorSchema.DARK);
+    this.appearanceService.setColorSchemaObservable(ColorSchema.LANDING);
   }
 
   tryAsAnon() {
