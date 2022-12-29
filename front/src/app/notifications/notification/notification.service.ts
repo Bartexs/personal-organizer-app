@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Notification } from '../notification-model/Notification.model';
+import { OrganizerNotification } from '../../models/OrganizerNotification.model';
 import { NotificationsListService } from '../notifications-list/notifications-list.service';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class NotificationService {
 
   }
 
-  public emitRemoveNotificationRequest(notificationObjectToRemove: Notification) {
+  public emitRemoveNotificationRequest(notificationObjectToRemove: OrganizerNotification) {
     this.notifServiceList.setNotificationToDelete(notificationObjectToRemove);
   }
 }

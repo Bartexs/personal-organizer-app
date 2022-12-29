@@ -3,9 +3,9 @@
 //     typeOfObject: string, 
 //     message: string
 // }
-import { StatusTypes } from "../statusTypesEnum/StatusTypes.model"
+import { StatusTypes } from "../notifications/statusTypesEnum/StatusTypes.model"
 
-export interface Notification {
+export interface OrganizerNotification {
     statusType: StatusTypes, 
     message: string
 }

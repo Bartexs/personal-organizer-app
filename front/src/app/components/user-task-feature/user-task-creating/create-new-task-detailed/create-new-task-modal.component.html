@@ -51,9 +51,7 @@
     </div>
     <p>Form Status: {{ creatingNewHabitForm.status }}</p>
     <div class="footer btn-group">
-        <button [disabled]="!creatingNewHabitForm.valid" type="submit" class="btn btn-success" (click)="onSubmitCreatingNewHabitForm()">Create new task</button>
+        <button [disabled]="!creatingNewHabitForm.valid" type="submit" class="btn btn-success" (click)="onCreateUserTask()">Create new task</button>
         <button class="btn btn-secondary" (click)="emitCloseNotification()">Cancel</button>
     </div>
 </div>
-
-<app-success-notification></app-success-notification>

@@ -1,30 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
-import { Notification } from '../notification-model/Notification.model';
+import { OrganizerNotification } from 'src/app/models/OrganizerNotification.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationsListService {
-  private notification = new Subject<Notification>();
-  private notificationToDelete = new Subject<Notification>();
+  private notification = new Subject<OrganizerNotification>();
+  private notificationToDelete = new Subject<OrganizerNotification>();
 
   constructor() { 
   }
 
-  public getNotification(): Observable<Notification> {
+  public getNotification(): Observable<OrganizerNotification> {
     return this.notification.asObservable();
   }
 
-  public setNotification(notif: Notification) {
-    this.notification.next(notif);
+  public setNotification(notification: OrganizerNotification) {
+    this.notification.next(notification);
   }
 
-  public getNotificationToDelete(): Observable<Notification> {
+  public getNotificationToDelete(): Observable<OrganizerNotification> {
     return this.notificationToDelete.asObservable();
   }
 
-  public setNotificationToDelete(notif: Notification) {
-    this.notificationToDelete.next(notif);
+  public setNotificationToDelete(notification: OrganizerNotification) {
+    this.notificationToDelete.next(notification);
   }
 }

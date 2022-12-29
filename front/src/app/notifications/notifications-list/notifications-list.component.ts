@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationsListService } from './notifications-list.service';
-import { Notification } from '../notification-model/Notification.model';
+import { OrganizerNotification } from 'src/app/models/OrganizerNotification.model';
 import { StatusTypes } from '../statusTypesEnum/StatusTypes.model';
 
 @Component({
@@ -9,7 +9,7 @@ import { StatusTypes } from '../statusTypesEnum/StatusTypes.model';
   styleUrls: ['./notifications-list.component.css']
 })
 export class NotificationsComponent implements OnInit {
-  notificationsList: Notification[] = [];
+  notificationsList: OrganizerNotification[] = [];
 
   constructor(private notifServiceList : NotificationsListService) { }
 
@@ -19,8 +19,8 @@ export class NotificationsComponent implements OnInit {
   }
 
   public subscribeToNotificationsReceiver() {
-    this.notifServiceList.getNotification().subscribe((notif) => {
-      this.notificationsList.push(notif);
+    this.notifServiceList.getNotification().subscribe((not) => {
+      this.notificationsList.push(not);
     })
   }
 
@@ -30,7 +30,7 @@ export class NotificationsComponent implements OnInit {
     });
   }
 
-  public removeFromArray(myArray: Array<Notification>, key: Notification) {
+  public removeFromArray(myArray: Array<OrganizerNotification>, key: OrganizerNotification) {
     const index = myArray.indexOf(key, 0);
     if (index > -1) {
       myArray.splice(index, 1);

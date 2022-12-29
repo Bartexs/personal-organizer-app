@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Notification } from '../notification-model/Notification.model';
+import { OrganizerNotification } from '../../models/OrganizerNotification.model';
 import { StatusTypes } from '../statusTypesEnum/StatusTypes.model';
 import { NotificationService } from './notification.service';
 
@@ -9,7 +9,7 @@ import { NotificationService } from './notification.service';
   styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent implements OnInit {
-  @Input() notificationObject!: Notification;
+  @Input() notificationObject!: OrganizerNotification;
   notificationTitle!: string;
   notificationColorsClass!: string;
 
@@ -27,7 +27,7 @@ export class NotificationComponent implements OnInit {
     }, 5000);
   }
 
-  public sendRemoveNotificationRequest(notificationObjectToRemove: Notification) {
+  public sendRemoveNotificationRequest(notificationObjectToRemove: OrganizerNotification) {
     this.notificationService.emitRemoveNotificationRequest(notificationObjectToRemove);
   }
 
