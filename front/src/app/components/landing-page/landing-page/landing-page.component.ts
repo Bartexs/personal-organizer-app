@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ElementRef } from '@angular/core';
@@ -12,7 +12,7 @@ import { ColorSchema } from 'src/app/models/ColorSchema.model';
   styleUrls: ['./landing-page.component.css'],
   styles: []
 })
-export class LandingPageComponent implements OnInit {
+export class LandingPageComponent implements OnInit, OnDestroy {
 
   constructor(private landingPageService: LandingPageService, private elementRef: ElementRef, private appearanceService: AppearanceService) { }
 
@@ -29,6 +29,12 @@ export class LandingPageComponent implements OnInit {
   ngAfterViewInit() {
     this.elementRef.nativeElement.ownerDocument
         .body.style.backgroundImage = 'url("bg.jpg")';
+  }
+
+  ngOnDestroy() {
+    this.elementRef.nativeElement.ownerDocument
+        .body.style.backgroundImage = 'url("")';
+        this.appearanceService.setColorSchemaObservable(ColorSchema.DEFAULT);
   }
 }
 
