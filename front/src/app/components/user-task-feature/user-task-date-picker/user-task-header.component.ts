@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ColorSchema } from 'src/app/models/ColorSchema.model';
 import { UserTasksListService } from 'src/app/services/user-tasks-list.service';
+import { AppearanceService } from '../../settings/appearance.service';
 
 @Component({
   selector: 'app-user-task-header',
@@ -10,13 +12,22 @@ export class UserTaskHeaderComponent implements OnInit {
   dateToShow!: any;
   showAllTasks!: boolean;
   messageToShow!: String;
+  color!: string;
 
-  constructor(public userTasksListService: UserTasksListService) { 
+  constructor(public userTasksListService: UserTasksListService, private appearenceService: AppearanceService) { 
   }
 
   ngOnInit(): void {
     this.subscribeUserTasksListServiceDateToShow();
     this.subscribeToMessageToShow();
+    this.subscribeToGettingColorSchema();
+    this.appearenceService.setColorSchemaObservable(ColorSchema.DARK);
+  }
+
+  private subscribeToGettingColorSchema() {
+    this.appearenceService.getColorSchemaObservable().subscribe((color) => {
+      this.color = color.mainColor;
+    })
   }
 
   public subscribeToMessageToShow() {

@@ -15,19 +15,19 @@
         <div class="header-date-picking"> 
             <div>
                 <div class="input-group day-control-buttons">
-                    <button class="btn-custom" (click)="setDate(-1)">Prev day</button>
-                    <button class="btn-custom" (click)="setDate(1)">Next day</button>
+                    <button class="btn-custom" (click)="setDate(-1)" [ngStyle]="{'background-color' : color}">Prev day</button>
+                    <button class="btn-custom" (click)="setDate(1)" [ngStyle]="{'background-color' : color}">Next day</button>
                 </div>
             </div>
             <div>
                 <div class="day-control-buttons">
-                    <button class="btn-custom" (click)="setDateToShowAsTodayAndFetchTasks()">Today</button>
+                    <button class="btn-custom" (click)="setDateToShowAsTodayAndFetchTasks()" [ngStyle]="{'background-color' : color}">Today</button>
                 </div>
             </div>
             <div>
                 <div class="input-group day-control-buttons">
-                    <button class="btn-custom" (click)="onFetchAllScheduledTasks()">All tasks</button>
-                    <button class="btn-custom" [disabled]="true" (click)="onFetchAllScheduledTasks()">Pick day</button>
+                    <button class="btn-custom" (click)="onFetchAllScheduledTasks()" [ngStyle]="{'background-color' : color}">All tasks</button>
+                    <button class="btn-custom" [disabled]="true" (click)="onFetchAllScheduledTasks()" [ngStyle]="{'background-color' : color}">Pick day</button>
                 </div>
             </div>
         </div>
