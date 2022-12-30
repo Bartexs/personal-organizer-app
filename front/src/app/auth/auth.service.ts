@@ -7,6 +7,8 @@ import { AppUserRole } from "../models/AppUserRoles.model";
 import { AuthTokensData } from "./AuthTokensData.model"
 import { Router } from "@angular/router";
 import { BehaviorSubject, Observable, ReplaySubject, Subject, take } from "rxjs";
+import { NotificationsListService } from "../notifications/notifications-list/notifications-list.service";
+import { NotificationsUtilityService } from "../notifications/notifications-utility.service";
 
 interface LoginData {
     username: string,
@@ -20,7 +22,7 @@ export class AuthService {
     private authResponseData!: AuthTokensData;
     private appUserSource = new BehaviorSubject<AppUser | null>(null);
 
-    constructor(private http: HttpClient, private router: Router) {
+    constructor(private http: HttpClient, private router: Router, private notifService: NotificationsListService, private notifUtils: NotificationsUtilityService) {
         this.setAppUserSourceFromLocalStorage();
     }
 
@@ -73,13 +75,28 @@ export class AuthService {
     }
 
     // we have to modify it to use data from form but use loginmain method more and remove it
+    // login(form: NgForm) {
+    //     this.sendLoginRequest(form).subscribe((response) => {
+    //         this.setAuthTokensData(response);
+    //         this.setLocalStorageTokensData(response);
+    //         this.setLocalStorageAppUser();
+    //         this.router.navigate(['/dashboard']);
+    //     });
+    // }
+
     login(form: NgForm) {
-        this.sendLoginRequest(form).subscribe((response) => {
-            this.setAuthTokensData(response);
-            this.setLocalStorageTokensData(response);
-            this.setLocalStorageAppUser();
-            this.router.navigate(['/dashboard']);
-        });
+        this.sendLoginRequest(form).subscribe({
+            next: (response) => {
+                this.setAuthTokensData(response);
+                this.setLocalStorageTokensData(response);
+                this.setLocalStorageAppUser();
+                this.notifService.setNotification(this.notifUtils.createAppUserNotLoggedIn());
+                this.router.navigate(['/dashboard']);
+            },
+            error: () => {
+                this.notifService.setNotification(this.notifUtils.createAppUserNotLoggedIn());
+            },
+        })
     }
 
     private setLocalStorageAppUser() {
@@ -123,7 +140,7 @@ export class AuthService {
             appUserRole: AppUserRole.USER
          }
 
-         return this.http.post('http://localhost:8080/register' , appUser);
+         return this.http.post<AppUser>('http://localhost:8080/register' , appUser);
     }
 
     sendRegisterNewAppUserRequest(appUser: AppUser) {

@@ -16,6 +16,7 @@ export class NotificationsComponent implements OnInit {
   ngOnInit(): void {
     this.subscribeToNotificationsReceiver();
     this.subscribeToNotificationToDelete();
+    console.log("Created");
   }
 
   public subscribeToNotificationsReceiver() {
