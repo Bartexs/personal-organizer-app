@@ -6,7 +6,7 @@
                 <a class="nav-link active" aria-current="page" href="dashboard">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link"href="statistics">Statistics</a>
+                <a class="nav-link disabled"href="statistics">Statistics</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled" href="about">About</a>
@@ -20,7 +20,7 @@
         </ul>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 move-to-right-edge">
             <li class="nav-item">
-                <a class="nav-link" style="cursor: pointer" [ngStyle]="isDemoAccount ? {'color':'red'} : {'color': 'none'}">{{appUserName}}</a>
+                <a class="nav-link" style="cursor: pointer" [ngClass]="isDemoAccount ? 'demo-user' : ''">{{appUserName}}</a>
             </li>
             <li class="nav-item" *ngIf="!isAuthenticated || isDemoAccount">
                 <a class="nav-link" href="register">Register</a>

@@ -29,17 +29,6 @@
                   required
                   minlength="2">
           </div>
-          <div>
-            <label for="password">Confirm password:</label>
-            <input 
-                type="text" 
-                id="password" 
-                class="form-control"
-                ngModel
-                name="password"
-                required
-                minlength="2">
-          </div>
         </div>
       <div style="text-align:center; padding-top: 1vh">
         <button [disabled]="!authForm.valid" type="submit">Register</button>
