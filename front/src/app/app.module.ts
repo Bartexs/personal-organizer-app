@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TimerComponent } from './utils/timer/timer.component';
 import { TaskComponent } from './components/user-task-feature/task/task.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CreateNewTaskComponent } from './components/user-task-feature/user-task-creating/create-new-task-detailed/create-new-task-modal.component';
@@ -23,7 +22,6 @@ import { UserTasksDateCompletedListComponent } from './components/user-task-feat
 import { NotificationsComponent } from './notifications/notifications-list/notifications-list.component';
 import { NotificationComponent } from './notifications/notification/notification.component';
 import { StatisticsMainComponent } from './components/statistics-page/statistics-main/statistics-main.component';
-import { AuthComponent } from './auth/auth.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar/nav-bar.component';
 import { FooterComponent } from './components/footer/footer/footer.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
@@ -34,7 +32,6 @@ import { LoginComponent } from './components/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
-    TimerComponent,
     TaskComponent,
     CreateNewTaskComponent,
     CreateNewSubtaskListComponent,
@@ -53,7 +50,6 @@ import { LoginComponent } from './components/login/login.component';
     NotificationsComponent,
     NotificationComponent,
     StatisticsMainComponent,
-    AuthComponent,
     NavBarComponent,
     FooterComponent,
     LandingPageComponent,
