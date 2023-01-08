@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AppUserRole } from 'src/app/models/AppUserRoles.model';
 import { AppUser } from 'src/app/models/AppUser.model';
 import { take } from 'rxjs';
+import { AppUserService } from 'src/app/appUser/app-user.service';
 
 interface LoginData {
   username: string,
@@ -15,7 +16,7 @@ interface LoginData {
 })
 export class LandingPageService {
 
-  constructor(private authService: AuthService, private router: Router) { 
+  constructor(private authService: AuthService, private router: Router, private appUserService: AppUserService) { 
   }
 
   ngOnInit() {
@@ -24,7 +25,7 @@ export class LandingPageService {
   onTryAsAnonymousUser() {
     let appUser = this.createRandomAppUser();
     let loginData = this.createLoginDataFromAppUser(appUser);
-    var registerDemoUserObservable = this.authService.sendRegisterNewAppUserRequest(appUser).pipe(take(1));
+    var registerDemoUserObservable = this.appUserService.sendRegisterNewAppUserRequest(appUser).pipe(take(1));
 
     registerDemoUserObservable.subscribe(() => {
           this.authService.loginMainMethod(loginData);

@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 import { BehaviorSubject, Observable, ReplaySubject, Subject, take } from "rxjs";
 import { NotificationsListService } from "../notifications/notifications-list/notifications-list.service";
 import { NotificationsUtilityService } from "../notifications/notifications-utility.service";
+import { AppUserService } from "../appUser/app-user.service";
 
 interface LoginData {
     username: string,
@@ -22,7 +23,12 @@ export class AuthService {
     private authResponseData!: AuthTokensData;
     private appUserSource = new BehaviorSubject<AppUser | null>(null);
 
-    constructor(private http: HttpClient, private router: Router, private notifService: NotificationsListService, private notifUtils: NotificationsUtilityService) {
+    constructor(
+        private http: HttpClient, 
+        private router: Router, 
+        private notifService: NotificationsListService, 
+        private notifUtils: NotificationsUtilityService,
+        private appUserService: AppUserService) {
         this.setAppUserSourceFromLocalStorage();
     }
 
@@ -61,7 +67,7 @@ export class AuthService {
         const headers = this.createLoginHeaders(loginData);
 
         var onSendLoginRequestObservable = this.onSendLoginRequest(headers).pipe(take(1));
-        var fetchAppUserObservable = this.fetchAppUser().pipe(take(1));
+        var fetchAppUserObservable = this.appUserService.fetchAppUser().pipe(take(1));
         
         onSendLoginRequestObservable.subscribe((loginResponseTokens) => {
             this.setAuthTokensData(loginResponseTokens);
@@ -100,7 +106,7 @@ export class AuthService {
     }
 
     private setLocalStorageAppUser() {
-        this.fetchAppUser().subscribe((recAppUser) => {
+        this.appUserService.fetchAppUser().subscribe((recAppUser) => {
             localStorage.setItem('appUser', JSON.stringify(recAppUser));
         });
     }
@@ -143,9 +149,7 @@ export class AuthService {
          return this.http.post<AppUser>('http://localhost:8080/register' , appUser);
     }
 
-    sendRegisterNewAppUserRequest(appUser: AppUser) {
-        return this.http.post<AppUser>('http://localhost:8080/register' , appUser);
-    }
+
 
     logoutUser() {
         localStorage.clear();
@@ -153,7 +157,5 @@ export class AuthService {
         // this.router.navigate(['/landing-page']);
     }
 
-    fetchAppUser() {
-        return this.http.get<AppUser>('http://localhost:8080/user');
-    }
+
 }
