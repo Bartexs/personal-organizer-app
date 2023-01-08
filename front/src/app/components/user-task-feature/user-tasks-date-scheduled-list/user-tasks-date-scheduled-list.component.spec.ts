@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { UserTasksDateScheduledListComponent } from './user-tasks-date-scheduled-list.component';
 
@@ -8,7 +10,11 @@ describe('UserTasksDateScheduledListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserTasksDateScheduledListComponent ]
+      declarations: [ UserTasksDateScheduledListComponent ],
+      imports: [
+        RouterTestingModule,
+        HttpClientTestingModule 
+      ],
     })
     .compileComponents();
 
