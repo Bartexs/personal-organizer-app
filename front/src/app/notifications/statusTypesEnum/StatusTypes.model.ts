@@ -4,3 +4,5 @@ export enum StatusTypes {
     Alert = "Alert", 
     Danger = "Danger" 
 }
+
+//  set name of this class to STATUSTYPES - as it should for enums
