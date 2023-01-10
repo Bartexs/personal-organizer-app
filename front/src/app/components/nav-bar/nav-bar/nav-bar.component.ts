@@ -16,7 +16,7 @@ export class NavBarComponent implements OnInit {
   colorSchemaBackgroundColor = ColorSchema.DEFAULT.mainColor;
   isDemoAccount: boolean = false;
 
-  constructor(private authService: AuthService, private appearenceService: AppearanceService, private router: Router ) { 
+  constructor(private authService: AuthService, private appearenceService: AppearanceService) { 
   }
 
   ngOnInit(): void {
