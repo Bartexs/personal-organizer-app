@@ -41,14 +41,12 @@ describe('NavBarComponent', () => {
     })
     .compileComponents();
 
-
     fixture = TestBed.createComponent(NavBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    
     expect(component).toBeTruthy();
   });
 });

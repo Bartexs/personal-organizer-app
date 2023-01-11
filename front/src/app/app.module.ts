@@ -54,7 +54,7 @@ import { LoginComponent } from './components/login/login.component';
     FooterComponent,
     LandingPageComponent,
     SettingsComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

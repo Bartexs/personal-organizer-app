@@ -1,5 +1,5 @@
 <!-- if hide widget button is pressed we dont show anything else, we are showing component -->
-<!-- <div class="window-wrapper" *ngIf="isWidgetView else hideTasksListView">
+<div class="window-wrapper" *ngIf="isWidgetView else hideTasksListView">
     <div class="roll-up-section-button"> 
         <button class="hide-widget"(click)="isWidgetView = !isWidgetView">hide widget</button>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down hide-arrow-down" viewBox="0 0 16 16">
@@ -23,7 +23,7 @@
     </div>
 </div>
 
-<app-notifications-list></app-notifications-list>
+<!-- <app-notifications-list></app-notifications-list> -->
 
 <ng-template #hideTasksListView>
     <div class="hiddenWidgetContainer">
@@ -38,4 +38,4 @@
             </svg>
         </div>
     </div>
-</ng-template> -->
+</ng-template>
