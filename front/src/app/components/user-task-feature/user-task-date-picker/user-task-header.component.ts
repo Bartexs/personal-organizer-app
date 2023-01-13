@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ColorSchema } from 'src/app/models/ColorSchema.model';
 import { UserTasksListService } from 'src/app/services/user-tasks-list.service';
 import { AppearanceService } from '../../settings/appearance.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-user-task-header',
@@ -14,7 +15,7 @@ export class UserTaskHeaderComponent implements OnInit {
   messageToShow!: String;
   color!: string;
 
-  constructor(public userTasksListService: UserTasksListService, private appearenceService: AppearanceService) { 
+  constructor(public userTasksListService: UserTasksListService, private appearenceService: AppearanceService, private ref: ChangeDetectorRef) { 
   }
 
   ngOnInit(): void {
@@ -22,6 +23,10 @@ export class UserTaskHeaderComponent implements OnInit {
     this.subscribeToMessageToShow();
     this.subscribeToGettingColorSchema();
     this.appearenceService.setColorSchemaObservable(ColorSchema.DARK);
+  }
+
+  private setDateToShow(newDateToShow: any) {
+    this.dateToShow = newDateToShow;
   }
 
   private subscribeToGettingColorSchema() {
@@ -49,17 +54,28 @@ export class UserTaskHeaderComponent implements OnInit {
 
   // based on amount of days got as parameter it shows another day 
   public setDate(numberOfDays: number) {
-    this.addDaysToCurrentlyShowingDate(numberOfDays);
+    const newDateToShow = this.addDaysToGivenDate(numberOfDays, this.dateToShow);
+    this.setDateToShow(newDateToShow);
     this.userTasksListService.setMessage(this.dateToShow);
     this.setObservableMessageToShow("date");
     this.userTasksListService.fetchTasksEmit();
     this.userTasksListService.setShowAllSchedulesUserTasksObservable(false);
   }
 
-  public addDaysToCurrentlyShowingDate(numberOfDays: number) {
-    var currDay = new Date(this.dateToShow);
+  public setDateByPickDayButton(event: any) {
+    console.log(event.value);
+    const valueFromDatePicker = event.value;
+    this.setDateToShow(valueFromDatePicker);
+    this.userTasksListService.setMessage(this.dateToShow);
+    this.setObservableMessageToShow("date");
+    this.userTasksListService.fetchTasksEmit();
+    this.userTasksListService.setShowAllSchedulesUserTasksObservable(false);
+  }
+
+  private addDaysToGivenDate(numberOfDays: number, date: any) {
+    var currDay = new Date(date);
     currDay.setDate(currDay.getDate() + numberOfDays);
-    this.dateToShow = currDay.toISOString().split('T')[0];
+    return currDay.toISOString().split('T')[0];
   }
 
   // sets date to show as today and fetch tasks

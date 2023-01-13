@@ -27,7 +27,8 @@
             <div>
                 <div class="input-group day-control-buttons">
                     <button class="btn-custom" (click)="onFetchAllScheduledTasks()" [ngStyle]="{'background-color' : color}">All tasks</button>
-                    <button class="btn-custom" [disabled]="true" (click)="onFetchAllScheduledTasks()" [ngStyle]="{'background-color' : color}">Pick day</button>
+                    <!-- <button class="btn-custom" (click)="setDateByPickDayButton()" [ngStyle]="{'background-color' : color}">Pick day</button> -->
+                    <input type="date" class="btn-custom" [value]=dateToShow (change)="setDateByPickDayButton(datePicker)" [ngStyle]="{'background-color' : color}" #datePicker>
                 </div>
             </div>
         </div>

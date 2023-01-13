@@ -30,8 +30,6 @@ export class AuthInterceptorService implements HttpInterceptor {
         
         const authResponseData = JSON.parse(getAuthResponseData(localStorage.getItem('authReponseData')!));
 
-        console.log("there is token");
-        console.log(authResponseData.access_token);
         return request.clone({
             setHeaders: {
                 Authorization: `Bearer ${authResponseData.access_token}`,
