@@ -22,7 +22,7 @@ export class LandingPageService {
   ngOnInit() {
   }
 
-  onTryAsAnonymousUser() {
+  public onTryAsAnonymousUser() {
     let appUser = this.createRandomAppUser();
     let loginData = this.createLoginDataFromAppUser(appUser);
     var registerDemoUserObservable = this.appUserService.sendRegisterNewAppUserRequest(appUser).pipe(take(1));
@@ -30,6 +30,14 @@ export class LandingPageService {
     registerDemoUserObservable.subscribe(() => {
           this.authService.loginMainMethod(loginData);
     });
+  }
+
+  public redirectToRegisterNewAppUser() {
+    this.router.navigate(['/register']);
+  }
+
+  public redirectToLoginPage() {
+    this.router.navigate(['/login']);
   }
 
   private createLoginDataFromAppUser(appUser: AppUser) {
