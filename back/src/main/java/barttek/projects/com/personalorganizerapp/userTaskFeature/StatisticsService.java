@@ -11,11 +11,13 @@ public class StatisticsService {
     @Autowired
     AuthAppService authAppService;
 
+    @Autowired
+    StatisticsBuilder statisticsBuilder;
+
     public Statistics getSummary() {
-        StatisticsBuilder statsBuilder = new StatisticsBuilder();
         Long userId = this.getAppUserId();
         Statistics statsSummary = new Statistics();
-        statsBuilder.buildSummary(statsSummary, userId);
+        statisticsBuilder.buildSummary(statsSummary, userId);
 
         return statsSummary;
     }

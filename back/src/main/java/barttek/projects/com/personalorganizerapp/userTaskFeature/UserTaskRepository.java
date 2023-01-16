@@ -26,7 +26,7 @@ public interface UserTaskRepository extends JpaRepository<UserTask, Long> {
     @Query("select u from UserTask u where u.completed = false and u.scheduleDate = ?1")
     List<UserTask> findScheduledUserTasksByScheduleDate(LocalDate scheduleDate);
 
-    @Query("SELECT COUNT(u) FROM UserTask u WHERE u.appUserId = ?1")
+    @Query("SELECT COUNT(u) FROM UserTask u WHERE u.appUserId = ?1 and u.completed = true")
     Integer countByAppUser(Long appUserId);
 
     @Override

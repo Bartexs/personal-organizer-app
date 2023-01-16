@@ -1,10 +1,15 @@
 package barttek.projects.com.personalorganizerapp.userTaskFeature;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class StatisticsBuilder {
+    private final UserTaskRepository userTaskRepository;
 
-
-    public StatisticsBuilder() {
-
+    @Autowired
+    public StatisticsBuilder(UserTaskRepository userTaskRepository) {
+        this.userTaskRepository = userTaskRepository;
     }
     public void buildSummary(Statistics statisticsSummary, Long appUserId) {
         statisticsSummary.setCompletedTasks(this.getCompletedTasksAmount(appUserId));
@@ -14,8 +19,7 @@ public class StatisticsBuilder {
     }
 
     public int getCompletedTasksAmount(Long appUserId) {
-
-        return 5;
+        return userTaskRepository.countByAppUser(appUserId);
     }
 
     public double getAvgCompletionsPerDay(Long appUserId) {
