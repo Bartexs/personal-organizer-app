@@ -2,7 +2,7 @@ package barttek.projects.com.personalorganizerapp.userTaskFeature;
 
 public class Statistics {
     private int completedTasks;
-    private int avgCompletionsPerDay;
+    private double avgCompletionsPerDay;
     private int maxCompletionsInDay;
     private int percentageOfCompletionOnTime;
     private int timeSpentOnOrganizer;
@@ -24,11 +24,11 @@ public class Statistics {
         this.completedTasks = completedTasks;
     }
 
-    public int getAvgCompletionsPerDay() {
+    public double getAvgCompletionsPerDay() {
         return avgCompletionsPerDay;
     }
 
-    public void setAvgCompletionsPerDay(int avgCompletionsPerDay) {
+    public void setAvgCompletionsPerDay(double avgCompletionsPerDay) {
         this.avgCompletionsPerDay = avgCompletionsPerDay;
     }
 

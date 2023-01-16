@@ -12,13 +12,15 @@ public class StatisticsService {
     AuthAppService authAppService;
 
     public Statistics getSummary() {
+        StatisticsBuilder statsBuilder = new StatisticsBuilder();
         Long userId = this.getAppUserId();
         Statistics statsSummary = new Statistics();
+        statsBuilder.buildSummary(statsSummary, userId);
+
         return statsSummary;
     }
 
     public Long getAppUserId() {
-        Long id = ((AppUser)authAppService.loadUserByUsername((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal())).getId();
-        return id;
+        return ((AppUser)authAppService.loadUserByUsername((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal())).getId();
     }
 }
