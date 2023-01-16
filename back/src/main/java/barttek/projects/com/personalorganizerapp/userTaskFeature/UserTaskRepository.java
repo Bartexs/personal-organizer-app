@@ -14,6 +14,9 @@ public interface UserTaskRepository extends JpaRepository<UserTask, Long> {
     @Query("select u from UserTask u where u.completed = true")
     List<UserTask> findAllCompletedUserTasks();
 
+    @Query("select u from UserTask u where u.completed = true and u.appUserId = ?1")
+    List<UserTask> findAllCompletedUserTasksByAppUserId(Long appUserId);
+
     @Query("select u from UserTask u where u.completed = false")
     List<UserTask> findAllScheduledUserTasks();
 
