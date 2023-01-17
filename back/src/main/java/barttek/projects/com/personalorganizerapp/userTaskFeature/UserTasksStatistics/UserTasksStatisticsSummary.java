@@ -1,19 +1,14 @@
-package barttek.projects.com.personalorganizerapp.userTaskFeature;
+package barttek.projects.com.personalorganizerapp.userTaskFeature.UserTasksStatistics;
 
-public class Statistics {
+public class UserTasksStatisticsSummary {
     private int completedTasks;
     private double avgCompletionsPerDay;
     private int maxCompletionsInDay;
-    private int percentageOfCompletionOnTime;
+    private double percentageOfCompletionsOnTime;
     private int timeSpentOnOrganizer;
     private int longestSessionsDuration;
 
-    public Statistics() {
-        this.populateStatisticsObject();
-    }
-
-    private void populateStatisticsObject() {
-
+    public UserTasksStatisticsSummary() {
     }
 
     public int getCompletedTasks() {
@@ -40,12 +35,12 @@ public class Statistics {
         this.maxCompletionsInDay = maxCompletionsInDay;
     }
 
-    public int getPercentageOfCompletionOnTime() {
-        return percentageOfCompletionOnTime;
+    public double getPercentageOfCompletionsOnTime() {
+        return percentageOfCompletionsOnTime;
     }
 
-    public void setPercentageOfCompletionOnTime(int percentageOfCompletionOnTime) {
-        this.percentageOfCompletionOnTime = percentageOfCompletionOnTime;
+    public void setPercentageOfCompletionsOnTime(double percentageOfCompletionsOnTime) {
+        this.percentageOfCompletionsOnTime = percentageOfCompletionsOnTime;
     }
 
     public int getTimeSpentOnOrganizer() {
@@ -62,5 +57,17 @@ public class Statistics {
 
     public void setLongestSessionsDuration(int longestSessionsDuration) {
         this.longestSessionsDuration = longestSessionsDuration;
+    }
+
+    @Override
+    public String toString() {
+        return "Statistics{" +
+                "completedTasks=" + completedTasks +
+                ", avgCompletionsPerDay=" + avgCompletionsPerDay +
+                ", maxCompletionsInDay=" + maxCompletionsInDay +
+                ", percentageOfCompletionsOnTime=" + percentageOfCompletionsOnTime +
+                ", timeSpentOnOrganizer=" + timeSpentOnOrganizer +
+                ", longestSessionsDuration=" + longestSessionsDuration +
+                '}';
     }
 }

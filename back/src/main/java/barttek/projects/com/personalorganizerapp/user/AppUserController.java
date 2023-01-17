@@ -17,6 +17,9 @@ public class AppUserController {
     @Autowired
     private AppUserService appUserService;
 
+    @Autowired
+    private AppUserUtility appUserUtility;
+
     @GetMapping("/settings")
     public ResponseEntity<AppUserSettingsConfig> appUserSettingsConfig() {
         AppUserSettingsConfig appUserSettingsConfig = appUserService.getAppUserSettingsConfig();
@@ -27,5 +30,10 @@ public class AppUserController {
     public ResponseEntity<AppUserAppearanceConfig> appUserAppearanceConfigResponseEntity() {
         AppUserAppearanceConfig appUserAppearanceConfig = appUserService.getAppUserAppearanceConfig();
         return new ResponseEntity<>(appUserAppearanceConfig, HttpStatus.OK);
+    }
+
+    @GetMapping("/userId")
+    public Long appUserId() {
+        return appUserUtility.getAppUserId();
     }
 }

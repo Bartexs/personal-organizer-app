@@ -1,4 +1,4 @@
-package barttek.projects.com.personalorganizerapp.userTaskFeature;
+package barttek.projects.com.personalorganizerapp.userTaskFeature.UserTasksStatistics;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/statistics")
-public class StatisticsController {
+public class UserTasksStatisticsController {
 
     @Autowired
-    StatisticsService statisticsService;
+    UserTasksStatisticsService userTasksStatisticsService;
 
 
     @GetMapping("/summary")
-    public ResponseEntity<Statistics> completedAmount() {
-        Statistics summary = statisticsService.getSummary();
+    public ResponseEntity<UserTasksStatisticsSummary> completedAmount() {
+        UserTasksStatisticsSummary summary = userTasksStatisticsService.getSummary();
         return new ResponseEntity<>(summary, HttpStatus.OK);
     }
 }

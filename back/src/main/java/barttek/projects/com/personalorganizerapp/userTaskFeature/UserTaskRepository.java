@@ -1,5 +1,6 @@
 package barttek.projects.com.personalorganizerapp.userTaskFeature;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,8 @@ public interface UserTaskRepository extends JpaRepository<UserTask, Long> {
 
     @Query("select u from UserTask u where u.completed = false")
     List<UserTask> findAllScheduledUserTasks();
+    @Query("select u from UserTask u where u.appUserId = ?1")
+    List<UserTask> findAllUserTasksByAppUserId(Long appUserId, Sort sort);
 
     @Query("select u from UserTask u where u.scheduleDate >= ?1 and u.scheduleDate <= ?2")
     List<UserTask> findAllScheduledUserTasksWithinScheduledDateRange(LocalDate scheduleDate1, LocalDate scheduleDate2);
