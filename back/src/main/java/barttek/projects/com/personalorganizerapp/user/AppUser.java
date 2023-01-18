@@ -2,6 +2,7 @@ package barttek.projects.com.personalorganizerapp.user;
 
 
 import barttek.projects.com.personalorganizerapp.userTaskFeature.UserTask;
+import barttek.projects.com.personalorganizerapp.userTaskFeature.UserTasksStatistics.UserTasksStatisticsSummary;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,6 +29,9 @@ public class AppUser implements AppUserInterface, UserDetails, Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     private final AppUserSettingsConfig appUserSettingsConfig;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserTasksStatisticsSummary userTasksStatisticsSummary;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -67,6 +71,7 @@ public class AppUser implements AppUserInterface, UserDetails, Serializable {
 
     public AppUser() {
         this.appUserSettingsConfig = new AppUserSettingsConfig();
+        this.userTasksStatisticsSummary = new UserTasksStatisticsSummary();
     }
 
     public AppUser(String name, String username, String password, AppUserRole appUserRole) {
@@ -75,6 +80,7 @@ public class AppUser implements AppUserInterface, UserDetails, Serializable {
         this.password = password;
         this.appUserRole = appUserRole;
         this.appUserSettingsConfig = new AppUserSettingsConfig();
+        this.userTasksStatisticsSummary = new UserTasksStatisticsSummary();
     }
 
     public Long getId() {
@@ -113,6 +119,15 @@ public class AppUser implements AppUserInterface, UserDetails, Serializable {
         return appUserSettingsConfig;
     }
 
+    public UserTasksStatisticsSummary getUserTasksStatisticsSummary() {
+        return userTasksStatisticsSummary;
+    }
+
+    public UserTasksStatisticsSummary setUserTasksStatisticsSummary(UserTasksStatisticsSummary userTasksStatisticsSummary) {
+        return this.userTasksStatisticsSummary = userTasksStatisticsSummary;
+    }
+
+
     @Override
     public String toString() {
         return "AppUser{" +
@@ -122,6 +137,7 @@ public class AppUser implements AppUserInterface, UserDetails, Serializable {
                 ", password='" + password + '\'' +
                 ", appUserRole=" + appUserRole +
                 ", appUserSettingsConfig=" + appUserSettingsConfig +
+                ", userTasksStatisticsSummary=" + userTasksStatisticsSummary +
                 '}';
     }
 }

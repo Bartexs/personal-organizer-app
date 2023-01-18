@@ -28,7 +28,8 @@ export class AuthService {
         private router: Router, 
         private notifService: NotificationsListService, 
         private notifUtils: NotificationsUtilityService,
-        private appUserService: AppUserService) {
+        private appUserService: AppUserService
+        ) {
         this.setAppUserSourceFromLocalStorage();
     }
 

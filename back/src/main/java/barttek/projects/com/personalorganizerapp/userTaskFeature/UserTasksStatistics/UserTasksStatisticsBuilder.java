@@ -26,7 +26,6 @@ public class UserTasksStatisticsBuilder {
         userTasksStatisticsSummarySummary.setLongestSessionsDuration(this.getLongestSessionDuration(appUserId));
         userTasksStatisticsSummarySummary.setMaxCompletionsInDay(this.getMaxCompletionsInDay(appUserId));
         userTasksStatisticsSummarySummary.setPercentageOfCompletionsOnTime(this.getPercentageOfCompletionsOnTime(appUserId));
-        userTasksStatisticsSummarySummary.setTimeSpentOnOrganizer(this.getTimeSpentOnOrganizer(appUserId));
 
         return userTasksStatisticsSummarySummary;
     }
@@ -59,8 +58,11 @@ public class UserTasksStatisticsBuilder {
         return 0;
     }
 
-    public int getTimeSpentOnOrganizer(Long appUserId) {
-        return 0;
+    public UserTasksStatisticsSummary addTimeSpentOnOrganizer(UserTasksStatisticsSummary statsSummary, int currentTimeSpent) {
+        int previouslyTimeSpent = statsSummary.getTimeSpentOnOrganizer();
+        int updatedTimeSpent = previouslyTimeSpent + currentTimeSpent;
+        statsSummary.setTimeSpentOnOrganizer(updatedTimeSpent);
+        return statsSummary;
     }
 
     public int getMaxCompletionsInDay(Long appUserId) {
