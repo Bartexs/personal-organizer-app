@@ -1,21 +1,21 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark nav-bg" [ngStyle]="{'background-color' : colorSchemaBackgroundColor}">
     <div class="container-fluid ">
-        <a href="landing-page" class="navbar-brand">PersonalOrganizerApp</a>
+        <a routerLink="landing-page" class="navbar-brand">PersonalOrganizerApp</a>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="dashboard">Home</a>
+                <a class="nav-link active" aria-current="page" routerLink="dashboard">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled"href="statistics">Statistics</a>
+                <a class="nav-link disabled" routerLink="statistics">Statistics</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="about">About</a>
+                <a class="nav-link disabled" routerLink="about">About</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="feedback">Contact</a>
+                <a class="nav-link disabled" routerLink="feedback">Contact</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="settings">Settings</a>
+                <a class="nav-link" routerLink="settings">Settings</a>
             </li>
         </ul>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 move-to-right-edge">
@@ -23,13 +23,13 @@
                 <a class="nav-link" style="cursor: pointer" [ngClass]="isDemoAccount ? 'demo-user' : ''">{{appUserName}}</a>
             </li>
             <li class="nav-item" *ngIf="!isAuthenticated || isDemoAccount">
-                <a class="nav-link" href="register">Register</a>
+                <a class="nav-link" routerLink="register">Register</a>
             </li>
             <li class="nav-item" *ngIf="!isAuthenticated">
-                <a class="nav-link" href="login">Login</a>
+                <a class="nav-link" routerLink="login">Login</a>
             </li>
             <li class="nav-item" *ngIf="isAuthenticated">
-                <a class="nav-link" (click)="logoutAppUser()" href="landing-page">Logout</a>
+                <a class="nav-link" (click)="logoutAppUser()" routerLink="landing-page">Logout</a>
             </li>
         </ul>
     </div>
