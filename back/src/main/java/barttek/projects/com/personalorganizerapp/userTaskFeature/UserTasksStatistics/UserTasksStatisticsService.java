@@ -24,8 +24,7 @@ public class UserTasksStatisticsService {
     @Autowired
     private AppUserRepository appUserRepository;
 
-    public UserTasksStatisticsSummary getSummary() {
-        Long userId = appUserUtility.getAppUserId();
+    public UserTasksStatisticsSummary getSummary(Long userId) {
         UserTasksStatisticsSummary statsSummary = this.getAppUserStatsSummary(userId);
         LocalDate today = LocalDate.now();
         statsSummary = userTasksStatisticsBuilder.buildSummary(statsSummary, userId, today);
@@ -37,8 +36,7 @@ public class UserTasksStatisticsService {
         appUserRepository.findAppUserById(userId).get().setUserTasksStatisticsSummary(statisticsSummary);
     }
 
-    public void addCurrentSessionTimer(Integer timeElapsedInMinutes) {
-        Long userId = appUserUtility.getAppUserId();
+    public void addCurrentSessionTimer(Long userId, Integer timeElapsedInMinutes) {
         UserTasksStatisticsSummary statsSummary = this.getAppUserStatsSummary(userId);
         this.userTasksStatisticsBuilder.addTimeSpentOnOrganizer(statsSummary, timeElapsedInMinutes);
         this.updateAppUserStatisticsSummary(statsSummary, userId);
