@@ -18,7 +18,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitLoginForm(form: NgForm) {
-      this.authService.login(form);
+      const loginData = this.authService.convertFromNgFormToLoginData(form);
+      this.authService.loginMainMethod(loginData);
       form.reset();
   }
 

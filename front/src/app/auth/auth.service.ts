@@ -81,29 +81,18 @@ export class AuthService {
         });
     }
 
-    // we have to modify it to use data from form but use loginmain method more and remove it
-    // login(form: NgForm) {
-    //     this.sendLoginRequest(form).subscribe((response) => {
-    //         this.setAuthTokensData(response);
-    //         this.setLocalStorageTokensData(response);
-    //         this.setLocalStorageAppUser();
-    //         this.router.navigate(['/dashboard']);
-    //     });
-    // }
+    public convertFromNgFormToLoginData(form: NgForm): LoginData {
+        let username = form.control.get("username")?.value;
+        let password = form.control.get("password")?.value;
 
-    login(form: NgForm) {
-        this.sendLoginRequest(form).subscribe({
-            next: (response) => {
-                this.setAuthTokensData(response);
-                this.setLocalStorageTokensData(response);
-                this.setLocalStorageAppUser();
-                this.notifService.setNotification(this.notifUtils.createAppUserNotLoggedIn());
-                this.router.navigate(['/dashboard']);
-            },
-            error: () => {
-                this.notifService.setNotification(this.notifUtils.createAppUserNotLoggedIn());
-            },
-        })
+        let loginData: LoginData;
+
+        loginData = {
+            username: username,
+            password: password
+        }
+
+        return loginData;
     }
 
     private setLocalStorageAppUser() {
@@ -112,17 +101,17 @@ export class AuthService {
         });
     }
     
-    sendLoginRequest(form: NgForm) {
-        let username = form.control.get("username")?.value;
-        let password = form.control.get("password")?.value;
+    // sendLoginRequest(form: NgForm) {
+    //     let username = form.control.get("username")?.value;
+    //     let password = form.control.get("password")?.value;
 
-        const headers = new HttpHeaders({
-            Authorization: 'Basic '+btoa(username+":"+password)
-        });
+    //     const headers = new HttpHeaders({
+    //         Authorization: 'Basic '+btoa(username+":"+password)
+    //     });
 
-        console.log(headers);
-        return this.http.get<AuthTokensData>('http://localhost:8080/login' , {headers});
-    }
+    //     console.log(headers);
+    //     return this.http.get<AuthTokensData>('http://localhost:8080/login' , {headers});
+    // }
 
     setLocalStorageTokensData(authTokensData: AuthTokensData) {
         localStorage.setItem('authReponseData', JSON.stringify(authTokensData));
@@ -150,13 +139,8 @@ export class AuthService {
          return this.http.post<AppUser>('http://localhost:8080/register' , appUser);
     }
 
-
-
     logoutUser() {
         localStorage.clear();
         this.setAppUser(null);
-        // this.router.navigate(['/landing-page']);
     }
-
-
 }
