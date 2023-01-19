@@ -23,7 +23,6 @@ public class UserTasksStatisticsBuilder {
     public UserTasksStatisticsSummary buildSummary(UserTasksStatisticsSummary userTasksStatisticsSummarySummary, Long appUserId, LocalDate summaryLastDate) {
         userTasksStatisticsSummarySummary.setCompletedTasks(this.getCompletedTasksAmount(appUserId));
         userTasksStatisticsSummarySummary.setAvgCompletionsPerDay(this.getAvgCompletionsPerDay(appUserId, summaryLastDate));
-        userTasksStatisticsSummarySummary.setLongestSessionsDuration(this.getLongestSessionDuration(appUserId));
         userTasksStatisticsSummarySummary.setMaxCompletionsInDay(this.getMaxCompletionsInDay(appUserId));
         userTasksStatisticsSummarySummary.setPercentageOfCompletionsOnTime(this.getPercentageOfCompletionsOnTime(appUserId));
 
@@ -52,10 +51,6 @@ public class UserTasksStatisticsBuilder {
 
     public long amountOfDaysBetweenLocalDates(LocalDate beginningDate, LocalDate endingDate) {
         return DAYS.between(beginningDate, endingDate);
-    }
-
-    public int getLongestSessionDuration(Long appUserId) {
-        return 0;
     }
 
     public UserTasksStatisticsSummary addTimeSpentOnOrganizer(UserTasksStatisticsSummary statsSummary, int currentTimeSpent) {

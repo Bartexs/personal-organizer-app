@@ -33,8 +33,6 @@ export class AuthService {
         this.setAppUserSourceFromLocalStorage();
     }
 
-    
-
     setAppUserSourceFromLocalStorage() {
         let dataFromLocalStorage = localStorage.getItem('appUser');
 

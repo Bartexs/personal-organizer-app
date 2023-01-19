@@ -28,7 +28,8 @@ public class UserTasksStatisticsController {
     @PostMapping("/timer")
     public ResponseEntity<UserTasksStatisticsSummary> currentSessionTimer(@RequestBody String timeElapsedInMinutes) {
         Long userId = appUserUtility.getAppUserId();
-        this.userTasksStatisticsService.addCurrentSessionTimer(userId, Integer.parseInt(timeElapsedInMinutes));
+        this.userTasksStatisticsService.addTotalSessionTimer(userId, 1);
+        this.userTasksStatisticsService.setLongestSessionsDuration(userId, Integer.parseInt(timeElapsedInMinutes));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

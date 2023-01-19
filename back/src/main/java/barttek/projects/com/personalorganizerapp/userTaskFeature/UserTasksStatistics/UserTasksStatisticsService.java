@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class UserTasksStatisticsService {
@@ -32,14 +33,28 @@ public class UserTasksStatisticsService {
         return statsSummary;
     }
 
-    private void updateAppUserStatisticsSummary(UserTasksStatisticsSummary statisticsSummary, Long userId) {
-        appUserRepository.findAppUserById(userId).get().setUserTasksStatisticsSummary(statisticsSummary);
+    public void updateAppUserStatisticsSummary(UserTasksStatisticsSummary statisticsSummary, Long userId) {
+        Optional<AppUser> appUser = appUserRepository.findAppUserById(userId);
+        AppUser user = appUser.orElseThrow();
+        user.setUserTasksStatisticsSummary(statisticsSummary);
+        appUserRepository.save(user);
     }
 
-    public void addCurrentSessionTimer(Long userId, Integer timeElapsedInMinutes) {
+
+    public void addTotalSessionTimer(Long userId, Integer timeElapsedInMinutes) {
         UserTasksStatisticsSummary statsSummary = this.getAppUserStatsSummary(userId);
-        this.userTasksStatisticsBuilder.addTimeSpentOnOrganizer(statsSummary, timeElapsedInMinutes);
+        statsSummary = this.userTasksStatisticsBuilder.addTimeSpentOnOrganizer(statsSummary, timeElapsedInMinutes);
         this.updateAppUserStatisticsSummary(statsSummary, userId);
+    }
+
+    public void setLongestSessionsDuration(Long userId, Integer timeElapsedInMinutes) {
+        UserTasksStatisticsSummary statsSummary = this.getAppUserStatsSummary(userId);
+        int currentLongestSessionDuration = statsSummary.getLongestSessionsDuration();
+
+        if(currentLongestSessionDuration < timeElapsedInMinutes) {
+            statsSummary.setLongestSessionsDuration(timeElapsedInMinutes);
+            this.updateAppUserStatisticsSummary(statsSummary, userId);
+        }
     }
 
     public UserTasksStatisticsSummary getAppUserStatsSummary(Long userId) {

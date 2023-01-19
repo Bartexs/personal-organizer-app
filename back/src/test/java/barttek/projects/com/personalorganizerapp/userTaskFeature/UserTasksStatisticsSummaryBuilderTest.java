@@ -102,12 +102,6 @@ class UserTasksStatisticsSummaryBuilderTest {
 
         assertEquals(expected, given);
     }
-
-    @Test
-    void getLongestSessionDuration() {
-        fail();
-    }
-
     @Test
     void getMaxCompletionsInDay() {
         int maxOccurrence = userTasksStatisticsBuilder.getMaxCompletionsInDay(2L);
