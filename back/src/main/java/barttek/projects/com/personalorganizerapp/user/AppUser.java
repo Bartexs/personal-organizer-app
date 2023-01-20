@@ -1,22 +1,17 @@
 package barttek.projects.com.personalorganizerapp.user;
 
-
-import barttek.projects.com.personalorganizerapp.userTaskFeature.UserTask;
 import barttek.projects.com.personalorganizerapp.userTaskFeature.UserTasksStatistics.UserTasksStatisticsSummary;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Set;
 
 @Entity
 @Table(name = "AppUser")
-public class AppUser implements AppUserInterface, UserDetails, Serializable {
+public class AppUser implements UserDetails, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

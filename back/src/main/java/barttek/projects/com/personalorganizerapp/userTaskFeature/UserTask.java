@@ -1,11 +1,9 @@
 package barttek.projects.com.personalorganizerapp.userTaskFeature;
 
 
-import barttek.projects.com.personalorganizerapp.user.AppUser;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.ParamDef;
-import org.springframework.cglib.core.Local;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -36,17 +34,9 @@ public class UserTask implements Serializable {
     public Long getAppUserId() {
         return appUserId;
     }
-
     public void setAppUserId(Long appUserId) {
         this.appUserId = appUserId;
     }
-
-    //    create StatisticsLogger, create is as interface and then use it for habits goals etc.
-//    sub task list ????
-//    reminder
-//    tags
-
-
     public UserTask() {
     }
 

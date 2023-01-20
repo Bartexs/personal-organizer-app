@@ -46,7 +46,6 @@ public class AuthAppController {
         int validityTimeInMsRefreshToken = 30 * 60 * 1000;
 
         AppUser appUser = (AppUser)authentication.getPrincipal();
-        authAppService.setCurrentlyAuthenticatedAppUser(appUser);
 
         String access_token = authAppService.createJwtToken(appUser, request, validityTimeInMsAccessToken);
         String refresh_token = authAppService.createJwtToken(appUser, request, validityTimeInMsRefreshToken);

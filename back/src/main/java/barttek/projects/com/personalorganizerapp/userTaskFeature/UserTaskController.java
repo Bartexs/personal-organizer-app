@@ -9,14 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
 import javax.persistence.EntityManager;
-import javax.servlet.http.HttpSession;
 import java.util.List;
-
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
@@ -26,9 +22,6 @@ public class UserTaskController {
 
     @Autowired
     AuthAppService authAppService;
-
-    @Autowired
-    private CurrentlyAuthAppUser currentlyAuthAppUser;
 
     @Autowired(required = true)
     private EntityManager entityManager;
@@ -40,16 +33,8 @@ public class UserTaskController {
     public void setHibernateFilterForAppUser() {
         Session session = entityManager.unwrap(Session.class);
 
-
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        System.out.println(authAppService.loadUserByUsername((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
         Long appUserId = ((AppUser)authAppService.loadUserByUsername((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal())).getId();
-        System.out.println(appUserId);
-        System.out.println(this.currentlyAuthAppUser.getAppUser().getId());
-
-
         Filter filter = session.enableFilter("appUserFilter");
-//        filter.setParameter("orgId", this.currentlyAuthAppUser.getAppUser().getId());
 
         filter.setParameter("orgId", appUserId);
     }
@@ -85,10 +70,6 @@ public class UserTaskController {
     public ResponseEntity<List<UserTask>> findAllCompletedUserTasks() {
         this.setHibernateFilterForAppUser();
         List<UserTask> userTasks = userTaskService.findAllCompletedUserTasks();
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(currentlyAuthAppUser.getAppUser());
-        System.out.println(auth);
 
         return new ResponseEntity<>(userTasks, HttpStatus.OK);
     }
