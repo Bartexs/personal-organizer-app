@@ -1,6 +1,5 @@
 <div class="custom-main-container">
     <div class="content-window">
-        <button (click)="getStatisticsSummary()">Get stats</button>
         <div class="inner-content">
             <div>
                 <!-- <h1> Content window header</h1> -->
@@ -8,35 +7,36 @@
                 <hr class="section-breaker line">
             </div>
             <div class="content">
-                <div class="general-stats" id="parent">
+                <p *ngIf="isLoading">Loading...</p>
+                <div class="general-stats" id="parent" *ngIf="!isLoading">
                     <!-- create another component to show info -->
                     <div>
                         <p>Completed:</p>
-                        <p><strong>126</strong></p>
+                        <p><strong>{{statisticsSummary.completedTasks}}</strong></p>
                     </div>
                     <div>
                         <p>Avg. completions per day:</p>
-                        <p><strong>3</strong></p>
+                        <p><strong>{{statisticsSummary.avgCompletionsPerDay}}</strong></p>
                     </div>
     
                     <div>
                         <p>Max completed in a day:</p>
-                        <p><strong>126</strong></p>
+                        <p><strong>{{statisticsSummary.maxCompletionsInDay}}</strong></p>
                     </div>
     
                     <div>
-                        <p>Completion on time:</p>
-                        <p><strong>95%</strong></p>
+                        <p>Completions on time:</p>
+                        <p><strong>{{statisticsSummary.percentageOfCompletionsOnTime}}%</strong></p>
                     </div>
     
                     <div>
                         <p>Time spent on organizer:</p>
-                        <p><strong>1h 36mins</strong></p>
+                        <p><strong>{{timeSpentOnOrganizer.hours}}h {{timeSpentOnOrganizer.minutes}}min</strong></p>
                     </div>
     
                     <div>
                         <p>Longest session:</p>
-                        <p><strong>7h 05mins</strong></p>
+                        <p><strong>{{longestSession.hours}}h {{longestSession.minutes}}min</strong></p>
                     </div>
     
                     <!-- do i want to implement those below??  -->
