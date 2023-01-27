@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { catchError, Observable, throwError } from "rxjs";
 import { AuthService } from "./auth.service";
 import { Token } from "@angular/compiler";
 
@@ -14,13 +14,19 @@ export class AuthInterceptorService implements HttpInterceptor {
         req: HttpRequest<any>, 
         next: HttpHandler): Observable<HttpEvent<any>> {
 
-        return next.handle(this.addAuthToken(req));
+        return next.handle(this.addAuthToken(req)).pipe((
+            catchError((error: HttpErrorResponse) => {
+                if (error instanceof HttpErrorResponse && error.status === 403) {
+                    this.authService.logoutUser();
+                }
+                return throwError(() => error);
+            }))
+        );
     }
 
     addAuthToken(request: HttpRequest<any>) {
 
         if(localStorage.getItem('authReponseData') == null) {
-            console.log("no token");
             return request;
         } 
 

@@ -42,7 +42,7 @@ public class AuthAppController {
 
     @GetMapping("/login")
     public ResponseEntity<JwtResponse> login(Authentication authentication, HttpServletRequest request) {
-        int validityTimeInMsAccessToken = 10 * 60 * 1000;
+        int validityTimeInMsAccessToken = 1 * 60 * 1000;
         int validityTimeInMsRefreshToken = 30 * 60 * 1000;
 
         AppUser appUser = (AppUser)authentication.getPrincipal();
@@ -53,6 +53,7 @@ public class AuthAppController {
         return ResponseEntity.ok(new JwtResponse(access_token, refresh_token));
     }
 
+//    refresh token has to return error just like acces token if its not valid, we catch it on interceptor in angular and logout user on it
     @GetMapping("/token/refresh")
     public ResponseEntity<HttpHeaders> refreshToken(Authentication authentication, HttpServletRequest request) {
         String authorizationHeader = request.getHeader(AUTHORIZATION);
